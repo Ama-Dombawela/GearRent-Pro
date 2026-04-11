@@ -20,7 +20,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public boolean save(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "INSERT INTO customers VALUES(?,?,?,?,?,?,?)",
-                t.getCutomerId(), t.getName(), t.getNicOrPassport(),
+                t.getCustomerId(), t.getName(), t.getNicOrPassport(),
                 t.getContactNo(), t.getEmail(), t.getAddress(),
                 t.getMembershipId());
     }
@@ -31,7 +31,7 @@ public class CustomerDaoImpl implements CustomerDao {
                 "UPDATE customers SET name=?, nic_passport=?, contact_no=?, email=?, address=?, membership_id=? WHERE customer_id=?",
                 t.getName(), t.getNicOrPassport(), t.getContactNo(),
                 t.getEmail(), t.getAddress(), t.getMembershipId(),
-                t.getCutomerId());
+                t.getCustomerId());
     }
 
     @Override
