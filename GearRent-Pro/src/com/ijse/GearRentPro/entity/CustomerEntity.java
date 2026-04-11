@@ -10,7 +10,7 @@ package com.ijse.GearRentPro.entity;
  */
 public class CustomerEntity {
 
-    private int cutomerId;
+    private String cutomerId;
     private String name;
     private String nicOrPassport;
     private String contactNo;
@@ -21,7 +21,7 @@ public class CustomerEntity {
     public CustomerEntity() {
     }
 
-    public CustomerEntity(int cutomerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
+    public CustomerEntity(String cutomerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
         this.cutomerId = cutomerId;
         this.name = name;
         this.nicOrPassport = nicOrPassport;
@@ -34,14 +34,14 @@ public class CustomerEntity {
     /**
      * @return the cutomerId
      */
-    public int getCutomerId() {
+    public String getCutomerId() {
         return cutomerId;
     }
 
     /**
      * @param cutomerId the cutomerId to set
      */
-    public void setCutomerId(int cutomerId) {
+    public void setCutomerId(String cutomerId) {
         this.cutomerId = cutomerId;
     }
 

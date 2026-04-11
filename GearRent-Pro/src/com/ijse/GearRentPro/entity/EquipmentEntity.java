@@ -4,15 +4,13 @@
  */
 package com.ijse.GearRentPro.entity;
 
-import static com.ijse.GearRentPro.entity.RentalEntity.RentalStatus.values;
-
 /**
  *
  * @author User
  */
 public class EquipmentEntity {
 
-    private int equipmentId;
+    private String equipmentId;
     private CategoryEntity category;
     private BranchEntity branch;
     private String brand;
@@ -25,7 +23,7 @@ public class EquipmentEntity {
     public EquipmentEntity() {
     }
 
-    public EquipmentEntity(int equipmentId, CategoryEntity category, BranchEntity branch, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, Status status) {
+    public EquipmentEntity(String equipmentId, CategoryEntity category, BranchEntity branch, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, Status status) {
         this.equipmentId = equipmentId;
         this.category = category;
         this.branch = branch;
@@ -68,14 +66,14 @@ public class EquipmentEntity {
     /**
      * @return the equipmentId
      */
-    public int getEquipmentId() {
+    public String getEquipmentId() {
         return equipmentId;
     }
 
     /**
      * @param equipmentId the equipmentId to set
      */
-    public void setEquipmentId(int equipmentId) {
+    public void setEquipmentId(String equipmentId) {
         this.equipmentId = equipmentId;
     }
 
