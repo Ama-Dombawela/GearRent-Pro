@@ -11,6 +11,6 @@ import com.ijse.GearRentPro.entity.CustomerEntity;
  *
  * @author User
  */
-public interface CutomerDao extends CrudDao<CustomerEntity, String>{
+public interface CustomerDao extends CrudDao<CustomerEntity, String>{
     
 }
