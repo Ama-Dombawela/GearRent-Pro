@@ -10,7 +10,7 @@ package com.ijse.GearRentPro.entity;
  */
 public class BranchEntity {
 
-    private int branchId;
+    private String branchId;
     private String branchCode;
     private String name;
     private String address;
@@ -19,7 +19,7 @@ public class BranchEntity {
     public BranchEntity() {
     }
 
-    public BranchEntity(int branchId, String branchCode, String name, String address, String contactNumber) {
+    public BranchEntity(String branchId, String branchCode, String name, String address, String contactNumber) {
         this.branchId = branchId;
         this.branchCode = branchCode;
         this.name = name;
@@ -30,14 +30,14 @@ public class BranchEntity {
     /**
      * @return the branchId
      */
-    public int getBranchId() {
+    public String getBranchId() {
         return branchId;
     }
 
     /**
      * @param branchId the branchId to set
      */
-    public void setBranchId(int branchId) {
+    public void setBranchId(String branchId) {
         this.branchId = branchId;
     }
 

@@ -10,7 +10,7 @@ package com.ijse.GearRentPro.entity;
  */
 public class CategoryEntity {
 
-    private int categoryId;
+    private String categoryId;
     private String name;
     private String description;
     private double priceFactor;
@@ -21,7 +21,7 @@ public class CategoryEntity {
     public CategoryEntity() {
     }
 
-    public CategoryEntity(int categoryId, String name, String description, double priceFactor, double weekendMutiplier, double lateFeePerDay, boolean isActive) {
+    public CategoryEntity(String categoryId, String name, String description, double priceFactor, double weekendMutiplier, double lateFeePerDay, boolean isActive) {
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
@@ -34,14 +34,14 @@ public class CategoryEntity {
     /**
      * @return the categoryId
      */
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
     /**
      * @param categoryId the categoryId to set
      */
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

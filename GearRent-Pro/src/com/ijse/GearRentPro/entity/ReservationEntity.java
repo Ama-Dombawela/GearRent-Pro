@@ -4,7 +4,6 @@
  */
 package com.ijse.GearRentPro.entity;
 
-import static com.ijse.GearRentPro.entity.RentalEntity.RentalStatus.values;
 import java.time.LocalDate;
 
 /**
@@ -13,7 +12,7 @@ import java.time.LocalDate;
  */
 public class ReservationEntity {
 
-    private int reservationId;
+    private String reservationId;
     private EquipmentEntity equipment;
     private CustomerEntity customer;
     private BranchEntity branch;
@@ -24,7 +23,7 @@ public class ReservationEntity {
     public ReservationEntity() {
     }
 
-    public ReservationEntity(int reservationId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, ReservationStatus reservationStatus) {
+    public ReservationEntity(String reservationId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, ReservationStatus reservationStatus) {
         this.reservationId = reservationId;
         this.equipment = equipment;
         this.customer = customer;
@@ -64,14 +63,14 @@ public class ReservationEntity {
     /**
      * @return the reservationId
      */
-    public int getReservationId() {
+    public String getReservationId() {
         return reservationId;
     }
 
     /**
      * @param reservationId the reservationId to set
      */
-    public void setReservationId(int reservationId) {
+    public void setReservationId(String reservationId) {
         this.reservationId = reservationId;
     }
 

@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class RentalEntity {
 
-    private int rentalId;
+    private String rentalId;
     private EquipmentEntity equipment;
     private CustomerEntity customer;
     private BranchEntity branch;
@@ -30,7 +30,7 @@ public class RentalEntity {
     public RentalEntity() {
     }
 
-    public RentalEntity(int rentalId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, LocalDate actualReturnDate, double rentalAmount, double depositAmount, double membershipDiscount, double longRentalDiscount, double finalAmount, PaymentStatus paymentStatus, RentalStatus rentalStatus) {
+    public RentalEntity(String rentalId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, LocalDate actualReturnDate, double rentalAmount, double depositAmount, double membershipDiscount, double longRentalDiscount, double finalAmount, PaymentStatus paymentStatus, RentalStatus rentalStatus) {
         this.rentalId = rentalId;
         this.equipment = equipment;
         this.customer = customer;
@@ -105,14 +105,14 @@ public class RentalEntity {
     /**
      * @return the rentalId
      */
-    public int getRentalId() {
+    public String getRentalId() {
         return rentalId;
     }
 
     /**
      * @param rentalId the rentalId to set
      */
-    public void setRentalId(int rentalId) {
+    public void setRentalId(String rentalId) {
         this.rentalId = rentalId;
     }
 
