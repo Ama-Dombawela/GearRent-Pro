@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ijse.GearRentPro.entity;
+package com.ijse.GearRentPro.dto;
 
 /**
  *
  * @author User
  */
-public class CustomerEntity {
+public class CustomerDto {
 
     private String customerId;
     private String name;
@@ -18,10 +18,10 @@ public class CustomerEntity {
     private String address;
     private int membershipId;
 
-    public CustomerEntity() {
+    public CustomerDto() {
     }
 
-    public CustomerEntity(String customerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
+    public CustomerDto(String customerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
         this.customerId = customerId;
         this.name = name;
         this.nicOrPassport = nicOrPassport;
@@ -131,7 +131,7 @@ public class CustomerEntity {
 
     @Override
     public String toString() {
-        return "CustomerEntity{" + "customerId=" + customerId + ", name=" + name + ", nicOrPassport=" + nicOrPassport + ", contactNo=" + contactNo + ", email=" + email + ", address=" + address + ", membershipId=" + membershipId + '}';
+        return "CustomerDto{" + "customerId=" + customerId + ", name=" + name + ", nicOrPassport=" + nicOrPassport + ", contactNo=" + contactNo + ", email=" + email + ", address=" + address + ", membershipId=" + membershipId + '}';
     }
 
 }

@@ -95,7 +95,7 @@ public class RentalDaoImpl implements RentalDao {
                 "INSERT INTO rentals VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 t.getRentalId(),
                 t.getEquipment().getEquipmentId(),
-                t.getCustomer().getCutomerId(),
+                t.getCustomer().getCustomerId(),
                 t.getBranch().getBranchId(),
                 t.getStartDate(),
                 t.getEndDate(),
@@ -116,7 +116,7 @@ public class RentalDaoImpl implements RentalDao {
                 "UPDATE rentals SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, actual_return_date=?, rental_amount=?, deposit_amount=?, membership_discount=?,"
                  + " long_rental_discount=?, final_amount=?, payment_status=?, rental_status=? WHERE rental_id=?",
                 t.getEquipment().getEquipmentId(),
-                t.getCustomer().getCutomerId(),
+                t.getCustomer().getCustomerId(),
                 t.getBranch().getBranchId(),
                 t.getStartDate(),
                 t.getEndDate(),

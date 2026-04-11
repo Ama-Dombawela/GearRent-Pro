@@ -70,7 +70,7 @@ public class ReservationDaoImpl implements ReservationDao {
                 "INSERT INTO reservations VALUES(?,?,?,?,?,?,?)",
                 t.getReservationId(),
                 t.getEquipment().getEquipmentId(),
-                t.getCustomer().getCutomerId(),
+                t.getCustomer().getCustomerId(),
                 t.getBranch().getBranchId(),
                 t.getStartDate(),
                 t.getEndDate(),
@@ -82,7 +82,7 @@ public class ReservationDaoImpl implements ReservationDao {
         return CrudUtil.executeUpdate(
                 "UPDATE reservations SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, status=? WHERE reservation_id=?",
                 t.getEquipment().getEquipmentId(),
-                t.getCustomer().getCutomerId(),
+                t.getCustomer().getCustomerId(),
                 t.getBranch().getBranchId(),
                 t.getStartDate(),
                 t.getEndDate(),
