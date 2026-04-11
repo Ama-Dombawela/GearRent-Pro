@@ -10,7 +10,7 @@ package com.ijse.GearRentPro.entity;
  */
 public class CustomerEntity {
 
-    private String cutomerId;
+    private String customerId;
     private String name;
     private String nicOrPassport;
     private String contactNo;
@@ -21,8 +21,8 @@ public class CustomerEntity {
     public CustomerEntity() {
     }
 
-    public CustomerEntity(String cutomerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
-        this.cutomerId = cutomerId;
+    public CustomerEntity(String customerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
+        this.customerId = customerId;
         this.name = name;
         this.nicOrPassport = nicOrPassport;
         this.contactNo = contactNo;
@@ -32,17 +32,17 @@ public class CustomerEntity {
     }
 
     /**
-     * @return the cutomerId
+     * @return the customerId
      */
-    public String getCutomerId() {
-        return cutomerId;
+    public String getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param cutomerId the cutomerId to set
+     * @param customerId the customerId to set
      */
-    public void setCutomerId(String cutomerId) {
-        this.cutomerId = cutomerId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /**
@@ -131,7 +131,7 @@ public class CustomerEntity {
 
     @Override
     public String toString() {
-        return "CustomerEntity{" + "cutomerId=" + cutomerId + ", name=" + name + ", nicOrPassport=" + nicOrPassport + ", contactNo=" + contactNo + ", email=" + email + ", address=" + address + ", membershipId=" + membershipId + '}';
+        return "CustomerEntity{" + "customerId=" + customerId + ", name=" + name + ", nicOrPassport=" + nicOrPassport + ", contactNo=" + contactNo + ", email=" + email + ", address=" + address + ", membershipId=" + membershipId + '}';
     }
 
 }
