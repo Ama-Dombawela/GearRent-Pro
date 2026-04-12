@@ -92,7 +92,7 @@ public class RentalDaoImpl implements RentalDao {
     @Override
     public boolean save(RentalEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "INSERT INTO rentals VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO rentals VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 t.getRentalId(),
                 t.getEquipment().getEquipmentId(),
                 t.getCustomer().getCustomerId(),
@@ -114,7 +114,7 @@ public class RentalDaoImpl implements RentalDao {
     public boolean update(RentalEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE rentals SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, actual_return_date=?, rental_amount=?, deposit_amount=?, membership_discount=?,"
-                 + " long_rental_discount=?, final_amount=?, payment_status=?, rental_status=? WHERE rental_id=?",
+                + " long_rental_discount=?, final_amount=?, payment_status=?, rental_status=? WHERE rental_id=?",
                 t.getEquipment().getEquipmentId(),
                 t.getCustomer().getCustomerId(),
                 t.getBranch().getBranchId(),

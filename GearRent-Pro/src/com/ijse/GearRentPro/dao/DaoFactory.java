@@ -7,7 +7,9 @@ package com.ijse.GearRentPro.dao;
 import com.ijse.GearRentPro.dao.Custom.impl.BranchDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.CategoryDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.CustomerDaoImpl;
+import com.ijse.GearRentPro.dao.Custom.impl.DamageDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.EquipmentDaoImpl;
+import com.ijse.GearRentPro.dao.Custom.impl.MembershipDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.RentalDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.ReservationDaoImpl;
 import com.ijse.GearRentPro.dao.Custom.impl.UserDaoImpl;
@@ -23,7 +25,7 @@ public class DaoFactory {
     private DaoFactory() {
     }
 
-    private static DaoFactory getInstance() {
+    public static DaoFactory getInstance() {
         if (daoFactory == null) {
             daoFactory = new DaoFactory();
         }
@@ -36,7 +38,7 @@ public class DaoFactory {
                 return new BranchDaoImpl();
             case CATEGORY:
                 return new CategoryDaoImpl();
-            case CUTOMER:
+            case CUSTOMER:
                 return new CustomerDaoImpl();
             case EQUIPMENT:
                 return new EquipmentDaoImpl();
@@ -46,12 +48,16 @@ public class DaoFactory {
                 return new ReservationDaoImpl();
             case USER:
                 return new UserDaoImpl();
+            case MEMBERSHIP:
+                return new MembershipDaoImpl();
+            case DAMAGE:
+                return new DamageDaoImpl();
             default:
                 throw new AssertionError();
         }
     }
 
     public enum DaoTypes {
-        BRANCH, CATEGORY, CUTOMER, EQUIPMENT, RENTAL, RESERVATION, USER
+        BRANCH, CATEGORY, CUSTOMER, EQUIPMENT, RENTAL, RESERVATION, USER, MEMBERSHIP, DAMAGE
     }
 }
