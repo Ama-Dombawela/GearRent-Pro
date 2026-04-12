@@ -247,9 +247,4 @@ public class RentalDto {
         this.rentalStatus = rentalStatus;
     }
 
-    @Override
-    public String toString() {
-        return "RentalDto{" + "rentalId=" + rentalId + ", equipment=" + equipment + ", customer=" + customer + ", branch=" + branch + ", startDate=" + startDate + ", endDate=" + endDate + ", actualReturnDate=" + actualReturnDate + ", rentalAmount=" + rentalAmount + ", depositAmount=" + depositAmount + ", membershipDiscount=" + membershipDiscount + ", longRentalDiscount=" + longRentalDiscount + ", finalAmount=" + finalAmount + ", paymentStatus=" + paymentStatus + ", rentalStatus=" + rentalStatus + '}';
-    }
-
 }
