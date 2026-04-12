@@ -4,10 +4,24 @@
  */
 package com.ijse.GearRentPro.service.custom;
 
+import com.ijse.GearRentPro.dto.CustomerDto;
+import com.ijse.GearRentPro.service.SuperService;
+import java.util.List;
+
 /**
  *
  * @author User
  */
-public interface CustomerService {
-    
+public interface CustomerService extends SuperService {
+
+    boolean saveCustomer(CustomerDto dto) throws Exception;
+
+    boolean updateCustomer(CustomerDto dto) throws Exception;
+
+    boolean deleteCustomer(String id) throws Exception;
+
+    CustomerDto findCustomer(String id) throws Exception;
+
+    List<CustomerDto> findAllCustomers() throws Exception;
+
 }

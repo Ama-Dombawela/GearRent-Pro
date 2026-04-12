@@ -4,10 +4,23 @@
  */
 package com.ijse.GearRentPro.service.custom;
 
+import com.ijse.GearRentPro.dto.ReservationDto;
+import com.ijse.GearRentPro.service.SuperService;
+import java.util.List;
+
 /**
  *
  * @author User
  */
-public interface ReservationService {
-    
+public interface ReservationService extends SuperService {
+
+    boolean saveReservation(ReservationDto dto) throws Exception;
+
+    boolean updateReservation(ReservationDto dto) throws Exception;
+
+    boolean deleteReservation(String id) throws Exception;
+
+    ReservationDto findReservation(String id) throws Exception;
+
+    List<ReservationDto> findAllReservations() throws Exception;
 }
