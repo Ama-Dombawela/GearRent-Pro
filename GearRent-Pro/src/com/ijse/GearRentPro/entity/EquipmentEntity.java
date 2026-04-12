@@ -11,8 +11,8 @@ package com.ijse.GearRentPro.entity;
 public class EquipmentEntity {
 
     private String equipmentId;
-    private CategoryEntity category;
-    private BranchEntity branch;
+    private String categoryId;
+    private String branchId;
     private String brand;
     private String model;
     private int purchaseYear;
@@ -23,10 +23,10 @@ public class EquipmentEntity {
     public EquipmentEntity() {
     }
 
-    public EquipmentEntity(String equipmentId, CategoryEntity category, BranchEntity branch, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, Status status) {
+    public EquipmentEntity(String equipmentId, String categoryId, String branchId, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, Status status) {
         this.equipmentId = equipmentId;
-        this.category = category;
-        this.branch = branch;
+        this.categoryId = categoryId;
+        this.branchId = branchId;
         this.brand = brand;
         this.model = model;
         this.purchaseYear = purchaseYear;
@@ -78,31 +78,31 @@ public class EquipmentEntity {
     }
 
     /**
-     * @return the category
+     * @return the categoryId
      */
-    public CategoryEntity getCategory() {
-        return category;
+    public String getCategoryId() {
+        return categoryId;
     }
 
     /**
-     * @param category the category to set
+     * @param categoryId the categoryId to set
      */
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     /**
@@ -191,7 +191,7 @@ public class EquipmentEntity {
 
     @Override
     public String toString() {
-        return "EquipmentEntity{" + "equipmentId=" + equipmentId + ", category=" + category + ", branch=" + branch + ", brand=" + brand + ", model=" + model + ", purchaseYear=" + purchaseYear + ", baseDailyPrice=" + baseDailyPrice + ", securityDeposit=" + securityDeposit + ", status=" + status + '}';
+        return "EquipmentEntity{" + "equipmentId=" + equipmentId + ", categoryId=" + categoryId + ", branchId=" + branchId + ", brand=" + brand + ", model=" + model + ", purchaseYear=" + purchaseYear + ", baseDailyPrice=" + baseDailyPrice + ", securityDeposit=" + securityDeposit + ", status=" + status + '}';
     }
 
 }

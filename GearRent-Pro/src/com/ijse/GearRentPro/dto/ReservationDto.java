@@ -4,10 +4,6 @@
  */
 package com.ijse.GearRentPro.dto;
 
-import com.ijse.GearRentPro.entity.BranchEntity;
-import com.ijse.GearRentPro.entity.CustomerEntity;
-import com.ijse.GearRentPro.entity.EquipmentEntity;
-import com.ijse.GearRentPro.entity.ReservationEntity;
 import java.time.LocalDate;
 
 /**
@@ -17,21 +13,21 @@ import java.time.LocalDate;
 public class ReservationDto {
 
     private String reservationId;
-    private EquipmentEntity equipment;
-    private CustomerEntity customer;
-    private BranchEntity branch;
+    private String equipmentId;
+    private String customerId;
+    private String branchId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private ReservationEntity.ReservationStatus reservationStatus;
+    private String reservationStatus;
 
     public ReservationDto() {
     }
 
-    public ReservationDto(String reservationId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, ReservationEntity.ReservationStatus reservationStatus) {
+    public ReservationDto(String reservationId, String equipmentId, String customerId, String branchId, LocalDate startDate, LocalDate endDate, String reservationStatus) {
         this.reservationId = reservationId;
-        this.equipment = equipment;
-        this.customer = customer;
-        this.branch = branch;
+        this.equipmentId = equipmentId;
+        this.customerId = customerId;
+        this.branchId = branchId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.reservationStatus = reservationStatus;
@@ -52,45 +48,45 @@ public class ReservationDto {
     }
 
     /**
-     * @return the equipment
+     * @return the equipmentId
      */
-    public EquipmentEntity getEquipment() {
-        return equipment;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
     /**
-     * @param equipment the equipment to set
+     * @param equipmentId the equipmentId to set
      */
-    public void setEquipment(EquipmentEntity equipment) {
-        this.equipment = equipment;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     /**
-     * @return the customer
+     * @return the customerId
      */
-    public CustomerEntity getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param customer the customer to set
+     * @param customerId the customerId to set
      */
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     /**
@@ -124,20 +120,20 @@ public class ReservationDto {
     /**
      * @return the reservationStatus
      */
-    public ReservationEntity.ReservationStatus getReservationStatus() {
+    public String getReservationStatus() {
         return reservationStatus;
     }
 
     /**
      * @param reservationStatus the reservationStatus to set
      */
-    public void setReservationStatus(ReservationEntity.ReservationStatus reservationStatus) {
+    public void setReservationStatus(String reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
 
     @Override
     public String toString() {
-        return "ReservationDto{" + "reservationId=" + reservationId + ", equipment=" + equipment + ", customer=" + customer + ", branch=" + branch + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationStatus=" + reservationStatus + '}';
+        return "ReservationDto{" + "reservationId=" + reservationId + ", equipmentId=" + equipmentId + ", customerId=" + customerId + ", branchId=" + branchId + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationStatus=" + reservationStatus + '}';
     }
 
 }

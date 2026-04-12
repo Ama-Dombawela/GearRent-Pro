@@ -13,9 +13,9 @@ import java.time.LocalDate;
 public class RentalEntity {
 
     private String rentalId;
-    private EquipmentEntity equipment;
-    private CustomerEntity customer;
-    private BranchEntity branch;
+    private String equipmentId;
+    private String customerId;
+    private String branchId;
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalDate actualReturnDate;
@@ -30,11 +30,11 @@ public class RentalEntity {
     public RentalEntity() {
     }
 
-    public RentalEntity(String rentalId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, LocalDate actualReturnDate, double rentalAmount, double depositAmount, double membershipDiscount, double longRentalDiscount, double finalAmount, PaymentStatus paymentStatus, RentalStatus rentalStatus) {
+    public RentalEntity(String rentalId, String equipmentId, String customerId, String branchId, LocalDate startDate, LocalDate endDate, LocalDate actualReturnDate, double rentalAmount, double depositAmount, double membershipDiscount, double longRentalDiscount, double finalAmount, PaymentStatus paymentStatus, RentalStatus rentalStatus) {
         this.rentalId = rentalId;
-        this.equipment = equipment;
-        this.customer = customer;
-        this.branch = branch;
+        this.equipmentId = equipmentId;
+        this.customerId = customerId;
+        this.branchId = branchId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.actualReturnDate = actualReturnDate;
@@ -117,45 +117,45 @@ public class RentalEntity {
     }
 
     /**
-     * @return the equipment
+     * @return the equipmentId
      */
-    public EquipmentEntity getEquipment() {
-        return equipment;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
     /**
-     * @param equipment the equipment to set
+     * @param equipmentId the equipmentId to set
      */
-    public void setEquipment(EquipmentEntity equipment) {
-        this.equipment = equipment;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     /**
-     * @return the customer
+     * @return the customerId
      */
-    public CustomerEntity getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param customer the customer to set
+     * @param customerId the customerId to set
      */
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     /**
@@ -300,7 +300,7 @@ public class RentalEntity {
 
     @Override
     public String toString() {
-        return "RentalEntity{" + "rentalId=" + rentalId + ", equipment=" + equipment + ", customer=" + customer + ", branch=" + branch + ", startDate=" + startDate + ", endDate=" + endDate + ", actualReturnDate=" + actualReturnDate + ", rentalAmount=" + rentalAmount + ", depositAmount=" + depositAmount + ", membershipDiscount=" + membershipDiscount + ", longRentalDiscount=" + longRentalDiscount + ", finalAmount=" + finalAmount + ", paymentStatus=" + paymentStatus + ", rentalStatus=" + rentalStatus + '}';
+        return "RentalEntity{" + "rentalId=" + rentalId + ", equipmentId=" + equipmentId + ", customerId=" + customerId + ", branchId=" + branchId + ", startDate=" + startDate + ", endDate=" + endDate + ", actualReturnDate=" + actualReturnDate + ", rentalAmount=" + rentalAmount + ", depositAmount=" + depositAmount + ", membershipDiscount=" + membershipDiscount + ", longRentalDiscount=" + longRentalDiscount + ", finalAmount=" + finalAmount + ", paymentStatus=" + paymentStatus + ", rentalStatus=" + rentalStatus + '}';
     }
 
 }

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
                 dto.getUsername(),
                 dto.getPassword(),
                 dto.getRoleId(),
-                dto.getBranch()
+                dto.getBranchId()
         ));
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 dto.getUsername(),
                 dto.getPassword(),
                 dto.getRoleId(),
-                dto.getBranch()
+                dto.getBranchId()
         ));
     }
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
                 entity.getUsername(),
                 entity.getPassword(),
                 entity.getRoleId(),
-                entity.getBranch()
+                entity.getBranchId()
         );
     }
 
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
                     entity.getUsername(),
                     entity.getPassword(),
                     entity.getRoleId(),
-                    entity.getBranch()
+                    entity.getBranchId()
             ));
         }
         return dtos;

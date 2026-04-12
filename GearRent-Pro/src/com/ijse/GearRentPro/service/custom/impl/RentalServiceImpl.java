@@ -24,9 +24,9 @@ public class RentalServiceImpl implements RentalService {
     public boolean saveRental(RentalDto dto) throws Exception {
         return rentalDao.save(new RentalEntity(
                 dto.getRentalId(),
-                dto.getEquipment(),
-                dto.getCustomer(),
-                dto.getBranch(),
+                dto.getEquipmentId(),
+                dto.getCustomerId(),
+                dto.getBranchId(),
                 dto.getStartDate(),
                 dto.getEndDate(),
                 dto.getActualReturnDate(),
@@ -35,8 +35,8 @@ public class RentalServiceImpl implements RentalService {
                 dto.getMembershipDiscount(),
                 dto.getLongRentalDiscount(),
                 dto.getFinalAmount(),
-                dto.getPaymentStatus(),
-                dto.getRentalStatus()
+                RentalEntity.PaymentStatus.fromDbValues(dto.getPaymentStatus()),
+                RentalEntity.RentalStatus.fromDbValues(dto.getRentalStatus())
         ));
 
     }
@@ -45,9 +45,9 @@ public class RentalServiceImpl implements RentalService {
     public boolean updateRental(RentalDto dto) throws Exception {
         return rentalDao.update(new RentalEntity(
                 dto.getRentalId(),
-                dto.getEquipment(),
-                dto.getCustomer(),
-                dto.getBranch(),
+                dto.getEquipmentId(),
+                dto.getCustomerId(),
+                dto.getBranchId(),
                 dto.getStartDate(),
                 dto.getEndDate(),
                 dto.getActualReturnDate(),
@@ -56,8 +56,8 @@ public class RentalServiceImpl implements RentalService {
                 dto.getMembershipDiscount(),
                 dto.getLongRentalDiscount(),
                 dto.getFinalAmount(),
-                dto.getPaymentStatus(),
-                dto.getRentalStatus()
+                RentalEntity.PaymentStatus.fromDbValues(dto.getPaymentStatus()),
+                RentalEntity.RentalStatus.fromDbValues(dto.getRentalStatus())
         ));
 
     }
@@ -72,9 +72,9 @@ public class RentalServiceImpl implements RentalService {
         RentalEntity entity = rentalDao.search(id);
         return new RentalDto(
                 entity.getRentalId(),
-                entity.getEquipment(),
-                entity.getCustomer(),
-                entity.getBranch(),
+                entity.getEquipmentId(),
+                entity.getCustomerId(),
+                entity.getBranchId(),
                 entity.getStartDate(),
                 entity.getEndDate(),
                 entity.getActualReturnDate(),
@@ -83,8 +83,8 @@ public class RentalServiceImpl implements RentalService {
                 entity.getMembershipDiscount(),
                 entity.getLongRentalDiscount(),
                 entity.getFinalAmount(),
-                entity.getPaymentStatus(),
-                entity.getRentalStatus()
+                entity.getPaymentStatus().getDatabaseValue(),
+                entity.getRentalStatus().getDatabaseValue()
         );
     }
 
@@ -95,9 +95,9 @@ public class RentalServiceImpl implements RentalService {
         for (RentalEntity entity : entities) {
             dtos.add(new RentalDto(
                     entity.getRentalId(),
-                    entity.getEquipment(),
-                    entity.getCustomer(),
-                    entity.getBranch(),
+                    entity.getEquipmentId(),
+                    entity.getCustomerId(),
+                    entity.getBranchId(),
                     entity.getStartDate(),
                     entity.getEndDate(),
                     entity.getActualReturnDate(),
@@ -106,8 +106,8 @@ public class RentalServiceImpl implements RentalService {
                     entity.getMembershipDiscount(),
                     entity.getLongRentalDiscount(),
                     entity.getFinalAmount(),
-                    entity.getPaymentStatus(),
-                    entity.getRentalStatus()
+                    entity.getPaymentStatus().getDatabaseValue(),
+                    entity.getRentalStatus().getDatabaseValue()
             ));
         }
         return dtos;

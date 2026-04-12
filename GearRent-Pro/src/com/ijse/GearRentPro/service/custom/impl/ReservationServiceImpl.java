@@ -24,12 +24,12 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean saveReservation(ReservationDto dto) throws Exception {
         return reservationDao.save(new ReservationEntity(
                 dto.getReservationId(),
-                dto.getEquipment(),
-                dto.getCustomer(),
-                dto.getBranch(),
+                dto.getEquipmentId(),
+                dto.getCustomerId(),
+                dto.getBranchId(),
                 dto.getStartDate(),
                 dto.getEndDate(),
-                dto.getReservationStatus()
+                ReservationEntity.ReservationStatus.fromDbValues(dto.getReservationStatus())
         ));
     }
 
@@ -37,12 +37,12 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean updateReservation(ReservationDto dto) throws Exception {
         return reservationDao.update(new ReservationEntity(
                 dto.getReservationId(),
-                dto.getEquipment(),
-                dto.getCustomer(),
-                dto.getBranch(),
+                dto.getEquipmentId(),
+                dto.getCustomerId(),
+                dto.getBranchId(),
                 dto.getStartDate(),
                 dto.getEndDate(),
-                dto.getReservationStatus()
+                ReservationEntity.ReservationStatus.fromDbValues(dto.getReservationStatus())
         ));
     }
 
@@ -56,12 +56,12 @@ public class ReservationServiceImpl implements ReservationService {
         ReservationEntity entity = reservationDao.search(id);
         return new ReservationDto(
                 entity.getReservationId(),
-                entity.getEquipment(),
-                entity.getCustomer(),
-                entity.getBranch(),
+                entity.getEquipmentId(),
+                entity.getCustomerId(),
+                entity.getBranchId(),
                 entity.getStartDate(),
                 entity.getEndDate(),
-                entity.getReservationStatus()
+                entity.getReservationStatus().getDatabaseValue()
         );
     }
 
@@ -72,12 +72,12 @@ public class ReservationServiceImpl implements ReservationService {
         for (ReservationEntity entity : entities) {
             dtos.add(new ReservationDto(
                     entity.getReservationId(),
-                    entity.getEquipment(),
-                    entity.getCustomer(),
-                    entity.getBranch(),
+                    entity.getEquipmentId(),
+                    entity.getCustomerId(),
+                    entity.getBranchId(),
                     entity.getStartDate(),
                     entity.getEndDate(),
-                    entity.getReservationStatus()
+                    entity.getReservationStatus().getDatabaseValue()
             ));
         }
         return dtos;

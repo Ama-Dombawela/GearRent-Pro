@@ -24,14 +24,14 @@ public class EquipmentServiceImpl implements EquipmentService {
     public boolean saveEquipment(EquipmentDto dto) throws Exception {
         return equipmentDao.save(new EquipmentEntity(
                 dto.getEquipmentId(),
-                dto.getCategory(),
-                dto.getBranch(),
+                dto.getCategoryId(),
+                dto.getBranchId(),
                 dto.getBrand(),
                 dto.getModel(),
                 dto.getPurchaseYear(),
                 dto.getBaseDailyPrice(),
                 dto.getSecurityDeposit(),
-                dto.getStatus()
+                EquipmentEntity.Status.valueOf(dto.getStatus())
         ));
     }
 
@@ -39,14 +39,14 @@ public class EquipmentServiceImpl implements EquipmentService {
     public boolean updateEquipment(EquipmentDto dto) throws Exception {
         return equipmentDao.update(new EquipmentEntity(
                 dto.getEquipmentId(),
-                dto.getCategory(),
-                dto.getBranch(),
+                dto.getCategoryId(),
+                dto.getBranchId(),
                 dto.getBrand(),
                 dto.getModel(),
                 dto.getPurchaseYear(),
                 dto.getBaseDailyPrice(),
                 dto.getSecurityDeposit(),
-                dto.getStatus()
+                EquipmentEntity.Status.valueOf(dto.getStatus())
         ));
     }
 
@@ -60,14 +60,14 @@ public class EquipmentServiceImpl implements EquipmentService {
         EquipmentEntity entity = equipmentDao.search(id);
         return new EquipmentDto(
                 entity.getEquipmentId(),
-                entity.getCategory(),
-                entity.getBranch(),
+                entity.getCategoryId(),
+                entity.getBranchId(),
                 entity.getBrand(),
                 entity.getModel(),
                 entity.getPurchaseYear(),
                 entity.getBaseDailyPrice(),
                 entity.getSecurityDeposit(),
-                entity.getStatus()
+                entity.getStatus().name()
         );
     }
 
@@ -78,14 +78,14 @@ public class EquipmentServiceImpl implements EquipmentService {
         for (EquipmentEntity entity : entities) {
             dtos.add(new EquipmentDto(
                     entity.getEquipmentId(),
-                    entity.getCategory(),
-                    entity.getBranch(),
+                    entity.getCategoryId(),
+                    entity.getBranchId(),
                     entity.getBrand(),
                     entity.getModel(),
                     entity.getPurchaseYear(),
                     entity.getBaseDailyPrice(),
                     entity.getSecurityDeposit(),
-                    entity.getStatus()
+                    entity.getStatus().name()
             ));
         }
         return dtos;
