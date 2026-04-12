@@ -11,7 +11,7 @@ import com.ijse.GearRentPro.service.custom.impl.EquipmentServiceImpl;
 import com.ijse.GearRentPro.service.custom.impl.MembershipServiceImpl;
 import com.ijse.GearRentPro.service.custom.impl.RentalServiceImpl;
 import com.ijse.GearRentPro.service.custom.impl.ReservationServiceImpl;
-import com.ijse.GearRentPro.service.custom.impl.ReturnServiceImpl;
+import com.ijse.GearRentPro.service.custom.impl.DamageServiceImpl;
 import com.ijse.GearRentPro.service.custom.impl.UserServiceImpl;
 
 /**
@@ -49,16 +49,18 @@ public class ServiceFactory {
             case USER:
                 return new UserServiceImpl();
             case RETURN:
-                return new ReturnServiceImpl();
+                return new DamageServiceImpl();
             case MEMBERSHIP:
                 return new MembershipServiceImpl();
+            case DAMAGE:
+                return new DamageServiceImpl();
             default:
                 throw new AssertionError();
         }
     }
 
     public enum ServiceType {
-        BRANCH, CATEGORY, CUSTOMER, EQUIPMENT, RENTAL, RESERVATION, USER, RETURN, MEMBERSHIP
+        BRANCH, CATEGORY, CUSTOMER, EQUIPMENT, RENTAL, RESERVATION, USER, RETURN, MEMBERSHIP, DAMAGE
     }
 
 }
