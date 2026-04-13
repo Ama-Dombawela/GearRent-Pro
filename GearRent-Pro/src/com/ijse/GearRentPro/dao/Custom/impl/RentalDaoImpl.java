@@ -21,7 +21,7 @@ public class RentalDaoImpl implements RentalDao {
     @Override
     public ArrayList<RentalEntity> getByCutomer(String customerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE customer_id=?", customerId);
+                SELECT_QUERY + " WHERE TRIM(customer_id)=?", customerId);
         ArrayList<RentalEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -32,7 +32,7 @@ public class RentalDaoImpl implements RentalDao {
     @Override
     public ArrayList<RentalEntity> getByBranch(String branchId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE branch_id=?", branchId);
+                SELECT_QUERY + " WHERE TRIM(branch_id)=?", branchId);
         ArrayList<RentalEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -65,7 +65,7 @@ public class RentalDaoImpl implements RentalDao {
     @Override
     public double getTotalActiveDepositByCutomer(String cutomerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                "SELECT SUM(deposit_amount) AS total FROM rentals WHERE customer_id=? AND rental_status='Active'",
+                "SELECT SUM(deposit_amount) AS total FROM rentals WHERE TRIM(customer_id)=? AND rental_status='Active'",
                 cutomerId);
         if (resultSet.next()) {
             return resultSet.getDouble("total");
@@ -98,7 +98,7 @@ public class RentalDaoImpl implements RentalDao {
     public boolean update(RentalEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE rentals SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, actual_return_date=?, rental_amount=?, deposit_amount=?, membership_discount=?,"
-                + " long_rental_discount=?, final_amount=?, payment_status=?, rental_status=? WHERE rental_id=?",
+                + " long_rental_discount=?, final_amount=?, payment_status=?, rental_status=? WHERE TRIM(rental_id)=?",
                 t.getEquipmentId(),
                 t.getCustomerId(),
                 t.getBranchId(),
@@ -119,13 +119,13 @@ public class RentalDaoImpl implements RentalDao {
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM rentals WHERE rental_id=?", id);
+                "DELETE FROM rentals WHERE TRIM(rental_id)=?", id);
     }
 
     @Override
     public RentalEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE rental_id=?", id);
+                SELECT_QUERY + " WHERE TRIM(rental_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -145,10 +145,10 @@ public class RentalDaoImpl implements RentalDao {
     private RentalEntity mapRow(ResultSet resultSet) throws Exception {
 
         return new RentalEntity(
-                resultSet.getString("rental_id"),
-                resultSet.getString("equipment_id"),
-                resultSet.getString("customer_id"),
-                resultSet.getString("branch_id"),
+                resultSet.getString("rental_id").trim(),
+                resultSet.getString("equipment_id").trim(),
+                resultSet.getString("customer_id").trim(),
+                resultSet.getString("branch_id").trim(),
                 resultSet.getDate("start_date").toLocalDate(),
                 resultSet.getDate("end_date").toLocalDate(),
                 resultSet.getDate("actual_return_date") != null ? resultSet.getDate("actual_return_date").toLocalDate() : null,

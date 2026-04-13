@@ -23,19 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="iblDelete" min="-2" pref="107" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="iblUpdate" min="-2" pref="107" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="iblSave" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="iblHeader" min="-2" pref="774" max="-2" attributes="0"/>
@@ -44,30 +31,40 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="iblContactNo" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="iblDelete" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="iblContactNotxt" min="-2" pref="205" max="-2" attributes="0"/>
+                      <Component id="iblUpdate" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="iblSave" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="iblBranchLoca" min="-2" pref="142" max="-2" attributes="0"/>
-                              <Component id="iblBranchName" min="-2" pref="142" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="iblBranchCode" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="iblBranchId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="747" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="iblContactNo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="iblContactNotxt" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="iblBranchCodetxt" min="-2" pref="205" max="-2" attributes="0"/>
-                          <Component id="iblBranchNametxt" min="-2" pref="205" max="-2" attributes="0"/>
-                          <Component id="iblLocationtxt" min="-2" pref="205" max="-2" attributes="0"/>
-                          <Component id="iblBranchIdtxt1" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="iblBranchLoca" min="-2" pref="142" max="-2" attributes="0"/>
+                                  <Component id="iblBranchName" min="-2" pref="142" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="iblBranchCode" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="iblBranchId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="iblBranchCodetxt" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="iblBranchNametxt" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="iblLocationtxt" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="iblBranchIdtxt1" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="410" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,14 +88,14 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="iblUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="iblSave" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="iblDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">

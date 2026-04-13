@@ -36,4 +36,8 @@ public class UserController {
     public List<UserDto> findAllUsers() throws Exception {
         return userService.findAllUsers();
     }
+
+    public UserDto findUserByUsernameAndPassword(String username, String password) throws Exception {
+        return userService.findUserByUsernameAndPassword(username, password);
+    }
 }

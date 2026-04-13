@@ -21,7 +21,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public ArrayList<ReservationEntity> getByCutomer(String customerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE customer_id=?", customerId);
+                SELECT_QUERY + " WHERE TRIM(customer_id)=?", customerId);
         ArrayList<ReservationEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -32,7 +32,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public ArrayList<ReservationEntity> getByBranch(String branchId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE branch_id=?", branchId);
+                SELECT_QUERY + " WHERE TRIM(branch_id)=?", branchId);
         ArrayList<ReservationEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -43,7 +43,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public boolean hasOverlap(String equipmentId, String startDate, String endDate) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                "SELECT * FROM reservations WHERE equipment_id=? AND status='Active' AND start_date <= ? AND end_date >= ?",
+                "SELECT * FROM reservations WHERE TRIM(equipment_id)=? AND status='Active' AND start_date <= ? AND end_date >= ?",
                 equipmentId, endDate, startDate);
         return resultSet.next();
     }
@@ -64,7 +64,7 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public boolean update(ReservationEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE reservations SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, status=? WHERE reservation_id=?",
+                "UPDATE reservations SET equipment_id=?, customer_id=?, branch_id=?, start_date=?, end_date=?, status=? WHERE TRIM(reservation_id)=?",
                 t.getEquipmentId(),
                 t.getCustomerId(),
                 t.getBranchId(),
@@ -77,13 +77,13 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM reservations WHERE reservation_id=?", id);
+                "DELETE FROM reservations WHERE TRIM(reservation_id)=?", id);
     }
 
     @Override
     public ReservationEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE reservation_id=?", id);
+                SELECT_QUERY + " WHERE TRIM(reservation_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -103,10 +103,10 @@ public class ReservationDaoImpl implements ReservationDao {
     private ReservationEntity mapRow(ResultSet resultSet) throws Exception {
 
         return new ReservationEntity(
-                resultSet.getString("reservation_id"),
-                resultSet.getString("equipment_id"),
-                resultSet.getString("customer_id"),
-                resultSet.getString("branch_id"),
+                resultSet.getString("reservation_id").trim(),
+                resultSet.getString("equipment_id").trim(),
+                resultSet.getString("customer_id").trim(),
+                resultSet.getString("branch_id").trim(),
                 resultSet.getDate("start_date").toLocalDate(),
                 resultSet.getDate("end_date").toLocalDate(),
                 ReservationEntity.ReservationStatus.fromDbValues(resultSet.getString("status"))

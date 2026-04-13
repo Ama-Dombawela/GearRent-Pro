@@ -28,7 +28,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public boolean update(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE customers SET name=?, nic_passport=?, contact_no=?, email=?, address=?, membership_id=? WHERE customer_id=?",
+                "UPDATE customers SET name=?, nic_passport=?, contact_no=?, email=?, address=?, membership_id=? WHERE TRIM(customer_id)=?",
                 t.getName(), t.getNicOrPassport(), t.getContactNo(),
                 t.getEmail(), t.getAddress(), t.getMembershipId(),
                 t.getCustomerId());
@@ -62,13 +62,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private CustomerEntity mapRow(ResultSet resultSet) throws Exception {
         return new CustomerEntity(
-                resultSet.getString("customer_id"),
+                resultSet.getString("customer_id").trim(),
                 resultSet.getString("name"),
                 resultSet.getString("nic_passport"),
                 resultSet.getString("contact_no"),
                 resultSet.getString("email"),
                 resultSet.getString("address"),
-                resultSet.getInt("membership_id")
+                resultSet.getString("membership_id")
         );
 
     }

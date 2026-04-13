@@ -35,6 +35,7 @@ public class ReservationEntity {
 
     //Enum for ReservationStatus
     public enum ReservationStatus {
+        PENDING("Pending"),
         ACTIVE("Active"),
         CANCELLED("Cancelled"),
         CONVERTED("Converted");
@@ -51,12 +52,15 @@ public class ReservationEntity {
         }
 
         public static ReservationStatus fromDbValues(String databaseValue) {
+            if (databaseValue == null || databaseValue.isBlank()) {
+                return PENDING;
+            }
             for (ReservationStatus status : values()) {
                 if (status.databaseValue.equals(databaseValue)) {
                     return status;
                 }
             }
-            throw new IllegalArgumentException("Unknown paymentStatus: " + databaseValue);
+            throw new IllegalArgumentException("Unknown reservationStatus: " + databaseValue);
         }
     }
 

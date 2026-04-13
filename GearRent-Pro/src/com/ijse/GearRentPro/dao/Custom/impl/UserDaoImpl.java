@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean update(UserEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE users SET username=?, password=?, role_id=?, branch_id=? WHERE user_id=?",
+                "UPDATE users SET username=?, password=?, role_id=?, branch_id=? WHERE TRIM(user_id)=?",
                 t.getUsername(), t.getPassword(), t.getRoleId(),
                 t.getBranchId(), t.getUserId());
     }
@@ -49,13 +49,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM users WHERE user_id=?", id);
+                "DELETE FROM users WHERE TRIM(user_id)=?", id);
     }
 
     @Override
     public UserEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE user_id=?", id);
+                SELECT_QUERY + " WHERE TRIM(user_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -75,11 +75,11 @@ public class UserDaoImpl implements UserDao {
     private UserEntity mapRow(ResultSet resultSet) throws Exception {
 
         return new UserEntity(
-                resultSet.getString("user_id"),
+                resultSet.getString("user_id").trim(),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
-                resultSet.getString("role_id"),
-                resultSet.getString("branch_id")
+                resultSet.getString("role_id").trim(),
+                resultSet.getString("branch_id").trim()
         );
     }
 
