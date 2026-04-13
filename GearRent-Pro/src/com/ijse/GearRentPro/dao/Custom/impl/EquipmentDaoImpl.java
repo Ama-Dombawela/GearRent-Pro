@@ -21,7 +21,7 @@ public class EquipmentDaoImpl implements EquipmentDao {
     @Override
     public ArrayList<EquipmentEntity> getByBranch(String branchId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE branch_id=? ", branchId);
+                SELECT_QUERY + " WHERE TRIM(branch_id)=? ", branchId);
         ArrayList<EquipmentEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -32,7 +32,7 @@ public class EquipmentDaoImpl implements EquipmentDao {
     @Override
     public ArrayList<EquipmentEntity> getByStatus(String status) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE status=?", status);
+                SELECT_QUERY + " WHERE TRIM(status)=?", status);
         ArrayList<EquipmentEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -43,7 +43,7 @@ public class EquipmentDaoImpl implements EquipmentDao {
     @Override
     public ArrayList<EquipmentEntity> getByCategory(String categoryId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE category_id=?", categoryId);
+                SELECT_QUERY + " WHERE TRIM(category_id)=?", categoryId);
         ArrayList<EquipmentEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -67,7 +67,7 @@ public class EquipmentDaoImpl implements EquipmentDao {
     @Override
     public boolean update(EquipmentEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE equipment SET category_id=?, branch_id=?, brand=?, model=?, purchase_year=?, base_daily_price=?, security_deposit=?, status=? WHERE equipment_id=?",
+                "UPDATE equipment SET category_id=?, branch_id=?, brand=?, model=?, purchase_year=?, base_daily_price=?, security_deposit=?, status=? WHERE TRIM(equipment_id)=?",
                 t.getCategoryId(),
                 t.getBranchId(),
                 t.getBrand(),
@@ -82,13 +82,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM equipment WHERE equipment_id=?", id);
+                "DELETE FROM equipment WHERE TRIM(equipment_id)=?", id);
     }
 
     @Override
     public EquipmentEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_QUERY + " WHERE equipment_id=?", id);
+                SELECT_QUERY + " WHERE TRIM(equipment_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -108,15 +108,15 @@ public class EquipmentDaoImpl implements EquipmentDao {
     private EquipmentEntity mapRow(ResultSet resultSet) throws Exception {
 
         return new EquipmentEntity(
-                resultSet.getString("equipment_id"),
-                resultSet.getString("category_id"),
-                resultSet.getString("branch_id"),
-                resultSet.getString("brand"),
-                resultSet.getString("model"),
+                resultSet.getString("equipment_id").trim(),
+                resultSet.getString("category_id").trim(),
+                resultSet.getString("branch_id").trim(),
+                resultSet.getString("brand").trim(),
+                resultSet.getString("model").trim(),
                 resultSet.getInt("purchase_year"),
                 resultSet.getDouble("base_daily_price"),
                 resultSet.getDouble("security_deposit"),
-                EquipmentEntity.Status.fromDbValues(resultSet.getString("status"))
+                EquipmentEntity.Status.fromDbValues(resultSet.getString("status").trim())
         );
 
     }

@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="iblHeader" min="-2" pref="774" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -47,35 +47,33 @@
                           <Component id="iblBranchIdtxt" alignment="0" max="32767" attributes="0"/>
                           <Component id="iblPurchaseYeartxt" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="iblBaseDailyPrice" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="iblBaseDailyPricetxt" min="-2" pref="172" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="iblStatus" max="32767" attributes="0"/>
-                                  <Component id="iblDepositAmount" pref="148" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="iblDepositAmountTxt" max="32767" attributes="0"/>
-                                  <Component id="iblStatustxt" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               <Component id="iblDelete" min="-2" pref="94" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="iblUpdate" min="-2" pref="107" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="iblSave" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="iblStatus" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="iblDepositAmount" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                  <Component id="iblBaseDailyPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="iblBaseDailyPricetxt" max="32767" attributes="0"/>
+                                  <Component id="iblDepositAmountTxt" max="32767" attributes="0"/>
+                                  <Component id="iblStatustxt" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -91,61 +89,59 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="iblEquiId" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="iblEquiIdtxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="iblEquiIdtxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="iblCateiId1" min="-2" max="-2" attributes="0"/>
-                  <Component id="iblCateIdtxt" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="iblCateIdtxt" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="iblBranchId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="iblBranchIdtxt" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="iblBranchIdtxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="iblBrand" max="32767" attributes="0"/>
-                      <Component id="iblBrandtxt" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="iblBrand" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="iblBaseDailyPrice" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="iblBaseDailyPricetxt" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="iblBaseDailyPricetxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="iblBrandtxt" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="iblDepositAmount" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="iblDepositAmountTxt" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="iblDepositAmountTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="iblStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="iblStatustxt" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="iblStatustxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="iblUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="iblDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="iblSave" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="iblModel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="iblModeltxt" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="iblModeltxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="iblPurchaseYear" max="32767" attributes="0"/>
-                          <Component id="iblPurchaseYeartxt" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="iblPurchaseYear" min="-2" max="-2" attributes="0"/>
+                          <Component id="iblPurchaseYeartxt" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="iblUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="iblDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="iblSave" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="230" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -167,7 +163,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Equipment id"/>
+        <Property name="text" type="java.lang.String" value="Equipment ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="iblEquiIdtxt">
@@ -185,7 +181,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Category id"/>
+        <Property name="text" type="java.lang.String" value="Category ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="iblCateIdtxt">
@@ -200,7 +196,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Branch id"/>
+        <Property name="text" type="java.lang.String" value="Branch ID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="iblBranchIdtxt">

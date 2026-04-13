@@ -31,7 +31,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                 dto.getPurchaseYear(),
                 dto.getBaseDailyPrice(),
                 dto.getSecurityDeposit(),
-                EquipmentEntity.Status.valueOf(dto.getStatus())
+                EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ","_"))
         ));
     }
 
@@ -46,7 +46,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                 dto.getPurchaseYear(),
                 dto.getBaseDailyPrice(),
                 dto.getSecurityDeposit(),
-                EquipmentEntity.Status.valueOf(dto.getStatus())
+                EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ","_"))
         ));
     }
 
