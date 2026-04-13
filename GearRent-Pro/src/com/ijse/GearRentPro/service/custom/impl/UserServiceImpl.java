@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
                 dto.getUsername(),
                 dto.getPassword(),
                 dto.getRoleId(),
-                dto.getBranch()
+                dto.getBranchId()
         ));
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 dto.getUsername(),
                 dto.getPassword(),
                 dto.getRoleId(),
-                dto.getBranch()
+                dto.getBranchId()
         ));
     }
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
                 entity.getUsername(),
                 entity.getPassword(),
                 entity.getRoleId(),
-                entity.getBranch()
+                entity.getBranchId()
         );
     }
 
@@ -69,10 +69,25 @@ public class UserServiceImpl implements UserService {
                     entity.getUsername(),
                     entity.getPassword(),
                     entity.getRoleId(),
-                    entity.getBranch()
+                    entity.getBranchId()
             ));
         }
         return dtos;
+    }
+
+    @Override
+    public UserDto findUserByUsernameAndPassword(String username, String password) throws Exception {
+        UserEntity entity = userDao.getByUsernameAndPassword(username, password);
+        if (entity == null) {
+            return null;
+        }
+        return new UserDto(
+                entity.getUserId(),
+                entity.getUsername(),
+                entity.getPassword(),
+                entity.getRoleId(),
+                entity.getBranchId()
+        );
     }
 
 }

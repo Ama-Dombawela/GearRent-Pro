@@ -16,12 +16,12 @@ public class CustomerEntity {
     private String contactNo;
     private String email;
     private String address;
-    private int membershipId;
+    private String membershipId;
 
     public CustomerEntity() {
     }
 
-    public CustomerEntity(String customerId, String name, String nicOrPassport, String contactNo, String email, String address, int membershipId) {
+    public CustomerEntity(String customerId, String name, String nicOrPassport, String contactNo, String email, String address, String membershipId) {
         this.customerId = customerId;
         this.name = name;
         this.nicOrPassport = nicOrPassport;
@@ -118,14 +118,14 @@ public class CustomerEntity {
     /**
      * @return the membershipId
      */
-    public int getMembershipId() {
+    public String getMembershipId() {
         return membershipId;
     }
 
     /**
      * @param membershipId the membershipId to set
      */
-    public void setMembershipId(int membershipId) {
+    public void setMembershipId(String membershipId) {
         this.membershipId = membershipId;
     }
 

@@ -23,4 +23,6 @@ public interface UserService extends SuperService{
     UserDto findUser(String id) throws Exception;
 
     List<UserDto> findAllUsers() throws Exception;
+    
+    UserDto findUserByUsernameAndPassword(String username, String password)throws Exception;
 }

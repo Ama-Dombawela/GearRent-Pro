@@ -6,7 +6,6 @@ package com.ijse.GearRentPro.dao.Custom.impl;
 
 import com.ijse.GearRentPro.dao.CrudUtil;
 import com.ijse.GearRentPro.dao.Custom.UserDao;
-import com.ijse.GearRentPro.entity.BranchEntity;
 import com.ijse.GearRentPro.entity.UserEntity;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -17,15 +16,12 @@ import java.util.ArrayList;
  */
 public class UserDaoImpl implements UserDao {
 
-    private static final String SELECT_WITH_JOIN = "SELECT u.*, "
-            + "b.branch_code, b.name AS branch_name, b.address AS branch_address, b.contact_no "
-            + "FROM users u "
-            + "LEFT JOIN branches b ON u.branch_id = b.branch_id";
+    private static final String SELECT_QUERY = "SELECT * FROM users";
 
     @Override
     public UserEntity getByUsernameAndPassword(String username, String password) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_WITH_JOIN + " WHERE u.username=? AND u.password=?",
+                SELECT_QUERY + " WHERE username=? AND password=?",
                 username, password);
         if (resultSet.next()) {
             return mapRow(resultSet);
@@ -39,28 +35,27 @@ public class UserDaoImpl implements UserDao {
                 "INSERT INTO users VALUES(?,?,?,?,?)",
                 t.getUserId(), t.getUsername(), t.getPassword(),
                 t.getRoleId(),
-                t.getBranch() != null ? t.getBranch().getBranchId() : null);
+                t.getBranchId());
     }
 
     @Override
     public boolean update(UserEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE users SET username=?, password=?, role_id=?, branch_id=? WHERE user_id=?",
+                "UPDATE users SET username=?, password=?, role_id=?, branch_id=? WHERE TRIM(user_id)=?",
                 t.getUsername(), t.getPassword(), t.getRoleId(),
-                t.getBranch() != null ? t.getBranch().getBranchId() : null,
-                t.getUserId());
+                t.getBranchId(), t.getUserId());
     }
 
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM users WHERE user_id=?", id);
+                "DELETE FROM users WHERE TRIM(user_id)=?", id);
     }
 
     @Override
     public UserEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
-                SELECT_WITH_JOIN + " WHERE u.user_id=?", id);
+                SELECT_QUERY + " WHERE TRIM(user_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -69,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public ArrayList<UserEntity> getAll() throws Exception {
-        ResultSet resultSet = CrudUtil.executeQuery(SELECT_WITH_JOIN);
+        ResultSet resultSet = CrudUtil.executeQuery(SELECT_QUERY);
         ArrayList<UserEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(mapRow(resultSet));
@@ -78,23 +73,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     private UserEntity mapRow(ResultSet resultSet) throws Exception {
-        BranchEntity branch = null;
-        String branchId = resultSet.getString("branch_id");
-        if (branchId != null) {
-            branch = new BranchEntity(
-                    branchId,
-                    resultSet.getString("branch_code"),
-                    resultSet.getString("branch_name"),
-                    resultSet.getString("branch_address"),
-                    resultSet.getString("contact_no")
-            );
-        }
+
         return new UserEntity(
-                resultSet.getString("user_id"),
+                resultSet.getString("user_id").trim(),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
-                resultSet.getString("role_id"),
-                branch
+                resultSet.getString("role_id").trim(),
+                resultSet.getString("branch_id").trim()
         );
     }
 

@@ -4,7 +4,7 @@
  */
 package com.ijse.GearRentPro.dto;
 
-import com.ijse.GearRentPro.entity.BranchEntity;
+
 
 /**
  *
@@ -16,17 +16,17 @@ public class UserDto {
     private String username;
     private String password;
     private String roleId;
-    private BranchEntity branch;
+    private String branchId;
 
     public UserDto() {
     }
 
-    public UserDto(String userId, String username, String password, String roleId, BranchEntity branch) {
+    public UserDto(String userId, String username, String password, String roleId, String branchId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.roleId = roleId;
-        this.branch = branch;
+        this.branchId = branchId;
     }
 
     /**
@@ -86,22 +86,22 @@ public class UserDto {
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     @Override
     public String toString() {
-        return "UserDto{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", roleId=" + roleId + ", branch=" + branch + '}';
+        return "UserDto{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", roleId=" + roleId + ", branchId=" + branchId + '}';
     }
 
 }

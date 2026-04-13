@@ -13,9 +13,9 @@ import java.time.LocalDate;
 public class ReservationEntity {
 
     private String reservationId;
-    private EquipmentEntity equipment;
-    private CustomerEntity customer;
-    private BranchEntity branch;
+    private String equipmentId;
+    private String customerId;
+    private String branchId;
     private LocalDate startDate;
     private LocalDate endDate;
     private ReservationStatus reservationStatus;
@@ -23,11 +23,11 @@ public class ReservationEntity {
     public ReservationEntity() {
     }
 
-    public ReservationEntity(String reservationId, EquipmentEntity equipment, CustomerEntity customer, BranchEntity branch, LocalDate startDate, LocalDate endDate, ReservationStatus reservationStatus) {
+    public ReservationEntity(String reservationId, String equipmentId, String customerId, String branchId, LocalDate startDate, LocalDate endDate, ReservationStatus reservationStatus) {
         this.reservationId = reservationId;
-        this.equipment = equipment;
-        this.customer = customer;
-        this.branch = branch;
+        this.equipmentId = equipmentId;
+        this.customerId = customerId;
+        this.branchId = branchId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.reservationStatus = reservationStatus;
@@ -35,6 +35,7 @@ public class ReservationEntity {
 
     //Enum for ReservationStatus
     public enum ReservationStatus {
+        PENDING("Pending"),
         ACTIVE("Active"),
         CANCELLED("Cancelled"),
         CONVERTED("Converted");
@@ -51,12 +52,15 @@ public class ReservationEntity {
         }
 
         public static ReservationStatus fromDbValues(String databaseValue) {
+            if (databaseValue == null || databaseValue.isBlank()) {
+                return PENDING;
+            }
             for (ReservationStatus status : values()) {
                 if (status.databaseValue.equals(databaseValue)) {
                     return status;
                 }
             }
-            throw new IllegalArgumentException("Unknown paymentStatus: " + databaseValue);
+            throw new IllegalArgumentException("Unknown reservationStatus: " + databaseValue);
         }
     }
 
@@ -75,45 +79,45 @@ public class ReservationEntity {
     }
 
     /**
-     * @return the equipment
+     * @return the equipmentId
      */
-    public EquipmentEntity getEquipment() {
-        return equipment;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
     /**
-     * @param equipment the equipment to set
+     * @param equipmentId the equipmentId to set
      */
-    public void setEquipment(EquipmentEntity equipment) {
-        this.equipment = equipment;
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     /**
-     * @return the customer
+     * @return the customerId
      */
-    public CustomerEntity getCustomer() {
-        return customer;
+    public String getCustomerId() {
+        return customerId;
     }
 
     /**
-     * @param customer the customer to set
+     * @param customerId the customerId to set
      */
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     /**
@@ -160,7 +164,7 @@ public class ReservationEntity {
 
     @Override
     public String toString() {
-        return "ReservationEntity{" + "reservationId=" + reservationId + ", equipment=" + equipment + ", customer=" + customer + ", branch=" + branch + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationStatus=" + reservationStatus + '}';
+        return "ReservationEntity{" + "reservationId=" + reservationId + ", equipmentId=" + equipmentId + ", customerId=" + customerId + ", branchId=" + branchId + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationStatus=" + reservationStatus + '}';
     }
 
 }

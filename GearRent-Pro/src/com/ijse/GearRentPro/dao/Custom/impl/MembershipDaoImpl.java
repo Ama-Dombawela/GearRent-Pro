@@ -23,7 +23,7 @@ public class MembershipDaoImpl implements MembershipDao {
         );
         if (resultSet.next()) {
             return new MembershipEntity(
-                    resultSet.getString("membership_id"),
+                    resultSet.getString("membership_id").trim(),
                     resultSet.getString("level_name"),
                     resultSet.getDouble("discount_percentage")
             );
@@ -44,7 +44,7 @@ public class MembershipDaoImpl implements MembershipDao {
     @Override
     public boolean update(MembershipEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE membership_levels SET level_name=?, discount_percentage=? WHERE membership_id=?",
+                "UPDATE membership_levels SET level_name=?, discount_percentage=? WHERE TRIM(membership_id)=?",
                 t.getLevel(),
                 t.getDiscountPer(),
                 t.getMembershipId()
@@ -54,18 +54,18 @@ public class MembershipDaoImpl implements MembershipDao {
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
-                "DELETE FROM membership_levels WHERE membership_id=?", id
+                "DELETE FROM membership_levels WHERE TRIM(membership_id)=?", id
         );
     }
 
     @Override
     public MembershipEntity search(String id) throws Exception {
         ResultSet rs = CrudUtil.executeQuery(
-                "SELECT * FROM membership_levels WHERE membership_id=?", id
+                "SELECT * FROM membership_levels WHERE TRIM(membership_id)=?", id
         );
         if (rs.next()) {
             return new MembershipEntity(
-                    rs.getString("membership_id"),
+                    rs.getString("membership_id").trim(),
                     rs.getString("level_name"),
                     rs.getDouble("discount_percentage")
             );
@@ -79,7 +79,7 @@ public class MembershipDaoImpl implements MembershipDao {
         ArrayList<MembershipEntity> list = new ArrayList<>();
         while (resultSet.next()) {
             list.add(new MembershipEntity(
-                    resultSet.getString("membership_id"),
+                    resultSet.getString("membership_id").trim(),
                     resultSet.getString("level_name"),
                     resultSet.getDouble("discount_percentage")
             ));

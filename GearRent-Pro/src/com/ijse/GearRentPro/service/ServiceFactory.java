@@ -48,8 +48,6 @@ public class ServiceFactory {
                 return new ReservationServiceImpl();
             case USER:
                 return new UserServiceImpl();
-            case RETURN:
-                return new DamageServiceImpl();
             case MEMBERSHIP:
                 return new MembershipServiceImpl();
             case DAMAGE:
@@ -60,7 +58,7 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        BRANCH, CATEGORY, CUSTOMER, EQUIPMENT, RENTAL, RESERVATION, USER, RETURN, MEMBERSHIP, DAMAGE
+        BRANCH, CATEGORY, CUSTOMER, EQUIPMENT, RENTAL, RESERVATION, USER, MEMBERSHIP, DAMAGE
     }
 
 }

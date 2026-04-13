@@ -27,7 +27,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public boolean update(CategoryEntity t) throws Exception {
         return CrudUtil.executeUpdate(
-                "UPDATE categories SET name=?, description=?, price_factor=?, weekend_multiplier=?, late_fee_per_day=?, is_active=? WHERE category_id=?",
+                "UPDATE categories SET name=?, description=?, price_factor=?, weekend_multiplier=?, late_fee_per_day=?, is_active=? WHERE TRIM(category_id)=?",
                 t.getName(), t.getDescription(), t.getPriceFactor(),
                 t.getWeekendMutiplier(), t.getLateFeePerDay(),
                 t.isIsActive(), t.getCategoryId());
@@ -35,12 +35,12 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public boolean delete(String id) throws Exception {
-        return CrudUtil.executeUpdate("DELETE FROM categories WHERE category_id=?", id);
+        return CrudUtil.executeUpdate("DELETE FROM categories WHERE TRIM(category_id)=?", id);
     }
 
     @Override
     public CategoryEntity search(String id) throws Exception {
-        ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM categories WHERE category_id=?", id);
+        ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM categories WHERE TRIM(category_id)=?", id);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }
@@ -60,7 +60,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     private CategoryEntity mapRow(ResultSet resultSet) throws Exception {
         return new CategoryEntity(
-                resultSet.getString("category_id"),
+                resultSet.getString("category_id").trim(),
                 resultSet.getString("name"),
                 resultSet.getString("description"),
                 resultSet.getDouble("price_factor"),

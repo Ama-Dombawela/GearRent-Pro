@@ -4,9 +4,6 @@
  */
 package com.ijse.GearRentPro.dto;
 
-import com.ijse.GearRentPro.entity.BranchEntity;
-import com.ijse.GearRentPro.entity.CategoryEntity;
-import com.ijse.GearRentPro.entity.EquipmentEntity;
 
 /**
  *
@@ -15,22 +12,22 @@ import com.ijse.GearRentPro.entity.EquipmentEntity;
 public class EquipmentDto {
 
     private String equipmentId;
-    private CategoryEntity category;
-    private BranchEntity branch;
+    private String categoryId;
+    private String branchId;
     private String brand;
     private String model;
     private int purchaseYear;
     private double baseDailyPrice;
     private double securityDeposit;
-    private EquipmentEntity.Status status;
+    private String status;
 
     public EquipmentDto() {
     }
 
-    public EquipmentDto(String equipmentId, CategoryEntity category, BranchEntity branch, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, EquipmentEntity.Status status) {
+    public EquipmentDto(String equipmentId, String categoryId, String branchId, String brand, String model, int purchaseYear, double baseDailyPrice, double securityDeposit, String status) {
         this.equipmentId = equipmentId;
-        this.category = category;
-        this.branch = branch;
+        this.categoryId = categoryId;
+        this.branchId = branchId;
         this.brand = brand;
         this.model = model;
         this.purchaseYear = purchaseYear;
@@ -54,31 +51,31 @@ public class EquipmentDto {
     }
 
     /**
-     * @return the category
+     * @return the categoryId
      */
-    public CategoryEntity getCategory() {
-        return category;
+    public String getCategoryId() {
+        return categoryId;
     }
 
     /**
-     * @param category the category to set
+     * @param categoryId the categoryId to set
      */
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**
-     * @return the branch
+     * @return the branchId
      */
-    public BranchEntity getBranch() {
-        return branch;
+    public String getBranchId() {
+        return branchId;
     }
 
     /**
-     * @param branch the branch to set
+     * @param branchId the branchId to set
      */
-    public void setBranch(BranchEntity branch) {
-        this.branch = branch;
+    public void setBranchId(String branchId) {
+        this.branchId = branchId;
     }
 
     /**
@@ -154,20 +151,20 @@ public class EquipmentDto {
     /**
      * @return the status
      */
-    public EquipmentEntity.Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(EquipmentEntity.Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "EquipmentDto{" + "equipmentId=" + equipmentId + ", category=" + category + ", branch=" + branch + ", brand=" + brand + ", model=" + model + ", purchaseYear=" + purchaseYear + ", baseDailyPrice=" + baseDailyPrice + ", securityDeposit=" + securityDeposit + ", status=" + status + '}';
+        return "EquipmentDto{" + "equipmentId=" + equipmentId + ", categoryId=" + categoryId + ", branchId=" + branchId + ", brand=" + brand + ", model=" + model + ", purchaseYear=" + purchaseYear + ", baseDailyPrice=" + baseDailyPrice + ", securityDeposit=" + securityDeposit + ", status=" + status + '}';
     }
 
 }
