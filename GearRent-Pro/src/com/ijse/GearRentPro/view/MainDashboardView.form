@@ -28,7 +28,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnLogout" min="-2" pref="575" max="-2" attributes="0"/>
                           <Component id="iblOperations1" min="-2" max="-2" attributes="0"/>
                           <Component id="iblOperations" min="-2" max="-2" attributes="0"/>
                           <Component id="iblInventoryAndCustomers" min="-2" max="-2" attributes="0"/>
@@ -62,12 +61,15 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnMembership" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnOverdueRentals" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="btnRevenueReport" min="-2" pref="180" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnUtilizationReport" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnLogout" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnOverdueRentals" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <Component id="btnRevenueReport" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnUtilizationReport" min="-2" pref="194" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>

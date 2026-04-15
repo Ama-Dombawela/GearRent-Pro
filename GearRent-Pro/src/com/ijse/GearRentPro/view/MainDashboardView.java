@@ -20,6 +20,7 @@ public class MainDashboardView extends javax.swing.JFrame {
      */
     public MainDashboardView() {
         initComponents();
+        applyRoleAccess();
     }
 
     /**
@@ -129,7 +130,6 @@ public class MainDashboardView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iblOperations1)
                             .addComponent(iblOperations)
                             .addComponent(iblInventoryAndCustomers)
@@ -156,12 +156,14 @@ public class MainDashboardView extends javax.swing.JFrame {
                                         .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnMembership))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnOverdueRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(btnRevenueReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(btnOverdueRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(17, 17, 17)
+                                    .addComponent(btnRevenueReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -352,4 +354,28 @@ public class MainDashboardView extends javax.swing.JFrame {
     private javax.swing.JLabel iblOperations;
     private javax.swing.JLabel iblOperations1;
     // End of variables declaration//GEN-END:variables
+
+    private void applyRoleAccess() {
+        String roleId = Session.getLoggedInUser().getRoleId();
+
+        if ("R001".equals(roleId)) {
+            // ADMIN - no restrictions
+
+        } else if ("R002".equals(roleId)) {
+            // BRANCH_MANAGER
+            btnBranch.setEnabled(false);
+            btnUser.setEnabled(false);
+            btnMembership.setEnabled(false);
+
+        } else if ("R003".equals(roleId)) {
+            // STAFF
+            btnBranch.setEnabled(false);
+            btnCategory.setEnabled(false);
+            btnUser.setEnabled(false);
+            btnMembership.setEnabled(false);
+            btnRevenueReport.setEnabled(false);
+            btnUtilizationReport.setEnabled(false);
+        }
+    }
+
 }
