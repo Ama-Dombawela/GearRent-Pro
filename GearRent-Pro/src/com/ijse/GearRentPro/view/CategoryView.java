@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CategoryController;
@@ -10,10 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class CategoryView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CategoryView.class.getName());
@@ -70,10 +64,10 @@ public class CategoryView extends javax.swing.JFrame {
         iblCatDes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatDes.setText("Description");
 
-        iblCatPricefactortxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatPricefactortxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatPricefactortxt.addActionListener(this::iblCatPricefactortxtActionPerformed);
 
-        iblCatDestxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatDestxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatDestxt.addActionListener(this::iblCatDestxtActionPerformed);
 
         iblCatWM.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -82,10 +76,10 @@ public class CategoryView extends javax.swing.JFrame {
         iblCatPricefactor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatPricefactor.setText("Price Factor");
 
-        iblCatWMtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatWMtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatWMtxt.addActionListener(this::iblCatWMtxtActionPerformed);
 
-        iblCatIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUpdate.setText("Update");
@@ -94,7 +88,7 @@ public class CategoryView extends javax.swing.JFrame {
         iblCatName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatName.setText("Category Name");
 
-        iblCatNametxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatNametxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatNametxt.addActionListener(this::iblCatNametxtActionPerformed);
 
         iblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -129,10 +123,10 @@ public class CategoryView extends javax.swing.JFrame {
         iblCatLateFeeperday.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatLateFeeperday.setText("Late Fee Per Day");
 
-        iblCatIsActivetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatIsActivetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatIsActivetxt.addActionListener(this::iblCatIsActivetxtActionPerformed);
 
-        iblCatLateFeeperdaytxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatLateFeeperdaytxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatLateFeeperdaytxt.addActionListener(this::iblCatLateFeeperdaytxtActionPerformed);
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -359,7 +353,7 @@ public class CategoryView extends javax.swing.JFrame {
                     dto.getName(),
                     dto.getDescription(),
                     dto.getPriceFactor(),
-                    dto.getWeekendMutiplier(),
+                    dto.getWeekendMultiplier(),
                     dto.getLateFeePerDay(),
                     dto.isIsActive()
                 };
@@ -371,17 +365,22 @@ public class CategoryView extends javax.swing.JFrame {
     }
 
     public void saveCategory() {
-        CategoryDto dto = new CategoryDto(
-                iblCatIdtxt.getText(),
-                iblCatNametxt.getText(),
-                iblCatDestxt.getText(),
-                Double.parseDouble(iblCatPricefactortxt.getText()),
-                Double.parseDouble(iblCatWMtxt.getText()),
-                Double.parseDouble(iblCatLateFeeperdaytxt.getText()),
-                Boolean.parseBoolean(iblCatIsActivetxt.getText())
-        );
-
         try {
+            if (iblCatIdtxt.getText().isBlank() || iblCatNametxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Category ID and name are required.");
+                return;
+            }
+
+            CategoryDto dto = new CategoryDto(
+                    iblCatIdtxt.getText(),
+                    iblCatNametxt.getText(),
+                    iblCatDestxt.getText(),
+                    Double.parseDouble(iblCatPricefactortxt.getText()),
+                    Double.parseDouble(iblCatWMtxt.getText()),
+                    Double.parseDouble(iblCatLateFeeperdaytxt.getText()),
+                    Boolean.parseBoolean(iblCatIsActivetxt.getText())
+            );
+
             boolean resp = categoryController.saveCategory(dto);
             if (resp) {
                 JOptionPane.showMessageDialog(this, "Category saved successfully!");
@@ -390,23 +389,30 @@ public class CategoryView extends javax.swing.JFrame {
             }
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Price factor, weekend multiplier, and late fee must be valid numbers.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
 
     public void updateCategory() {
-        CategoryDto dto = new CategoryDto(
-                iblCatIdtxt.getText(),
-                iblCatNametxt.getText(),
-                iblCatDestxt.getText(),
-                Double.parseDouble(iblCatPricefactortxt.getText()),
-                Double.parseDouble(iblCatWMtxt.getText()),
-                Double.parseDouble(iblCatLateFeeperdaytxt.getText()),
-                Boolean.parseBoolean(iblCatIsActivetxt.getText())
-        );
-
         try {
+            if (iblCatIdtxt.getText().isBlank() || iblCatNametxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Category ID and name are required.");
+                return;
+            }
+
+            CategoryDto dto = new CategoryDto(
+                    iblCatIdtxt.getText(),
+                    iblCatNametxt.getText(),
+                    iblCatDestxt.getText(),
+                    Double.parseDouble(iblCatPricefactortxt.getText()),
+                    Double.parseDouble(iblCatWMtxt.getText()),
+                    Double.parseDouble(iblCatLateFeeperdaytxt.getText()),
+                    Boolean.parseBoolean(iblCatIsActivetxt.getText())
+            );
+
             boolean resp = categoryController.updateCategory(dto);
             if (resp) {
                 JOptionPane.showMessageDialog(this, "Category updated successfully!");
@@ -415,6 +421,8 @@ public class CategoryView extends javax.swing.JFrame {
             }
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Price factor, weekend multiplier, and late fee must be valid numbers.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -449,7 +457,7 @@ public class CategoryView extends javax.swing.JFrame {
                 iblCatNametxt.setText(dto.getName());
                 iblCatDestxt.setText(dto.getDescription());
                 iblCatPricefactortxt.setText(String.valueOf(dto.getPriceFactor()));
-                iblCatWMtxt.setText(String.valueOf(dto.getWeekendMutiplier()));
+                iblCatWMtxt.setText(String.valueOf(dto.getWeekendMultiplier()));
                 iblCatLateFeeperdaytxt.setText(String.valueOf(dto.getLateFeePerDay()));
                 iblCatIsActivetxt.setText(String.valueOf(dto.isIsActive()));
             } else {

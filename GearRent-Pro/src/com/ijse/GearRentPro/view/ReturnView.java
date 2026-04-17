@@ -1,32 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CategoryController;
-import com.ijse.GearRentPro.controller.DamageController;
 import com.ijse.GearRentPro.controller.EquipmentController;
 import com.ijse.GearRentPro.controller.RentalController;
 import com.ijse.GearRentPro.dto.CategoryDto;
-import com.ijse.GearRentPro.dto.DamageDto;
 import com.ijse.GearRentPro.dto.EquipmentDto;
 import com.ijse.GearRentPro.dto.RentalDto;
+import com.ijse.GearRentPro.util.Session;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class ReturnView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReturnView.class.getName());
     private RentalController rentalController = new RentalController();
-    private DamageController damageController = new DamageController();
     private CategoryController categoryController = new CategoryController();
     private EquipmentController equipmentController = new EquipmentController();
 
@@ -78,7 +71,7 @@ public class ReturnView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iblActualReturnDatetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblActualReturnDatetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblActualReturnDatetxt.addActionListener(this::iblActualReturnDatetxtActionPerformed);
 
         iblRentalId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -95,7 +88,7 @@ public class ReturnView extends javax.swing.JFrame {
         iblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iblHeader.setText("Process Return");
 
-        iblDamageDescptxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblDamageDescptxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblDamageDescptxt.addActionListener(this::iblDamageDescptxtActionPerformed);
 
         tblReturn.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,7 +109,7 @@ public class ReturnView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblReturn);
 
-        iblCatDestxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatDestxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatDestxt.addActionListener(this::iblCatDestxtActionPerformed);
 
         iblDamageCharge.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -131,15 +124,15 @@ public class ReturnView extends javax.swing.JFrame {
         iblCatLateFeeperday.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatLateFeeperday.setText("Late Fee Per Day");
 
-        iblDamageChargetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblDamageChargetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblDamageChargetxt.addActionListener(this::iblDamageChargetxtActionPerformed);
 
         iblLateFeetxt.setEditable(false);
-        iblLateFeetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblLateFeetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblLateFeetxt.addActionListener(this::iblLateFeetxtActionPerformed);
 
         iblCatLateFeeperdaytxt.setEditable(false);
-        iblCatLateFeeperdaytxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCatLateFeeperdaytxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCatLateFeeperdaytxt.addActionListener(this::iblCatLateFeeperdaytxtActionPerformed);
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -153,6 +146,7 @@ public class ReturnView extends javax.swing.JFrame {
         iblDelete.setText("Delete");
         iblDelete.addActionListener(this::iblDeleteActionPerformed);
 
+        cmbRentalId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbRentalId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbRentalId.addActionListener(this::cmbRentalIdActionPerformed);
 
@@ -163,11 +157,11 @@ public class ReturnView extends javax.swing.JFrame {
         iblLateFee.setText("Late Fee");
 
         iblRefundtxt.setEditable(false);
-        iblRefundtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblRefundtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblRefundtxt.addActionListener(this::iblRefundtxtActionPerformed);
 
         iblTotalChargestxt.setEditable(false);
-        iblTotalChargestxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblTotalChargestxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblTotalChargestxt.addActionListener(this::iblTotalChargestxtActionPerformed);
 
         btnprocessReturn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -186,66 +180,60 @@ public class ReturnView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(iblCatLateFeeperday)
-                            .addComponent(iblDamageCharge)
-                            .addComponent(iblDamageDescp, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblCatDes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblActualReturnDate)
-                            .addComponent(iblRentalId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblLateFee, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblTotalCharges, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblRefund, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cmbRentalId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(iblDamageChargetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                                        .addComponent(iblActualReturnDatetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
-                                    .addComponent(iblCatDestxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblDamageDescptxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(iblLateFeetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblRefundtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblTotalChargestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(iblCatLateFeeperdaytxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(578, 578, 578))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(btnprocessReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnprocessReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iblCatLateFeeperday)
+                    .addComponent(iblDamageCharge)
+                    .addComponent(iblDamageDescp, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblCatDes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblActualReturnDate)
+                    .addComponent(iblRentalId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblLateFee, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblTotalCharges, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblRefund, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cmbRentalId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(iblDamageChargetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                .addComponent(iblActualReturnDatetxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
+                            .addComponent(iblCatDestxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblDamageDescptxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(iblLateFeetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblRefundtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblTotalChargestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(iblCatLateFeeperdaytxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(601, 601, 601))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(iblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(iblRentalId, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cmbRentalId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,9 +253,7 @@ public class ReturnView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblDamageChargetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblDamageCharge, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(btnCalculate)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblCatLateFeeperday, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblCatLateFeeperdaytxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -288,10 +274,11 @@ public class ReturnView extends javax.swing.JFrame {
                         .addComponent(iblRefundtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnprocessReturn)
                     .addComponent(iblDelete)
                     .addComponent(iblUpdate)
-                    .addComponent(iblSave))
+                    .addComponent(iblSave)
+                    .addComponent(btnprocessReturn)
+                    .addComponent(btnCalculate))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -379,7 +366,11 @@ public class ReturnView extends javax.swing.JFrame {
         try {
             cmbRentalId.removeAllItems();
             List<RentalDto> rentals = rentalController.findAllRentals();
+            String branchFilter = Session.getCurrentBranchId();
             for (RentalDto rental : rentals) {
+                if (branchFilter != null && !branchFilter.equals(rental.getBranchId())) {
+                    continue;
+                }
                 if ("Active".equalsIgnoreCase(rental.getRentalStatus())) {
                     cmbRentalId.addItem(rental.getRentalId());
                 }
@@ -403,7 +394,11 @@ public class ReturnView extends javax.swing.JFrame {
 
             tblReturn.setModel(model);
             List<RentalDto> rentals = rentalController.findAllRentals();
+            String branchFilter = Session.getCurrentBranchId();
             for (RentalDto rental : rentals) {
+                if (branchFilter != null && !branchFilter.equals(rental.getBranchId())) {
+                    continue;
+                }
                 model.addRow(new Object[]{
                     rental.getRentalId(),
                     rental.getEquipmentId(),
@@ -454,6 +449,10 @@ public class ReturnView extends javax.swing.JFrame {
             iblLateFeetxt.setText(String.valueOf(lateFee));
             iblTotalChargestxt.setText(String.valueOf(totalCharges));
             iblRefundtxt.setText(String.valueOf(refund));
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Actual return date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Damage charge must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error calculating return: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -465,38 +464,27 @@ public class ReturnView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please select a rental ID.");
                 return;
             }
-
-            String rentalId = cmbRentalId.getSelectedItem().toString();
-            RentalDto rental = rentalController.findRental(rentalId);
-            if (rental == null) {
-                JOptionPane.showMessageDialog(this, "Rental not found.");
+            if (iblActualReturnDatetxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Actual return date is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
+            String rentalId = cmbRentalId.getSelectedItem().toString();
             LocalDate actualReturnDate = LocalDate.parse(iblActualReturnDatetxt.getText());
-            rental.setActualReturnDate(actualReturnDate);
-            rental.setRentalStatus("Returned");
 
-            boolean hasDamage = !iblDamageDescptxt.getText().isBlank();
-            if (hasDamage) {
-                double charge = iblDamageChargetxt.getText().isBlank() ? 0.0 : Double.parseDouble(iblDamageChargetxt.getText());
-                DamageDto damageDto = new DamageDto(
-                        iblCatDestxt.getText(),
-                        rentalId,
-                        iblDamageDescptxt.getText(),
-                        charge
-                );
-                damageController.saveDamage(damageDto);
-            }
+            double damageCharge = iblDamageChargetxt.getText().isBlank()
+                    ? 0.0
+                    : Double.parseDouble(iblDamageChargetxt.getText());
 
-            EquipmentDto equipment = equipmentController.findEquipment(rental.getEquipmentId());
-            if (equipment != null) {
-                equipment.setStatus(hasDamage ? "Under Maintenance" : "Available");
-                equipmentController.updateEquipment(equipment);
-            }
+            boolean processed = rentalController.processReturn(
+                    rentalId,
+                    actualReturnDate,
+                    iblCatDestxt.getText(),
+                    iblDamageDescptxt.getText(),
+                    damageCharge
+            );
 
-            boolean updated = rentalController.updateRental(rental);
-            if (updated) {
+            if (processed) {
                 JOptionPane.showMessageDialog(this, "Return processed successfully.");
                 loadDropdowns();
                 loadTable();
@@ -504,6 +492,10 @@ public class ReturnView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to process return.");
             }
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Actual return date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Damage charge must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error processing return: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

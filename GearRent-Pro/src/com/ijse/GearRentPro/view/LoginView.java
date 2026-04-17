@@ -1,19 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 package com.ijse.GearRentPro.view;
 
-import com.ijse.GearRentPro.Session;
+import com.ijse.GearRentPro.util.Session;
 import com.ijse.GearRentPro.controller.UserController;
 import com.ijse.GearRentPro.dto.UserDto;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author User
- */
+
 public class LoginView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginView.class.getName());
@@ -44,15 +37,15 @@ public class LoginView extends javax.swing.JFrame {
         iblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUsername.setText("Username  :");
 
-        iblUsernametxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblUsernametxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblPassword.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblPassword.setText("Password   :");
 
-        iblPasswordtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblPasswordtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblPasswordtxt.addActionListener(this::iblPasswordtxtActionPerformed);
 
-        iblHeader.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         iblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iblHeader.setText("GearRentPro Login");
 
@@ -98,7 +91,7 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(iblPassword))
                 .addGap(50, 50, 50)
                 .addComponent(ButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();

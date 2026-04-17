@@ -1,26 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CustomerController;
 import com.ijse.GearRentPro.controller.MembershipController;
+import com.ijse.GearRentPro.controller.RentalController;
 import com.ijse.GearRentPro.dto.CustomerDto;
 import com.ijse.GearRentPro.dto.MembershipDto;
+import com.ijse.GearRentPro.dto.RentalDto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class CustomerView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomerView.class.getName());
     private CustomerController customerController = new CustomerController();
     private MembershipController membershipController = new MembershipController();
+    private RentalController rentalController = new RentalController();
 
     /**
      * Creates new form CustomerView
@@ -64,7 +64,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iblCustNametxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCustNametxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustNametxt.addActionListener(this::iblCustNametxtActionPerformed);
 
         iblCustomerId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -81,10 +81,10 @@ public class CustomerView extends javax.swing.JFrame {
         iblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iblHeader.setText("Manage Customer");
 
-        iblCustContactNotxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCustContactNotxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustContactNotxt.addActionListener(this::iblCustContactNotxtActionPerformed);
 
-        iblNICOrPassporttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblNICOrPassporttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblNICOrPassporttxt.addActionListener(this::iblNICOrPassporttxtActionPerformed);
 
         iblCustEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -99,12 +99,12 @@ public class CustomerView extends javax.swing.JFrame {
         iblCustAddress.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustAddress.setText("Address");
 
-        iblCustEmailtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCustEmailtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustEmailtxt.addActionListener(this::iblCustEmailtxtActionPerformed);
 
-        iblCustomerIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCustomerIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        iblCustAddresstxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCustAddresstxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustAddresstxt.addActionListener(this::iblCustAddresstxtActionPerformed);
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -118,6 +118,7 @@ public class CustomerView extends javax.swing.JFrame {
         iblDelete.setText("Delete");
         iblDelete.addActionListener(this::iblDeleteActionPerformed);
 
+        cmbMembershipId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbMembershipId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -135,16 +136,17 @@ public class CustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCustomerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCustomer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -158,7 +160,7 @@ public class CustomerView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(iblCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(iblCustomerIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,22 +175,26 @@ public class CustomerView extends javax.swing.JFrame {
                                     .addComponent(iblCustEmailtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                                     .addComponent(iblCustAddresstxt, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                                     .addComponent(cmbMembershipId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(535, 535, 535))
+                .addGap(555, 555, 555))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(851, Short.MAX_VALUE)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -203,7 +209,7 @@ public class CustomerView extends javax.swing.JFrame {
                             .addComponent(iblUpdate)
                             .addComponent(iblDelete)))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 22, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iblCustomerIdtxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iblCustomerId, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -233,9 +239,10 @@ public class CustomerView extends javax.swing.JFrame {
                             .addComponent(iblCustMembershipId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBack))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnBack)
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -282,6 +289,10 @@ public class CustomerView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void tblCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomerMouseClicked
+        searchCustomer();
+    }//GEN-LAST:event_tblCustomerMouseClicked
+
     private void loadMemberships() {
         try {
             cmbMembershipId.removeAllItems();
@@ -327,6 +338,19 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void saveCustomer() {
         try {
+            if (iblCustomerIdtxt.getText().isBlank() || iblCustNametxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Customer ID and name are required.");
+                return;
+            }
+            if (iblNICOrPassporttxt.getText().isBlank() || iblCustContactNotxt.getText().isBlank() || iblCustEmailtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "NIC/Passport, contact number, and email are required.");
+                return;
+            }
+            if (cmbMembershipId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Please select a membership.");
+                return;
+            }
+
             String membershipId = cmbMembershipId.getSelectedItem().toString().split(" - ")[0];
             CustomerDto dto = new CustomerDto(
                     iblCustomerIdtxt.getText(),
@@ -353,6 +377,19 @@ public class CustomerView extends javax.swing.JFrame {
 
     private void updateCustomer() {
         try {
+            if (iblCustomerIdtxt.getText().isBlank() || iblCustNametxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Customer ID and name are required.");
+                return;
+            }
+            if (iblNICOrPassporttxt.getText().isBlank() || iblCustContactNotxt.getText().isBlank() || iblCustEmailtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "NIC/Passport, contact number, and email are required.");
+                return;
+            }
+            if (cmbMembershipId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Please select a membership.");
+                return;
+            }
+
             String membershipId = cmbMembershipId.getSelectedItem().toString().split(" - ")[0];
             CustomerDto dto = new CustomerDto(
                     iblCustomerIdtxt.getText(),
@@ -380,6 +417,10 @@ public class CustomerView extends javax.swing.JFrame {
     private void deleteCustomer() {
         try {
             String id = iblCustomerIdtxt.getText();
+            if (id.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Please enter or select a customer ID to delete.");
+                return;
+            }
             boolean isDeleted = customerController.deleteCustomer(id);
             if (isDeleted) {
                 JOptionPane.showMessageDialog(this, "Customer deleted successfully.");
@@ -422,8 +463,69 @@ public class CustomerView extends javax.swing.JFrame {
                     break;
                 }
             }
+
+            showRentalHistory(dto.getCustomerId());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error searching customer: " + e.getMessage());
+        }
+    }
+
+    private void showRentalHistory(String customerId) {
+        try {
+            List<RentalDto> rentals = rentalController.findAllRentals();
+            List<RentalDto> customerRentals = new ArrayList<>();
+            double activeDeposits = 0.0;
+
+            for (RentalDto rental : rentals) {
+                if (!customerId.equals(rental.getCustomerId())) {
+                    continue;
+                }
+                customerRentals.add(rental);
+                if ("Active".equalsIgnoreCase(rental.getRentalStatus())) {
+                    activeDeposits += rental.getDepositAmount();
+                }
+            }
+
+            int pastRentals = 0;
+            int activeRentals = 0;
+            StringBuilder historyText = new StringBuilder();
+            historyText.append("Customer Rental History\n");
+            historyText.append("Customer ID: ").append(customerId).append("\n\n");
+
+            if (customerRentals.isEmpty()) {
+                historyText.append("No rentals found.");
+            } else {
+                for (RentalDto rental : customerRentals) {
+                    if ("Active".equalsIgnoreCase(rental.getRentalStatus())) {
+                        activeRentals++;
+                    } else {
+                        pastRentals++;
+                    }
+                    historyText.append(rental.getRentalId())
+                            .append(" | ")
+                            .append(rental.getEquipmentId())
+                            .append(" | ")
+                            .append(rental.getStartDate())
+                            .append(" -> ")
+                            .append(rental.getEndDate())
+                            .append(" | ")
+                            .append(rental.getRentalStatus())
+                            .append(" | Deposit: ")
+                            .append(rental.getDepositAmount())
+                            .append("\n");
+                }
+
+                historyText.append("\nSummary\n");
+                historyText.append("Past rentals: ").append(pastRentals).append("\n");
+                historyText.append("Active rentals: ").append(activeRentals).append("\n");
+                historyText.append("Total deposit held: ").append(activeDeposits).append("\n");
+            }
+
+            JTextArea textArea = new JTextArea(historyText.toString(), 18, 60);
+            textArea.setEditable(false);
+            JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Rental History", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error loading rental history: " + e.getMessage());
         }
     }
 

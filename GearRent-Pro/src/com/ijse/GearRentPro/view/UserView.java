@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.UserController;
@@ -10,10 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class UserView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UserView.class.getName());
@@ -66,10 +60,10 @@ public class UserView extends javax.swing.JFrame {
         iblPassword.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblPassword.setText("Password");
 
-        iblRoleIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblRoleIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblRoleIdtxt.addActionListener(this::iblRoleIdtxtActionPerformed);
 
-        iblPasswordtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblPasswordtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblPasswordtxt.addActionListener(this::iblPasswordtxtActionPerformed);
 
         iblBranchId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -78,10 +72,10 @@ public class UserView extends javax.swing.JFrame {
         iblRoleId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblRoleId.setText("Role ID");
 
-        iblBranchIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBranchIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchIdtxt.addActionListener(this::iblBranchIdtxtActionPerformed);
 
-        iblUserIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblUserIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUpdate.setText("Update");
@@ -90,7 +84,7 @@ public class UserView extends javax.swing.JFrame {
         iblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUsername.setText("Username");
 
-        iblUsernametxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblUsernametxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUsernametxt.addActionListener(this::iblUsernametxtActionPerformed);
 
         iblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -132,42 +126,40 @@ public class UserView extends javax.swing.JFrame {
                 .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(iblRoleId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(iblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(iblUsername)
-                                        .addComponent(iblUserId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(iblBranchId))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(iblBranchIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblUsernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblPasswordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblRoleIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblUserIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(368, 368, 368))
-                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(iblRoleId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(iblUsername)
+                                .addComponent(iblUserId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(iblBranchId))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iblBranchIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblUsernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblPasswordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblRoleIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblUserIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(368, 368, 368))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(iblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblUserIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,10 +190,10 @@ public class UserView extends javax.swing.JFrame {
                             .addComponent(iblBranchId))
                         .addGap(52, 52, 52)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(btnBack)
-                .addGap(34, 34, 34))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -278,6 +270,15 @@ public class UserView extends javax.swing.JFrame {
 
     private void saveUser() {
         try {
+            if (iblUserIdtxt.getText().isBlank() || iblUsernametxt.getText().isBlank() || iblPasswordtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "User ID, username, and password are required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblRoleIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Role ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             UserDto dto = new UserDto(
                     iblUserIdtxt.getText(),
                     iblUsernametxt.getText(),
@@ -302,6 +303,15 @@ public class UserView extends javax.swing.JFrame {
 
     private void updateUser() {
         try {
+            if (iblUserIdtxt.getText().isBlank() || iblUsernametxt.getText().isBlank() || iblPasswordtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "User ID, username, and password are required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblRoleIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Role ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             UserDto dto = new UserDto(
                     iblUserIdtxt.getText(),
                     iblUsernametxt.getText(),
@@ -327,6 +337,10 @@ public class UserView extends javax.swing.JFrame {
     private void deleteUser() {
         try {
             String userId = iblUserIdtxt.getText();
+            if (userId.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Please enter or select a user ID to delete.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             boolean isDeleted = userController.deleteUser(userId);
             if (isDeleted) {
                 JOptionPane.showMessageDialog(this, "User deleted successfully.");

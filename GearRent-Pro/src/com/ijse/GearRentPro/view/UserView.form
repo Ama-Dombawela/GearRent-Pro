@@ -29,42 +29,38 @@
               <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="iblRoleId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
-                                          <Component id="iblPassword" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="iblUsername" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="iblUserId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="iblBranchId" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="iblRoleId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
+                                  <Component id="iblPassword" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="iblBranchIdtxt" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblUsernametxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblPasswordtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblRoleIdtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblUserIdtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="368" max="-2" attributes="0"/>
+                              <Component id="iblUsername" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="iblUserId" alignment="1" min="-2" pref="142" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnBack" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="iblDelete" min="-2" pref="107" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="iblUpdate" min="-2" pref="107" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="iblSave" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="iblBranchId" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="iblBranchIdtxt" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="iblUsernametxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="iblPasswordtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="iblRoleIdtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="iblUserIdtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="368" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnBack" alignment="1" min="-2" pref="171" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="iblDelete" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="iblUpdate" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="iblSave" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
@@ -75,7 +71,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="iblHeader" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace type="separate" pref="33" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="iblUserIdtxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="iblUserId" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -116,10 +112,10 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="106" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="169" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,7 +151,7 @@
     <Component class="javax.swing.JTextField" name="iblRoleIdtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -165,7 +161,7 @@
     <Component class="javax.swing.JTextField" name="iblPasswordtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -191,7 +187,7 @@
     <Component class="javax.swing.JTextField" name="iblBranchIdtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -201,7 +197,7 @@
     <Component class="javax.swing.JTextField" name="iblUserIdtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
@@ -227,7 +223,7 @@
     <Component class="javax.swing.JTextField" name="iblUsernametxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>

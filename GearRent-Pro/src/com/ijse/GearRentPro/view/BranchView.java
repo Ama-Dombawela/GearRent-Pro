@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -10,10 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class BranchView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BranchView.class.getName());
@@ -304,8 +298,8 @@ public class BranchView extends javax.swing.JFrame {
         tblBranch.setModel(dtm);
 
         try {
-            List<com.ijse.GearRentPro.dto.BranchDto> branchDtos = branchController.findAllBranches();
-            for (com.ijse.GearRentPro.dto.BranchDto branchDto : branchDtos) {
+            List<BranchDto> branchDtos = branchController.findAllBranches();
+            for (BranchDto branchDto : branchDtos) {
                 Object[] rowData = {
                     branchDto.getBranchId(),
                     branchDto.getBranchCode(),
@@ -321,6 +315,10 @@ public class BranchView extends javax.swing.JFrame {
     }
 
     public void saveBranch() {
+        if (iblBranchIdtxt1.getText().isBlank() || iblBranchCodetxt.getText().isBlank() || iblBranchNametxt.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Branch ID, code, and name are required.");
+            return;
+        }
         BranchDto branchDTO = new BranchDto(
                 iblBranchIdtxt1.getText(),
                 iblBranchCodetxt.getText(),
@@ -342,6 +340,10 @@ public class BranchView extends javax.swing.JFrame {
     }
 
     public void updateBranch() {
+        if (iblBranchIdtxt1.getText().isBlank() || iblBranchCodetxt.getText().isBlank() || iblBranchNametxt.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Branch ID, code, and name are required.");
+            return;
+        }
         BranchDto branchDTO = new BranchDto(
                 iblBranchIdtxt1.getText(),
                 iblBranchCodetxt.getText(),
@@ -364,6 +366,10 @@ public class BranchView extends javax.swing.JFrame {
 
     public void deleteBranch() {
         String branchId = iblBranchIdtxt1.getText();
+        if (branchId.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter or select a branch ID to delete.");
+            return;
+        }
         try {
             boolean resp = branchController.deleteBranch(branchId);
             if (resp) {
@@ -385,7 +391,7 @@ public class BranchView extends javax.swing.JFrame {
         String branchId = (String) tblBranch.getValueAt(tblBranch.getSelectedRow(), 0);
 
         try {
-            com.ijse.GearRentPro.dto.BranchDto branchDto = branchController.findBranch(branchId);
+            BranchDto branchDto = branchController.findBranch(branchId);
             if (branchDto != null) {
                 iblBranchIdtxt1.setText(branchDto.getBranchId());
                 iblBranchCodetxt.setText(branchDto.getBranchCode());

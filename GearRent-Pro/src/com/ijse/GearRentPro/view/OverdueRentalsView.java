@@ -1,10 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.RentalController;
+import com.ijse.GearRentPro.controller.CustomerController;
+import com.ijse.GearRentPro.controller.BranchController;
+import com.ijse.GearRentPro.controller.EquipmentController;
+import com.ijse.GearRentPro.dto.CustomerDto;
+import com.ijse.GearRentPro.dto.BranchDto;
+import com.ijse.GearRentPro.dto.EquipmentDto;
 import com.ijse.GearRentPro.dto.RentalDto;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -12,14 +15,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class OverdueRentalsView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OverdueRentalsView.class.getName());
     private RentalController rentalController = new RentalController();
+    private CustomerController customerController = new CustomerController();
+    private BranchController branchController = new BranchController();
+    private EquipmentController equipmentController = new EquipmentController();
 
     /**
      * Creates new form OverdueRentalView
@@ -145,9 +148,33 @@ public class OverdueRentalsView extends javax.swing.JFrame {
                     && !"Returned".equalsIgnoreCase(rental.getRentalStatus())
                     && !"Cancelled".equalsIgnoreCase(rental.getRentalStatus())) {
                     long daysOverdue = ChronoUnit.DAYS.between(rental.getEndDate(), today);
+                    String customerName = rental.getCustomerId();
+                    String branchName = rental.getBranchId();
+                    String equipmentName = rental.getEquipmentId();
+                    try {
+                        CustomerDto customer = customerController.findCustomer(rental.getCustomerId());
+                        if (customer != null) {
+                            customerName = customer.getName();
+                        }
+                    } catch (Exception ignored) {
+                    }
+                    try {
+                        BranchDto branch = branchController.findBranch(rental.getBranchId());
+                        if (branch != null) {
+                            branchName = branch.getName();
+                        }
+                    } catch (Exception ignored) {
+                    }
+                    try {
+                        EquipmentDto equipment = equipmentController.findEquipment(rental.getEquipmentId());
+                        if (equipment != null) {
+                            equipmentName = equipment.getBrand() + " " + equipment.getModel();
+                        }
+                    } catch (Exception ignored) {
+                    }
                     model.addRow(new Object[]{
-                        rental.getRentalId(), rental.getEquipmentId(),
-                        rental.getCustomerId(), rental.getBranchId(),
+                        rental.getRentalId(), equipmentName,
+                        customerName, branchName,
                         rental.getEndDate(), daysOverdue
                     });
                 }

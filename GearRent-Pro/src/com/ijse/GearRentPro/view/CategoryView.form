@@ -181,7 +181,7 @@
     <Component class="javax.swing.JTextField" name="iblCatPricefactortxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -191,7 +191,7 @@
     <Component class="javax.swing.JTextField" name="iblCatDestxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -217,7 +217,7 @@
     <Component class="javax.swing.JTextField" name="iblCatWMtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -227,7 +227,7 @@
     <Component class="javax.swing.JTextField" name="iblCatIdtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
     </Component>
@@ -253,7 +253,7 @@
     <Component class="javax.swing.JTextField" name="iblCatNametxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -323,7 +323,7 @@
     <Component class="javax.swing.JTextField" name="iblCatIsActivetxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -333,7 +333,7 @@
     <Component class="javax.swing.JTextField" name="iblCatLateFeeperdaytxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>

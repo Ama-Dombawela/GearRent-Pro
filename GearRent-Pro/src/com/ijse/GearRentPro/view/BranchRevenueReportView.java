@@ -1,27 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
+import com.ijse.GearRentPro.controller.CategoryController;
+import com.ijse.GearRentPro.controller.DamageController;
+import com.ijse.GearRentPro.controller.EquipmentController;
 import com.ijse.GearRentPro.controller.RentalController;
 import com.ijse.GearRentPro.dto.BranchDto;
+import com.ijse.GearRentPro.dto.CategoryDto;
+import com.ijse.GearRentPro.dto.DamageDto;
+import com.ijse.GearRentPro.dto.EquipmentDto;
 import com.ijse.GearRentPro.dto.RentalDto;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class BranchRevenueReportView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BranchRevenueReportView.class.getName());
     private BranchController branchController = new BranchController();
     private RentalController rentalController = new RentalController();
+    private CategoryController categoryController = new CategoryController();
+    private DamageController damageController = new DamageController();
+    private EquipmentController equipmentController = new EquipmentController();
 
     /**
      * Creates new form BranchRevenueReportView
@@ -64,13 +69,13 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
         iblTo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblTo.setText("To");
 
-        iblTotxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblTotxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblTotxt.addActionListener(this::iblTotxtActionPerformed);
 
         iblFrom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblFrom.setText("From");
 
-        iblFromtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblFromtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblFromtxt.addActionListener(this::iblFromtxtActionPerformed);
 
         iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -107,7 +112,7 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
         btnGenerate.addActionListener(this::btnGenerateActionPerformed);
 
         iblTotalRevenue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblTotalRevenue.setText("Total Revenue :  ");
+        iblTotalRevenue.setText("Total Revenue  :  ");
         iblTotalRevenue.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         iblLateFeesTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -115,11 +120,11 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
         iblLateFeesTotal.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         iblTotalDamage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblTotalDamage.setText("Total Damage : ");
+        iblTotalDamage.setText("Total Damage  : ");
         iblTotalDamage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         iblTotalRenals.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblTotalRenals.setText("Total Rentals :");
+        iblTotalRenals.setText("Total Rentals    :");
         iblTotalRenals.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,40 +134,31 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(iblTotalRenals, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblLateFeesTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblTotalDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(234, 234, 234)
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(iblTo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbBranch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblFromtxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblTotxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(90, 90, 90)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(iblLateFeesTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(iblTotalRenals, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(109, 109, 109)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(iblTotalRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(iblTotalDamage, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(71, 71, 71)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(iblTo, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                                    .addComponent(iblFrom, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                                    .addComponent(iblBranch, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                                                .addGap(26, 26, 26)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cmbBranch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(iblFromtxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(iblTotxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(btnGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,18 +180,20 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnGenerate)
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iblTotalRenals, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                    .addComponent(iblTotalRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(iblTotalRenals, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(iblLateFeesTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iblLateFeesTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iblTotalDamage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(iblTotalRevenue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBack)
-                .addGap(20, 20, 20))
+                .addComponent(iblTotalDamage)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,8 +245,18 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             String startDateStr = iblFromtxt.getText().trim();
             String endDateStr = iblTotxt.getText().trim();
 
+            if (startDateStr.isBlank() || endDateStr.isBlank()) {
+                JOptionPane.showMessageDialog(this, "From and To dates are required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             LocalDate startDate = LocalDate.parse(startDateStr);
             LocalDate endDate = LocalDate.parse(endDateStr);
+
+            if (startDate.isAfter(endDate)) {
+                JOptionPane.showMessageDialog(this, "From date cannot be after To date.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
             DefaultTableModel model = new DefaultTableModel(
                 new Object[]{"Rental ID", "Customer ID", "Equipment ID", "Start Date", "End Date", "Amount", "Late Fee", "Damage", "Total"}, 0
@@ -269,7 +277,26 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
 
                 double amount = rental.getRentalAmount();
                 double lateFee = 0;
+                if (rental.getActualReturnDate() != null && rental.getEndDate() != null && rental.getActualReturnDate().isAfter(rental.getEndDate())) {
+                    long lateDays = ChronoUnit.DAYS.between(rental.getEndDate(), rental.getActualReturnDate());
+                    try {
+                        EquipmentDto equipment = equipmentController.findEquipment(rental.getEquipmentId());
+                        if (equipment != null) {
+                            CategoryDto category = categoryController.findCategory(equipment.getCategoryId());
+                            lateFee = lateDays * category.getLateFeePerDay();
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
+
                 double damage = 0;
+                try {
+                    List<DamageDto> damages = damageController.findDamagesByRentalId(rental.getRentalId());
+                    for (DamageDto damageDto : damages) {
+                        damage += damageDto.getDamageCharge();
+                    }
+                } catch (Exception ignored) {
+                }
                 double total = amount + lateFee + damage;
 
                 model.addRow(new Object[]{
@@ -289,6 +316,8 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             iblLateFeesTotal.setText("Total Late Fees : LKR " + totalLateFees);
             iblTotalDamage.setText("Total Damage : LKR " + totalDamage);
 
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use YYYY-MM-DD for From and To dates.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

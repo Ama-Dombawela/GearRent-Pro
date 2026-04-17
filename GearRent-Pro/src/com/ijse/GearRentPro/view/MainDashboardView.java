@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
-import com.ijse.GearRentPro.Session;
+import com.ijse.GearRentPro.util.Session;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author User
- */
+
 public class MainDashboardView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainDashboardView.class.getName());
@@ -53,7 +47,7 @@ public class MainDashboardView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iblHeader.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         iblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iblHeader.setText("GearRentPro Dashboard");
 
@@ -204,7 +198,7 @@ public class MainDashboardView extends javax.swing.JFrame {
                     .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();

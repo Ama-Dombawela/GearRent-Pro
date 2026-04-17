@@ -1,36 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
+import com.ijse.GearRentPro.controller.CategoryController;
 import com.ijse.GearRentPro.controller.CustomerController;
 import com.ijse.GearRentPro.controller.EquipmentController;
 import com.ijse.GearRentPro.controller.MembershipController;
 import com.ijse.GearRentPro.controller.RentalController;
+import com.ijse.GearRentPro.dto.BranchDto;
+import com.ijse.GearRentPro.dto.CategoryDto;
 import com.ijse.GearRentPro.dto.CustomerDto;
 import com.ijse.GearRentPro.dto.EquipmentDto;
 import com.ijse.GearRentPro.dto.MembershipDto;
 import com.ijse.GearRentPro.dto.RentalDto;
+import com.ijse.GearRentPro.util.Session;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class RentalView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RentalView.class.getName());
     private RentalController rentalController = new RentalController();
     private EquipmentController equipmentController = new EquipmentController();
     private CustomerController customerController = new CustomerController();
     private BranchController branchController = new BranchController();
     private MembershipController membershipController = new MembershipController();
+    private CategoryController categoryController = new CategoryController();
 
     /**
      * Creates new form RentalView
@@ -86,7 +87,7 @@ public class RentalView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         iblFinalAmounttxt.setEditable(false);
-        iblFinalAmounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblFinalAmounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblBrand.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBrand.setText("Branch ID");
@@ -105,7 +106,7 @@ public class RentalView extends javax.swing.JFrame {
         iblDelete.setText("Delete");
         iblDelete.addActionListener(this::iblDeleteActionPerformed);
 
-        iblStartDatetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblStartDatetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblStartDatetxt.addActionListener(this::iblStartDatetxtActionPerformed);
 
         iblSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -141,10 +142,10 @@ public class RentalView extends javax.swing.JFrame {
         iblRentalId.setText("Rental ID");
 
         iblLongRentalDiscounttxt.setEditable(false);
-        iblLongRentalDiscounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblLongRentalDiscounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblLongRentalDiscounttxt.addActionListener(this::iblLongRentalDiscounttxtActionPerformed);
 
-        iblRentalIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblRentalIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblRentalIdtxt.addActionListener(this::iblRentalIdtxtActionPerformed);
 
         iblLongRentalDiscount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -153,10 +154,10 @@ public class RentalView extends javax.swing.JFrame {
         iblEquipmentid.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblEquipmentid.setText("Equipment ID");
 
-        iblEndDatetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblEndDatetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblDepositAmounttxt.setEditable(false);
-        iblDepositAmounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblDepositAmounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblCustomerId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCustomerId.setText("Customer ID");
@@ -174,20 +175,24 @@ public class RentalView extends javax.swing.JFrame {
         iblRentalAmount.setText("Rental Amount");
 
         iblRentalAmounttxt.setEditable(false);
-        iblRentalAmounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblRentalAmounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblBaseDailyPricetxt.setEditable(false);
-        iblBaseDailyPricetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBaseDailyPricetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
+        cmbEquipmentId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbEquipmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEquipmentId.addActionListener(this::cmbEquipmentIdActionPerformed);
 
+        cmbCustomerId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbCustomerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbCustomerId.addActionListener(this::cmbCustomerIdActionPerformed);
 
+        cmbBranchId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbBranchId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbBranchId.addActionListener(this::cmbBranchIdActionPerformed);
 
+        cmbPaymentStatus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbPaymentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid", "Partially Paid" }));
         cmbPaymentStatus.addActionListener(this::cmbPaymentStatusActionPerformed);
 
@@ -318,19 +323,22 @@ public class RentalView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iblStartDate)
                             .addComponent(iblStartDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(iblEndDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iblEndDate))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblPaymentStatus)
-                            .addComponent(cmbPaymentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 69, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(iblPaymentStatus)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbPaymentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 69, Short.MAX_VALUE)
                         .addComponent(btnCalculate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,9 +347,9 @@ public class RentalView extends javax.swing.JFrame {
                             .addComponent(iblSave))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(btnBack)
-                .addGap(18, 18, 18))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -409,6 +417,13 @@ public class RentalView extends javax.swing.JFrame {
             cmbEquipmentId.removeAllItems();
             cmbCustomerId.removeAllItems();
             cmbBranchId.removeAllItems();
+            cmbPaymentStatus.removeAllItems();
+
+            cmbBranchId.addItem("All Branches");
+            cmbPaymentStatus.addItem("All");
+            cmbPaymentStatus.addItem("Paid");
+            cmbPaymentStatus.addItem("Unpaid");
+            cmbPaymentStatus.addItem("Partially Paid");
 
             List<EquipmentDto> equipments = equipmentController.findAllEquipments();
             for (EquipmentDto equipment : equipments) {
@@ -420,8 +435,8 @@ public class RentalView extends javax.swing.JFrame {
                 cmbCustomerId.addItem(customer.getCustomerId());
             }
 
-            List<com.ijse.GearRentPro.dto.BranchDto> branches = branchController.findAllBranches();
-            for (com.ijse.GearRentPro.dto.BranchDto branch : branches) {
+            List<BranchDto> branches = branchController.findAllBranches();
+            for (BranchDto branch : branches) {
                 cmbBranchId.addItem(branch.getBranchId());
             }
         } catch (Exception e) {
@@ -436,12 +451,28 @@ public class RentalView extends javax.swing.JFrame {
 
             EquipmentDto equipment = equipmentController.findEquipment(equipmentId);
             CustomerDto customer = customerController.findCustomer(customerId);
+            CategoryDto category = categoryController.findCategory(equipment.getCategoryId());
 
             LocalDate startDate = LocalDate.parse(iblStartDatetxt.getText());
             LocalDate endDate = LocalDate.parse(iblEndDatetxt.getText());
 
             long days = ChronoUnit.DAYS.between(startDate, endDate);
-            double rentalAmount = equipment.getBaseDailyPrice() * days;
+            // Count weekend days
+            long weekendDays = 0;
+            for (LocalDate d = startDate; d.isBefore(endDate); d = d.plusDays(1)) {
+                if (d.getDayOfWeek() == DayOfWeek.SATURDAY
+                        || d.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                    weekendDays++;
+                }
+            }
+            long weekDays = days - weekendDays;
+
+            double priceFactor = category.getPriceFactor();
+            double weekendMultiplier = category.getWeekendMultiplier();
+            double basePrice = equipment.getBaseDailyPrice();
+
+            double rentalAmount = (basePrice * priceFactor * weekDays)
+                    + (basePrice * priceFactor * weekendMultiplier * weekendDays);
             double depositAmount = equipment.getSecurityDeposit();
 
             MembershipDto membership = null;
@@ -478,7 +509,33 @@ public class RentalView extends javax.swing.JFrame {
             tbleRental.setModel(model);
 
             List<RentalDto> rentals = rentalController.findAllRentals();
+            String branchFilter = Session.getCurrentBranchId();
+            String selectedBranch = cmbBranchId.getSelectedItem() != null ? cmbBranchId.getSelectedItem().toString() : "";
+            String paymentFilter = cmbPaymentStatus.getSelectedItem() != null ? cmbPaymentStatus.getSelectedItem().toString() : "";
+            LocalDate startFilter = null;
+            LocalDate endFilter = null;
+            if (!iblStartDatetxt.getText().trim().isBlank()) {
+                startFilter = LocalDate.parse(iblStartDatetxt.getText().trim());
+            }
+            if (!iblEndDatetxt.getText().trim().isBlank()) {
+                endFilter = LocalDate.parse(iblEndDatetxt.getText().trim());
+            }
             for (RentalDto rental : rentals) {
+                if (branchFilter != null && !branchFilter.equals(rental.getBranchId())) {
+                    continue;
+                }
+                if (!selectedBranch.isBlank() && !"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(rental.getBranchId())) {
+                    continue;
+                }
+                if (startFilter != null && rental.getStartDate() != null && rental.getStartDate().isBefore(startFilter)) {
+                    continue;
+                }
+                if (endFilter != null && rental.getEndDate() != null && rental.getEndDate().isAfter(endFilter)) {
+                    continue;
+                }
+                if (!paymentFilter.isBlank() && !"All".equalsIgnoreCase(paymentFilter) && !rental.getPaymentStatus().equalsIgnoreCase(paymentFilter)) {
+                    continue;
+                }
                 model.addRow(new Object[]{
                     rental.getRentalId(),
                     rental.getEquipmentId(),
@@ -499,6 +556,15 @@ public class RentalView extends javax.swing.JFrame {
 
     private void saveRental() {
         try {
+            if (iblRentalIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Rental ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cmbEquipmentId.getSelectedItem() == null || cmbCustomerId.getSelectedItem() == null || cmbBranchId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Equipment, customer, and branch must be selected.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             RentalDto dto = new RentalDto(
                     iblRentalIdtxt.getText(),
                     cmbEquipmentId.getSelectedItem().toString(),
@@ -512,7 +578,7 @@ public class RentalView extends javax.swing.JFrame {
                     Double.parseDouble(iblBaseDailyPricetxt.getText()),
                     Double.parseDouble(iblLongRentalDiscounttxt.getText()),
                     Double.parseDouble(iblFinalAmounttxt.getText()),
-                    cmbPaymentStatus.getSelectedItem().toString(),
+                        resolvePaymentStatusForSave(),
                     "Active"
             );
 
@@ -523,8 +589,12 @@ public class RentalView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to save rental.");
             }
 
-            loadTable();
             clearForm();
+            loadTable();
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Start date and end date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Amount fields must contain valid numeric values.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving rental: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -532,6 +602,15 @@ public class RentalView extends javax.swing.JFrame {
 
     private void updateRental() {
         try {
+            if (iblRentalIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Rental ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cmbEquipmentId.getSelectedItem() == null || cmbCustomerId.getSelectedItem() == null || cmbBranchId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Equipment, customer, and branch must be selected.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             RentalDto dto = new RentalDto(
                     iblRentalIdtxt.getText(),
                     cmbEquipmentId.getSelectedItem().toString(),
@@ -545,7 +624,7 @@ public class RentalView extends javax.swing.JFrame {
                     Double.parseDouble(iblBaseDailyPricetxt.getText()),
                     Double.parseDouble(iblLongRentalDiscounttxt.getText()),
                     Double.parseDouble(iblFinalAmounttxt.getText()),
-                    cmbPaymentStatus.getSelectedItem().toString(),
+                        resolvePaymentStatusForSave(),
                     "Active"
             );
 
@@ -556,8 +635,12 @@ public class RentalView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to update rental.");
             }
 
-            loadTable();
             clearForm();
+            loadTable();
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Start date and end date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Amount fields must contain valid numeric values.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error updating rental: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -566,6 +649,10 @@ public class RentalView extends javax.swing.JFrame {
     private void deleteRental() {
         try {
             String rentalId = iblRentalIdtxt.getText();
+            if (rentalId.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Please enter or select a rental ID to delete.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             boolean isDeleted = rentalController.deleteRental(rentalId);
             if (isDeleted) {
                 JOptionPane.showMessageDialog(this, "Rental deleted successfully.");
@@ -573,8 +660,8 @@ public class RentalView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to delete rental.");
             }
 
-            loadTable();
             clearForm();
+            loadTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error deleting rental: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -633,6 +720,11 @@ public class RentalView extends javax.swing.JFrame {
         if (cmbPaymentStatus.getItemCount() > 0) {
             cmbPaymentStatus.setSelectedIndex(0);
         }
+    }
+
+    private String resolvePaymentStatusForSave() {
+        String selected = cmbPaymentStatus.getSelectedItem() != null ? cmbPaymentStatus.getSelectedItem().toString() : "";
+        return "All".equalsIgnoreCase(selected) ? "Unpaid" : selected;
     }
 
     /**

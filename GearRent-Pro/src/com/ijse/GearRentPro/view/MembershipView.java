@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.MembershipController;
@@ -10,10 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
+
 public class MembershipView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MembershipView.class.getName());
@@ -62,10 +56,10 @@ public class MembershipView extends javax.swing.JFrame {
         iblMembDiscount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembDiscount.setText("Discount %");
 
-        iblMembDiscounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembDiscounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembDiscounttxt.addActionListener(this::iblMembDiscounttxtActionPerformed);
 
-        iblMembershipIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembershipIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUpdate.setText("Update");
@@ -74,7 +68,7 @@ public class MembershipView extends javax.swing.JFrame {
         iblMembLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembLevel.setText("Level");
 
-        iblMembLeveltxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembLeveltxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembLeveltxt.addActionListener(this::iblMembLeveltxtActionPerformed);
 
         iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -154,7 +148,7 @@ public class MembershipView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(iblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblMembershipId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblMembershipIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,10 +166,10 @@ public class MembershipView extends javax.swing.JFrame {
                     .addComponent(iblDelete)
                     .addComponent(iblUpdate))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBack)
-                .addGap(27, 27, 27))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -242,6 +236,19 @@ public class MembershipView extends javax.swing.JFrame {
 
     private void saveMembership() {
         try {
+            if (iblMembershipIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembLeveltxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership level is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembDiscounttxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),
@@ -257,6 +264,8 @@ public class MembershipView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Discount must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving membership: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -264,6 +273,19 @@ public class MembershipView extends javax.swing.JFrame {
 
     private void updateMembership() {
         try {
+            if (iblMembershipIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembLeveltxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership level is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembDiscounttxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),
@@ -279,6 +301,8 @@ public class MembershipView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Discount must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error updating membership: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
