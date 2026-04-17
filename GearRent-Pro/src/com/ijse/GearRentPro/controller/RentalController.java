@@ -7,6 +7,7 @@ package com.ijse.GearRentPro.controller;
 import com.ijse.GearRentPro.dto.RentalDto;
 import com.ijse.GearRentPro.service.ServiceFactory;
 import com.ijse.GearRentPro.service.custom.RentalService;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,6 +32,10 @@ public class RentalController {
 
     public RentalDto findRental(String id) throws Exception {
         return rentalService.findRental(id);
+    }
+
+    public boolean processReturn(String rentalId, LocalDate actualReturnDate, String damageId, String damageDescription, double damageCharge) throws Exception {
+        return rentalService.processReturn(rentalId, actualReturnDate, damageId, damageDescription, damageCharge);
     }
 
     public List<RentalDto> findAllRentals() throws Exception {

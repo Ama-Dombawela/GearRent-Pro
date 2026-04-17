@@ -4,6 +4,7 @@
  */
 package com.ijse.GearRentPro.controller;
 
+import com.ijse.GearRentPro.dto.RentalDto;
 import com.ijse.GearRentPro.dto.ReservationDto;
 import com.ijse.GearRentPro.service.ServiceFactory;
 import com.ijse.GearRentPro.service.custom.ReservationService;
@@ -23,6 +24,14 @@ public class ReservationController {
 
     public boolean updateReservation(ReservationDto dto) throws Exception {
         return reservationService.updateReservation(dto);
+    }
+
+    public boolean cancelReservation(String id) throws Exception {
+        return reservationService.cancelReservation(id);
+    }
+
+    public boolean convertReservationToRental(ReservationDto reservation, RentalDto rental) throws Exception {
+        return reservationService.convertReservationToRental(reservation, rental);
     }
 
     public boolean deleteReservation(String id) throws Exception {
