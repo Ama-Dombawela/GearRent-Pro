@@ -5,7 +5,6 @@
 package com.ijse.GearRentPro.dao.Custom;
 
 import com.ijse.GearRentPro.dao.CrudDao;
-import com.ijse.GearRentPro.entity.EquipmentEntity;
 import com.ijse.GearRentPro.entity.RentalEntity;
 import java.util.ArrayList;
 
@@ -15,10 +14,13 @@ import java.util.ArrayList;
  */
 public interface RentalDao extends CrudDao<RentalEntity, String>{
     
-    ArrayList<RentalEntity> getByCutomer(String customerId)throws Exception;
+    ArrayList<RentalEntity> getByCustomer(String customerId)throws Exception;
     ArrayList<RentalEntity> getByBranch(String branchId)throws Exception;
     ArrayList<RentalEntity> getByStatus(String status)throws Exception;
     ArrayList<RentalEntity> getOverdueRentals()throws Exception;
-    double getTotalActiveDepositByCutomer(String cutomerId)throws Exception;
+    double getTotalActiveDepositByCustomer(String CustomerId)throws Exception;
+    double getTotalActiveDepositByCustomerForUpdate(String CustomerId)throws Exception;
+    boolean hasActiveOverlapForUpdate(String equipmentId, String startDate, String endDate)throws Exception;
+    RentalEntity searchForUpdate(String rentalId) throws Exception;
     
 }

@@ -19,7 +19,7 @@ public class ReservationDaoImpl implements ReservationDao {
     private static final String SELECT_QUERY = "SELECT * FROM reservations";
 
     @Override
-    public ArrayList<ReservationEntity> getByCutomer(String customerId) throws Exception {
+    public ArrayList<ReservationEntity> getByCustomer(String customerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 SELECT_QUERY + " WHERE TRIM(customer_id)=?", customerId);
         ArrayList<ReservationEntity> list = new ArrayList<>();
@@ -44,6 +44,14 @@ public class ReservationDaoImpl implements ReservationDao {
     public boolean hasOverlap(String equipmentId, String startDate, String endDate) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT * FROM reservations WHERE TRIM(equipment_id)=? AND status='Active' AND start_date <= ? AND end_date >= ?",
+                equipmentId, endDate, startDate);
+        return resultSet.next();
+    }
+
+    @Override
+    public boolean hasOverlapForUpdate(String equipmentId, String startDate, String endDate) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                "SELECT reservation_id FROM reservations WHERE TRIM(equipment_id)=? AND status='Active' AND start_date <= ? AND end_date >= ? FOR UPDATE",
                 equipmentId, endDate, startDate);
         return resultSet.next();
     }

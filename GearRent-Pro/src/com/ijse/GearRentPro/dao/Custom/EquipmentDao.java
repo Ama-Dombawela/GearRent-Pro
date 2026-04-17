@@ -17,5 +17,6 @@ public interface EquipmentDao extends CrudDao<EquipmentEntity, String>{
     ArrayList<EquipmentEntity> getByBranch(String branchId)throws Exception;
     ArrayList<EquipmentEntity> getByStatus(String status)throws Exception;
     ArrayList<EquipmentEntity> getByCategory(String categoryId)throws Exception;
+    EquipmentEntity searchForUpdate(String id) throws Exception;
     
 }

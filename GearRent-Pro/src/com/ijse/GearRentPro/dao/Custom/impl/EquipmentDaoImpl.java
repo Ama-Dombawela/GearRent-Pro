@@ -96,6 +96,16 @@ public class EquipmentDaoImpl implements EquipmentDao {
     }
 
     @Override
+    public EquipmentEntity searchForUpdate(String id) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                SELECT_QUERY + " WHERE TRIM(equipment_id)=? FOR UPDATE", id);
+        if (resultSet.next()) {
+            return mapRow(resultSet);
+        }
+        return null;
+    }
+
+    @Override
     public ArrayList<EquipmentEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(SELECT_QUERY);
         ArrayList<EquipmentEntity> list = new ArrayList<>();

@@ -74,12 +74,14 @@ public class UserDaoImpl implements UserDao {
 
     private UserEntity mapRow(ResultSet resultSet) throws Exception {
 
+        String branchId = resultSet.getString("branch_id");
+
         return new UserEntity(
                 resultSet.getString("user_id").trim(),
                 resultSet.getString("username"),
                 resultSet.getString("password"),
                 resultSet.getString("role_id").trim(),
-                resultSet.getString("branch_id").trim()
+            branchId == null ? null : branchId.trim()
         );
     }
 

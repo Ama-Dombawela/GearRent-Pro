@@ -19,7 +19,7 @@ public class RentalDaoImpl implements RentalDao {
     private static final String SELECT_QUERY = "SELECT * FROM rentals";
 
     @Override
-    public ArrayList<RentalEntity> getByCutomer(String customerId) throws Exception {
+    public ArrayList<RentalEntity> getByCustomer(String customerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 SELECT_QUERY + " WHERE TRIM(customer_id)=?", customerId);
         ArrayList<RentalEntity> list = new ArrayList<>();
@@ -63,14 +63,36 @@ public class RentalDaoImpl implements RentalDao {
     }
 
     @Override
-    public double getTotalActiveDepositByCutomer(String cutomerId) throws Exception {
+    public double getTotalActiveDepositByCustomer(String CustomerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT SUM(deposit_amount) AS total FROM rentals WHERE TRIM(customer_id)=? AND rental_status='Active'",
-                cutomerId);
+                CustomerId);
         if (resultSet.next()) {
             return resultSet.getDouble("total");
         }
         return 0.0;
+    }
+
+    @Override
+    public double getTotalActiveDepositByCustomerForUpdate(String CustomerId) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                "SELECT SUM(deposit_amount) AS total FROM rentals WHERE TRIM(customer_id)=? AND rental_status='Active' FOR UPDATE",
+                CustomerId);
+        if (resultSet.next()) {
+            return resultSet.getDouble("total");
+        }
+        return 0.0;
+    }
+
+    @Override
+    public boolean hasActiveOverlapForUpdate(String equipmentId, String startDate, String endDate) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                "SELECT rental_id FROM rentals WHERE TRIM(equipment_id)=? AND rental_status IN ('Active','Overdue') AND start_date <= ? AND end_date >= ? FOR UPDATE",
+                equipmentId,
+                endDate,
+                startDate
+        );
+        return resultSet.next();
     }
 
     @Override
@@ -126,6 +148,16 @@ public class RentalDaoImpl implements RentalDao {
     public RentalEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 SELECT_QUERY + " WHERE TRIM(rental_id)=?", id);
+        if (resultSet.next()) {
+            return mapRow(resultSet);
+        }
+        return null;
+    }
+
+    @Override
+    public RentalEntity searchForUpdate(String rentalId) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                SELECT_QUERY + " WHERE TRIM(rental_id)=? FOR UPDATE", rentalId);
         if (resultSet.next()) {
             return mapRow(resultSet);
         }

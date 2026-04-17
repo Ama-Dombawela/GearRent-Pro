@@ -21,7 +21,7 @@ public class CategoryDaoImpl implements CategoryDao {
         return CrudUtil.executeUpdate(
                 "INSERT INTO categories VALUES(?,?,?,?,?,?,?)",
                 t.getCategoryId(), t.getName(), t.getDescription(),
-                t.getPriceFactor(), t.getWeekendMutiplier(), t.getLateFeePerDay(), t.isIsActive());
+                t.getPriceFactor(), t.getWeekendMultiplier(), t.getLateFeePerDay(), t.isIsActive());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
         return CrudUtil.executeUpdate(
                 "UPDATE categories SET name=?, description=?, price_factor=?, weekend_multiplier=?, late_fee_per_day=?, is_active=? WHERE TRIM(category_id)=?",
                 t.getName(), t.getDescription(), t.getPriceFactor(),
-                t.getWeekendMutiplier(), t.getLateFeePerDay(),
+                t.getWeekendMultiplier(), t.getLateFeePerDay(),
                 t.isIsActive(), t.getCategoryId());
     }
 
