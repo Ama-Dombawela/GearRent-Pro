@@ -18,6 +18,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
 
     private static final String SELECT_QUERY = "SELECT * FROM equipment";
 
+    /**
+     * Loads equipment for a specific branch.
+     *
+     * @param branchId branch identifier
+     * @return matching equipment entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<EquipmentEntity> getByBranch(String branchId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -29,6 +36,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
         return list;
     }
 
+    /**
+     * Loads equipment with a specific status.
+     *
+     * @param status equipment status value
+     * @return matching equipment entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<EquipmentEntity> getByStatus(String status) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -40,6 +54,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
         return list;
     }
 
+    /**
+     * Loads equipment for a specific category.
+     *
+     * @param categoryId category identifier
+     * @return matching equipment entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<EquipmentEntity> getByCategory(String categoryId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -51,6 +72,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
         return list;
     }
 
+    /**
+     * Saves an equipment row using the entity values.
+     *
+     * @param t equipment entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean save(EquipmentEntity t) throws Exception {
         return CrudUtil.executeUpdate(
@@ -64,6 +92,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
                 t.getStatus().getDatabaseValue());
     }
 
+    /**
+     * Updates an equipment row using the entity values.
+     *
+     * @param t equipment entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean update(EquipmentEntity t) throws Exception {
         return CrudUtil.executeUpdate(
@@ -79,12 +114,26 @@ public class EquipmentDaoImpl implements EquipmentDao {
                 t.getEquipmentId());
     }
 
+    /**
+     * Deletes an equipment row by ID.
+     *
+     * @param id equipment identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
                 "DELETE FROM equipment WHERE TRIM(equipment_id)=?", id);
     }
 
+    /**
+     * Loads one equipment row by ID.
+     *
+     * @param id equipment identifier
+     * @return matching equipment entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public EquipmentEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -95,6 +144,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
         return null;
     }
 
+    /**
+     * Loads one equipment row by ID while locking it for update.
+     *
+     * @param id equipment identifier
+     * @return matching equipment entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public EquipmentEntity searchForUpdate(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -105,6 +161,12 @@ public class EquipmentDaoImpl implements EquipmentDao {
         return null;
     }
 
+    /**
+     * Loads all equipment rows.
+     *
+     * @return list of equipment entities
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public ArrayList<EquipmentEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(SELECT_QUERY);

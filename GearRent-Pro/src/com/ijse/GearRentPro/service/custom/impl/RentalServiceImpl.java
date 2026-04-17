@@ -48,6 +48,14 @@ public class RentalServiceImpl implements RentalService {
     MembershipDao membershipDao = (MembershipDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.MEMBERSHIP);
 
     @Override
+    /**
+     * Creates a rental after validating dates, deposit limits, overlaps, and
+     * pricing.
+     *
+     * @param dto the rental data
+     * @return true if successful
+     * @throws Exception if validation or database operation fails
+     */
     public boolean saveRental(RentalDto dto) throws Exception {
 
         if (dto.getRentalId() == null || dto.getRentalId().isBlank()) {
@@ -170,6 +178,14 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    /**
+     * Updates a rental after validating dates, branch scope, and recalculated
+     * pricing.
+     *
+     * @param dto the updated rental data
+     * @return true if successful
+     * @throws Exception if validation or database operation fails
+     */
     public boolean updateRental(RentalDto dto) throws Exception {
         AuthUtil.requireBranchScopedAccess(dto.getBranchId());
 
@@ -198,7 +214,7 @@ public class RentalServiceImpl implements RentalService {
         if (equipment == null) {
             throw new Exception("Equipment not found.");
         }
-            if (!Objects.equals(equipment.getBranchId(), dto.getBranchId())) {
+        if (!Objects.equals(equipment.getBranchId(), dto.getBranchId())) {
             throw new Exception("Equipment does not belong to the selected branch.");
         }
         calculateRentalPricing(dto, equipment);
@@ -223,6 +239,13 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    /**
+     * Deletes a rental when the current user has access to its branch.
+     *
+     * @param id the rental ID
+     * @return true if successful
+     * @throws Exception if authorization or database operation fails
+     */
     public boolean deleteRental(String id) throws Exception {
         RentalEntity entity = rentalDao.search(id);
         if (entity != null) {
@@ -232,6 +255,13 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    /**
+     * Finds a rental by ID and maps it to a DTO.
+     *
+     * @param id the rental ID
+     * @return the rental DTO or null if not found
+     * @throws Exception if database operation fails
+     */
     public RentalDto findRental(String id) throws Exception {
         RentalEntity entity = rentalDao.search(id);
         if (entity == null) {
@@ -257,6 +287,18 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    /**
+     * Closes a rental, records settlement values, and updates the equipment
+     * status.
+     *
+     * @param rentalId the rental ID
+     * @param actualReturnDate the return date
+     * @param damageId the damage record ID
+     * @param damageDescription the damage description
+     * @param damageCharge the damage charge amount
+     * @return true if successful
+     * @throws Exception if database operation fails
+     */
     public boolean processReturn(String rentalId, LocalDate actualReturnDate, String damageId, String damageDescription, double damageCharge) throws Exception {
         if (rentalId == null || rentalId.isBlank()) {
             throw new Exception("Rental ID is required.");
@@ -331,10 +373,10 @@ public class RentalServiceImpl implements RentalService {
                 throw new Exception("Failed to update rental return details.");
             }
 
-                String returnId = rentalId != null && rentalId.startsWith("RN")
+            String returnId = rentalId != null && rentalId.startsWith("RN")
                     ? "RT" + rentalId.substring(2)
                     : "RT" + rentalId;
-                boolean settlementSaved = CrudUtil.executeUpdate(
+            boolean settlementSaved = CrudUtil.executeUpdate(
                     "INSERT INTO returns (return_id, rental_id, actual_return_date, late_fee, damage_charge, deposit_amount, refund_amount, extra_pay_amount, settlement_type) VALUES (?,?,?,?,?,?,?,?,?)",
                     returnId,
                     rentalId,
@@ -345,7 +387,7 @@ public class RentalServiceImpl implements RentalService {
                     settlement > 0 ? settlement : 0.0,
                     settlement < 0 ? Math.abs(settlement) : 0.0,
                     settlement < 0 ? "Extra Pay" : "Refund"
-                );
+            );
             if (!settlementSaved) {
                 throw new Exception("Failed to save return settlement details.");
             }
@@ -367,6 +409,12 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    /**
+     * Loads all rentals and filters them by the current branch scope.
+     *
+     * @return list of rental DTOs for the current branch
+     * @throws Exception if database operation fails
+     */
     public List<RentalDto> findAllRentals() throws Exception {
         ArrayList<RentalEntity> entities = rentalDao.getAll();
         List<RentalDto> dtos = new ArrayList<>();
@@ -395,6 +443,17 @@ public class RentalServiceImpl implements RentalService {
         return dtos;
     }
 
+    /**
+     * Calculates all pricing components for a rental including base amount,
+     * discounts, and final settlement value. Looks up the equipment's category
+     * to apply price factors and weekend multipliers, retrieves membership data
+     * for discounts, and computes rental, membership, and long-rental discounts
+     * before setting the final amount.
+     *
+     * @param dto the rental DTO to populate with pricing data
+     * @param equipment the equipment entity to calculate pricing for
+     * @throws Exception if category or customer lookup fails
+     */
     private void calculateRentalPricing(RentalDto dto, EquipmentEntity equipment) throws Exception {
         CategoryEntity category = categoryDao.search(equipment.getCategoryId());
         if (category == null) {

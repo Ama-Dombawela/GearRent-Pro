@@ -18,6 +18,7 @@ public class RentalController {
 
     private final RentalService rentalService = (RentalService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.RENTAL);
 
+    // Handles rental and return actions from the UI.
     public boolean saveRental(RentalDto dto) throws Exception {
         return rentalService.saveRental(dto);
     }

@@ -33,6 +33,7 @@ public class DaoFactory {
     }
 
     public SuperDao getDao(DaoTypes type) {
+        // Return the DAO implementation that matches the requested module.
         switch (type) {
             case BRANCH:
                 return new BranchDaoImpl();

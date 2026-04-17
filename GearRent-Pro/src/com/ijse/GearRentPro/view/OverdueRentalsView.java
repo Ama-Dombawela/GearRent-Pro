@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.RentalController;
@@ -15,9 +14,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class OverdueRentalsView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OverdueRentalsView.class.getName());
     private RentalController rentalController = new RentalController();
     private CustomerController customerController = new CustomerController();
@@ -29,6 +27,8 @@ public class OverdueRentalsView extends javax.swing.JFrame {
      */
     public OverdueRentalsView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 
@@ -135,18 +135,20 @@ public class OverdueRentalsView extends javax.swing.JFrame {
     private void loadTable() {
         try {
             DefaultTableModel model = new DefaultTableModel(
-                new Object[]{"Rental ID", "Equipment ID", "Customer ID", "Branch ID", "End Date", "Days Overdue"}, 0
+                    new Object[]{"Rental ID", "Equipment ID", "Customer ID", "Branch ID", "End Date", "Days Overdue"}, 0
             ) {
-                public boolean isCellEditable(int row, int column) { return false; }
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
             };
             tbleOverdueRental.setModel(model);
             List<RentalDto> rentals = rentalController.findAllRentals();
             LocalDate today = LocalDate.now();
             for (RentalDto rental : rentals) {
                 if (rental.getEndDate() != null
-                    && today.isAfter(rental.getEndDate())
-                    && !"Returned".equalsIgnoreCase(rental.getRentalStatus())
-                    && !"Cancelled".equalsIgnoreCase(rental.getRentalStatus())) {
+                        && today.isAfter(rental.getEndDate())
+                        && !"Returned".equalsIgnoreCase(rental.getRentalStatus())
+                        && !"Cancelled".equalsIgnoreCase(rental.getRentalStatus())) {
                     long daysOverdue = ChronoUnit.DAYS.between(rental.getEndDate(), today);
                     String customerName = rental.getCustomerId();
                     String branchName = rental.getBranchId();
@@ -179,7 +181,8 @@ public class OverdueRentalsView extends javax.swing.JFrame {
                     });
                 }
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     /**

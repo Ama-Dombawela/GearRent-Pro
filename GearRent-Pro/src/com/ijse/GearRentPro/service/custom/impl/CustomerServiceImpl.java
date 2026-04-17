@@ -26,6 +26,14 @@ public class CustomerServiceImpl implements CustomerService {
     MembershipDao membershipDao = (MembershipDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.MEMBERSHIP);
 
     @Override
+    /**
+     * Creates a new customer after validating required fields and membership
+     * eligibility.
+     *
+     * @param dto customer data from the UI
+     * @return true when the customer is saved successfully
+     * @throws Exception when validation, lookup, or persistence fails
+     */
     public boolean saveCustomer(CustomerDto dto) throws Exception {
         AuthUtil.requireUser();
         if (dto.getCustomerId() == null || dto.getCustomerId().isBlank()) {
@@ -72,6 +80,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    /**
+     * Updates an existing customer after validating the input and membership
+     * reference.
+     *
+     * @param dto customer data from the UI
+     * @return true when the customer is updated successfully
+     * @throws Exception when validation, lookup, or persistence fails
+     */
     public boolean updateCustomer(CustomerDto dto) throws Exception {
         AuthUtil.requireUser();
         if (dto.getCustomerId() == null || dto.getCustomerId().isBlank()) {
@@ -118,12 +134,26 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    /**
+     * Deletes a customer by ID.
+     *
+     * @param id customer identifier
+     * @return true when the customer is deleted successfully
+     * @throws Exception when the user is not allowed or the delete fails
+     */
     public boolean deleteCustomer(String id) throws Exception {
         AuthUtil.requireUser();
         return customerDao.delete(id);
     }
 
     @Override
+    /**
+     * Finds a customer by ID and maps the entity to a DTO.
+     *
+     * @param id customer identifier
+     * @return customer data, or null when not found
+     * @throws Exception when the user is not allowed or the query fails
+     */
     public CustomerDto findCustomer(String id) throws Exception {
         AuthUtil.requireUser();
         CustomerEntity entity = customerDao.search(id);
@@ -142,6 +172,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    /**
+     * Loads all customers and converts them to DTOs.
+     *
+     * @return customer list for the UI layer
+     * @throws Exception when the user is not allowed or the query fails
+     */
     public List<CustomerDto> findAllCustomers() throws Exception {
         AuthUtil.requireUser();
         ArrayList<CustomerEntity> entities = customerDao.getAll();
@@ -160,6 +196,9 @@ public class CustomerServiceImpl implements CustomerService {
         return dtos;
     }
 
+    /*
+     * Checks whether a SQL exception is caused by a duplicate entry constraint violation.
+     */
     private boolean isDuplicateEntry(SQLException exception) {
         String message = exception.getMessage();
         return exception.getErrorCode() == 1062

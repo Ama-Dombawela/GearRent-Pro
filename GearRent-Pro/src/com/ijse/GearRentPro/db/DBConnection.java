@@ -13,26 +13,28 @@ import java.sql.SQLException;
  * @author User
  */
 public class DBConnection {
-    
+
     private static DBConnection dbConnection;
     private Connection connection;
-    
-    private DBConnection()throws ClassNotFoundException, SQLException{
+
+    private DBConnection() throws ClassNotFoundException, SQLException {
+        // Load the MySQL driver and open the shared application connection.
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GearRentPro", "root","");
-        
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GearRentPro", "root", "");
+
     }
-    
-    public static DBConnection getInstance()throws ClassNotFoundException, SQLException{
-        if(dbConnection == null){
+
+    public static DBConnection getInstance() throws ClassNotFoundException, SQLException {
+        // Create the connection object once and reuse it for the app lifetime.
+        if (dbConnection == null) {
             dbConnection = new DBConnection();
         }
         return dbConnection;
-    
+
     }
-    
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return connection;
     }
-    
+
 }

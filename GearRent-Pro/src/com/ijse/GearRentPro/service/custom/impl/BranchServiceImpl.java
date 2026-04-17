@@ -22,6 +22,13 @@ public class BranchServiceImpl implements BranchService {
 
     BranchDao branchDao = (BranchDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.BRANCH);
 
+    /**
+     * Creates a new branch after validating the branch code and basic details.
+     *
+     * @param dto branch data from the UI
+     * @return true when the branch is saved successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     @Override
     public boolean saveBranch(BranchDto dto) throws Exception {
         AuthUtil.requireAdmin();
@@ -50,6 +57,14 @@ public class BranchServiceImpl implements BranchService {
         }
     }
 
+    /**
+     * Updates an existing branch after validating the branch code and basic
+     * details.
+     *
+     * @param dto branch data from the UI
+     * @return true when the branch is updated successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     @Override
     public boolean updateBranch(BranchDto dto) throws Exception {
         AuthUtil.requireAdmin();
@@ -78,12 +93,26 @@ public class BranchServiceImpl implements BranchService {
         }
     }
 
+    /**
+     * Deletes a branch by ID.
+     *
+     * @param id branch identifier
+     * @return true when the branch is deleted successfully
+     * @throws Exception when authorization or persistence fails
+     */
     @Override
     public boolean deleteBranch(String id) throws Exception {
         AuthUtil.requireAdmin();
         return branchDao.delete(id);
     }
 
+    /**
+     * Finds a branch by ID and maps it to a DTO.
+     *
+     * @param id branch identifier
+     * @return branch data, or null when not found
+     * @throws Exception when authorization or query execution fails
+     */
     @Override
     public BranchDto findBranch(String id) throws Exception {
         AuthUtil.requireUser();
@@ -100,6 +129,12 @@ public class BranchServiceImpl implements BranchService {
         );
     }
 
+    /**
+     * Loads all branches and converts them to DTOs.
+     *
+     * @return branch list for the UI layer
+     * @throws Exception when authorization or query execution fails
+     */
     @Override
     public List<BranchDto> findAllBranches() throws Exception {
         AuthUtil.requireUser();
@@ -117,6 +152,9 @@ public class BranchServiceImpl implements BranchService {
         return dtos;
     }
 
+    /*
+     * Checks whether a SQL exception is caused by a duplicate entry constraint violation.
+     */
     private boolean isDuplicateEntry(SQLException exception) {
         String message = exception.getMessage();
         return exception.getErrorCode() == 1062

@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CategoryController;
@@ -15,7 +14,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ReturnView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReturnView.class.getName());
@@ -28,6 +26,8 @@ public class ReturnView extends javax.swing.JFrame {
      */
     public ReturnView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadDropdowns();
         loadTable();
     }

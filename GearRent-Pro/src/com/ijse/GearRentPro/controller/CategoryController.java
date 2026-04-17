@@ -17,6 +17,7 @@ public class CategoryController {
 
     private final CategoryService categoryService = (CategoryService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CATEGORY);
 
+    // Handles category management actions from the UI.
     public boolean saveCategory(CategoryDto dto) throws Exception {
         return categoryService.saveCategory(dto);
     }

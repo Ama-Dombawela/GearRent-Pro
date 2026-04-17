@@ -18,6 +18,7 @@ public class ReservationController {
 
     private final ReservationService reservationService = (ReservationService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.RESERVATION);
 
+    // Handles reservation workflow actions from the UI.
     public boolean saveReservation(ReservationDto dto) throws Exception {
         return reservationService.saveReservation(dto);
     }

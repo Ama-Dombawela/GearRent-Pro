@@ -16,6 +16,7 @@ public final class AuthUtil {
     }
 
     public static void requireAdmin() throws Exception {
+        // Role R001 is treated as the admin account.
         UserDto user = requireUser();
         if (!"R001".equals(user.getRoleId())) {
             throw new Exception("Access denied: admin privileges are required.");
@@ -26,10 +27,12 @@ public final class AuthUtil {
         UserDto user = requireUser();
         String roleId = user.getRoleId();
 
+        // Admin can access any branch.
         if ("R001".equals(roleId)) {
             return;
         }
 
+        // Non-admin users must stay within their own branch.
         if (branchId == null || branchId.isBlank()) {
             throw new Exception("Access denied: branch is required for this operation.");
         }
@@ -40,6 +43,7 @@ public final class AuthUtil {
     }
 
     public static void requireAdminOrManager() throws Exception {
+        // Admin and manager accounts are allowed here.
         UserDto user = requireUser();
         if (!"R001".equals(user.getRoleId()) && !"R002".equals(user.getRoleId())) {
             throw new Exception("Access denied: only admin or branch manager can perform this action.");

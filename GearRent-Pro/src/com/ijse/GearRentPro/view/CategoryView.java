@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CategoryController;
@@ -7,9 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CategoryView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CategoryView.class.getName());
     private CategoryController categoryController = new CategoryController();
 
@@ -18,6 +16,8 @@ public class CategoryView extends javax.swing.JFrame {
      */
     public CategoryView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 

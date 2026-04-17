@@ -17,6 +17,7 @@ public class BranchController {
 
     private final BranchService branchService = (BranchService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.BRANCH);
 
+    // Handles branch management actions from the UI.
     public boolean saveBranch(BranchDto dto) throws Exception {
         return branchService.saveBranch(dto);
     }

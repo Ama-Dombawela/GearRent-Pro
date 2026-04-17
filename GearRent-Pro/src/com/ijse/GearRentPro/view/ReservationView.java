@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -23,7 +22,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ReservationView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReservationView.class.getName());
@@ -39,6 +37,8 @@ public class ReservationView extends javax.swing.JFrame {
      */
     public ReservationView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadDropdowns();
         loadTable();
     }
@@ -360,7 +360,9 @@ public class ReservationView extends javax.swing.JFrame {
             List<ReservationDto> reservations = reservationController.findAllReservations();
             String branchFilter = Session.getCurrentBranchId();
             for (ReservationDto reservation : reservations) {
-                if(branchFilter !=null && !branchFilter.equals(reservation.getBranchId()))continue;
+                if (branchFilter != null && !branchFilter.equals(reservation.getBranchId())) {
+                    continue;
+                }
                 model.addRow(new Object[]{
                     reservation.getReservationId(),
                     reservation.getEquipmentId(),
@@ -540,7 +542,7 @@ public class ReservationView extends javax.swing.JFrame {
             double longRentalDiscount = days >= 7 ? rentalAmount * 0.10 : 0.0;
             double finalAmount = rentalAmount - membershipDiscount - longRentalDiscount;
 
-                boolean converted = reservationController.convertReservationToRental(reservation, new RentalDto(
+            boolean converted = reservationController.convertReservationToRental(reservation, new RentalDto(
                     reservation.getReservationId(),
                     reservation.getEquipmentId(),
                     reservation.getCustomerId(),

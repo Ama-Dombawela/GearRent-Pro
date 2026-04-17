@@ -22,6 +22,14 @@ public class MembershipServiceImpl implements MembershipService {
     MembershipDao membershipDao = (MembershipDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.MEMBERSHIP);
 
     @Override
+    /**
+     * Creates a membership level after validating uniqueness and discount
+     * bounds.
+     *
+     * @param dto membership data from the UI
+     * @return true when the membership is saved successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     public boolean saveMembership(MembershipDto dto) throws Exception {
         AuthUtil.requireAdmin();
 
@@ -56,6 +64,13 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
+    /**
+     * Updates a membership level after checking uniqueness and discount bounds.
+     *
+     * @param dto membership data from the UI
+     * @return true when the membership is updated successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     public boolean updateMembership(MembershipDto dto) throws Exception {
         AuthUtil.requireAdmin();
 
@@ -90,12 +105,26 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
+    /**
+     * Deletes a membership by ID.
+     *
+     * @param id membership identifier
+     * @return true when the membership is deleted successfully
+     * @throws Exception when authorization or persistence fails
+     */
     public boolean deleteMembership(String id) throws Exception {
         AuthUtil.requireAdmin();
         return membershipDao.delete(id);
     }
 
     @Override
+    /**
+     * Finds a membership by ID.
+     *
+     * @param id membership identifier
+     * @return membership data, or null when not found
+     * @throws Exception when authorization or query execution fails
+     */
     public MembershipDto findMembership(String id) throws Exception {
         AuthUtil.requireUser();
         MembershipEntity entity = membershipDao.search(id);
@@ -110,6 +139,12 @@ public class MembershipServiceImpl implements MembershipService {
     }
 
     @Override
+    /**
+     * Loads all memberships and converts them to DTOs.
+     *
+     * @return membership list for the UI layer
+     * @throws Exception when authorization or query execution fails
+     */
     public List<MembershipDto> findAllMemberships() throws Exception {
         AuthUtil.requireUser();
         ArrayList<MembershipEntity> entities = membershipDao.getAll();

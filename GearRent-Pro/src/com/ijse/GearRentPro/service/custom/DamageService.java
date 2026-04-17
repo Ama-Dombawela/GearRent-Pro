@@ -14,15 +14,21 @@ import java.util.List;
  */
 public interface DamageService extends SuperService {
 
+    // Save a new damage record
     boolean saveDamage(DamageDto dto) throws Exception;
 
+    // Update existing damage record
     boolean updateDamage(DamageDto dto) throws Exception;
 
+    // Delete damage record by ID
     boolean deleteDamage(String id) throws Exception;
 
+    // Find damage record by ID
     DamageDto findDamage(String id) throws Exception;
 
+    // Get all damage records
     List<DamageDto> findAllDamages() throws Exception;
 
+    // Get damage records for a rental
     List<DamageDto> findDamagesByRentalId(String rentalId) throws Exception;
 }

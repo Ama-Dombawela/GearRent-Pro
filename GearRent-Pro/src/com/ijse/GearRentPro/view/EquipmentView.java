@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.EquipmentController;
@@ -7,7 +6,6 @@ import com.ijse.GearRentPro.util.Session;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class EquipmentView extends javax.swing.JFrame {
 
@@ -20,6 +18,8 @@ public class EquipmentView extends javax.swing.JFrame {
      */
     public EquipmentView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 

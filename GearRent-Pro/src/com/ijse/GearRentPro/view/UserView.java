@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.UserController;
@@ -7,9 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class UserView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UserView.class.getName());
     private UserController userController = new UserController();
 
@@ -18,6 +16,8 @@ public class UserView extends javax.swing.JFrame {
      */
     public UserView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 

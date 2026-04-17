@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -22,7 +21,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class RentalView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RentalView.class.getName());
@@ -38,6 +36,8 @@ public class RentalView extends javax.swing.JFrame {
      */
     public RentalView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadDropdowns();
         loadTable();
     }
@@ -578,7 +578,7 @@ public class RentalView extends javax.swing.JFrame {
                     Double.parseDouble(iblBaseDailyPricetxt.getText()),
                     Double.parseDouble(iblLongRentalDiscounttxt.getText()),
                     Double.parseDouble(iblFinalAmounttxt.getText()),
-                        resolvePaymentStatusForSave(),
+                    resolvePaymentStatusForSave(),
                     "Active"
             );
 
@@ -624,7 +624,7 @@ public class RentalView extends javax.swing.JFrame {
                     Double.parseDouble(iblBaseDailyPricetxt.getText()),
                     Double.parseDouble(iblLongRentalDiscounttxt.getText()),
                     Double.parseDouble(iblFinalAmounttxt.getText()),
-                        resolvePaymentStatusForSave(),
+                    resolvePaymentStatusForSave(),
                     "Active"
             );
 

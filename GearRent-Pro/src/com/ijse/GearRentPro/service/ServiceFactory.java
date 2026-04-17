@@ -33,6 +33,7 @@ public class ServiceFactory {
     }
 
     public SuperService getService(ServiceType type) {
+        // Return the service implementation that matches the requested module.
         switch (type) {
             case BRANCH:
                 return new BranchServiceImpl();

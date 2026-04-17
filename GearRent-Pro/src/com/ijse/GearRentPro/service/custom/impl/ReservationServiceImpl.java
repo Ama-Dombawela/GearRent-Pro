@@ -45,6 +45,14 @@ public class ReservationServiceImpl implements ReservationService {
     MembershipDao membershipDao = (MembershipDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.MEMBERSHIP);
 
     @Override
+    /**
+     * Creates a reservation after validating dates, overlap rules, and deposit
+     * limits.
+     *
+     * @param dto the reservation data
+     * @return true if successful
+     * @throws Exception if validation or database operation fails
+     */
     public boolean saveReservation(ReservationDto dto) throws Exception {
 
         //required fields
@@ -144,6 +152,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Updates a reservation after validating date ranges and branch
+     * consistency.
+     *
+     * @param dto the updated reservation data
+     * @return true if successful
+     * @throws Exception if validation or database operation fails
+     */
     public boolean updateReservation(ReservationDto dto) throws Exception {
         if (dto.getReservationId() == null || dto.getReservationId().isBlank()) {
             throw new Exception("Reservation ID is required");
@@ -194,6 +210,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Cancels a reservation when it has not already been converted.
+     *
+     * @param id the reservation ID
+     * @return true if successful
+     * @throws Exception if the reservation is already converted or database
+     * operation fails
+     */
     public boolean cancelReservation(String id) throws Exception {
         ReservationEntity existing = reservationDao.search(id);
         if (existing == null) {
@@ -208,6 +232,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Converts a reservation into a rental inside a single transaction.
+     *
+     * @param reservation the reservation to convert
+     * @param rental the new rental data
+     * @return true if successful
+     * @throws Exception if conversion fails and transaction is rolled back
+     */
     public boolean convertReservationToRental(ReservationDto reservation, RentalDto rental) throws Exception {
         if (reservation == null || rental == null) {
             throw new Exception("Reservation and rental data are required.");
@@ -270,7 +302,7 @@ public class ReservationServiceImpl implements ReservationService {
                 throw new Exception("Equipment is already rented for the selected dates.");
             }
 
-                String rentalId = generateNextRentalId();
+            String rentalId = generateNextRentalId();
             boolean rentalSaved = rentalDao.save(new RentalEntity(
                     rentalId,
                     rental.getEquipmentId(),
@@ -314,6 +346,15 @@ public class ReservationServiceImpl implements ReservationService {
         }
     }
 
+    /**
+     * Generates the next sequential rental ID by scanning all existing rentals,
+     * extracting numeric portions, finding the maximum, and incrementing by
+     * one.
+     *
+     * @return the next rental ID in the format RNxxx where xxx is a zero-padded
+     * number
+     * @throws Exception if database query fails
+     */
     private String generateNextRentalId() throws Exception {
         ArrayList<RentalEntity> rentals = rentalDao.getAll();
         int maxNumber = 0;
@@ -343,6 +384,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Deletes a reservation when the current user has access to its branch.
+     *
+     * @param id the reservation ID
+     * @return true if successful
+     * @throws Exception if authorization or database operation fails
+     */
     public boolean deleteReservation(String id) throws Exception {
         ReservationEntity entity = reservationDao.search(id);
         if (entity != null) {
@@ -352,6 +400,13 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Finds a reservation by ID and maps it to a DTO.
+     *
+     * @param id the reservation ID
+     * @return the reservation DTO or null if not found
+     * @throws Exception if database operation fails
+     */
     public ReservationDto findReservation(String id) throws Exception {
         ReservationEntity entity = reservationDao.search(id);
         if (entity == null) {
@@ -370,6 +425,12 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    /**
+     * Loads all reservations and filters them by the current branch scope.
+     *
+     * @return list of reservation DTOs for the current branch
+     * @throws Exception if database operation fails
+     */
     public List<ReservationDto> findAllReservations() throws Exception {
         ArrayList<ReservationEntity> entities = reservationDao.getAll();
         List<ReservationDto> dtos = new ArrayList<>();
@@ -391,6 +452,17 @@ public class ReservationServiceImpl implements ReservationService {
         return dtos;
     }
 
+    /**
+     * Calculates all pricing components for a rental including base amount,
+     * discounts, and final settlement value. Looks up the equipment's category
+     * to apply price factors and weekend multipliers, retrieves membership data
+     * for discounts, and computes rental, membership, and long-rental discounts
+     * before setting the final amount.
+     *
+     * @param rental rental DTO to populate with pricing data
+     * @param equipment the equipment entity to calculate pricing for
+     * @throws Exception if category or customer lookup fails
+     */
     private void calculateRentalPricing(RentalDto rental, EquipmentEntity equipment) throws Exception {
         CategoryEntity category = categoryDao.search(equipment.getCategoryId());
         if (category == null) {

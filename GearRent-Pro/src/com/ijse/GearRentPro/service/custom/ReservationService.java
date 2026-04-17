@@ -15,17 +15,24 @@ import java.util.List;
  */
 public interface ReservationService extends SuperService {
 
+    // Save a new reservation
     boolean saveReservation(ReservationDto dto) throws Exception;
 
+    // Update existing reservation
     boolean updateReservation(ReservationDto dto) throws Exception;
 
+    // Cancel a reservation
     boolean cancelReservation(String id) throws Exception;
 
+    // Convert a reservation to a rental
     boolean convertReservationToRental(ReservationDto reservation, RentalDto rental) throws Exception;
 
+    // Delete reservation by ID
     boolean deleteReservation(String id) throws Exception;
 
+    // Find reservation by ID
     ReservationDto findReservation(String id) throws Exception;
 
+    // Get all reservations
     List<ReservationDto> findAllReservations() throws Exception;
 }

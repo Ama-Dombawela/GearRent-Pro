@@ -30,6 +30,14 @@ public class EquipmentServiceImpl implements EquipmentService {
     BranchDao branchDao = (BranchDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.BRANCH);
 
     @Override
+    /**
+     * Creates a new equipment record after validating branch, category, and
+     * pricing data.
+     *
+     * @param dto equipment data from the UI
+     * @return true when the equipment is saved successfully
+     * @throws Exception when validation, lookup, or persistence fails
+     */
     public boolean saveEquipment(EquipmentDto dto) throws Exception {
         AuthUtil.requireBranchScopedAccess(dto.getBranchId());
         if (dto.getEquipmentId() == null || dto.getEquipmentId().isBlank()) {
@@ -77,7 +85,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                     dto.getPurchaseYear(),
                     dto.getBaseDailyPrice(),
                     dto.getSecurityDeposit(),
-                    EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ","_"))
+                    EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ", "_"))
             ));
         } catch (SQLException e) {
             if (isDuplicateEntry(e)) {
@@ -88,6 +96,14 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    /**
+     * Updates an equipment record after validating branch, category, and
+     * pricing data.
+     *
+     * @param dto equipment data from the UI
+     * @return true when the equipment is updated successfully
+     * @throws Exception when validation, lookup, or persistence fails
+     */
     public boolean updateEquipment(EquipmentDto dto) throws Exception {
         AuthUtil.requireBranchScopedAccess(dto.getBranchId());
         if (dto.getEquipmentId() == null || dto.getEquipmentId().isBlank()) {
@@ -135,7 +151,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                     dto.getPurchaseYear(),
                     dto.getBaseDailyPrice(),
                     dto.getSecurityDeposit(),
-                    EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ","_"))
+                    EquipmentEntity.Status.valueOf(dto.getStatus().toUpperCase().replace(" ", "_"))
             ));
         } catch (SQLException e) {
             if (isDuplicateEntry(e)) {
@@ -146,6 +162,13 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    /**
+     * Deletes an equipment record if the current user can access the branch.
+     *
+     * @param id equipment identifier
+     * @return true when the equipment is deleted successfully
+     * @throws Exception when authorization or persistence fails
+     */
     public boolean deleteEquipment(String id) throws Exception {
         EquipmentEntity entity = equipmentDao.search(id);
         if (entity != null) {
@@ -155,6 +178,13 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    /**
+     * Finds an equipment record by ID and maps it to a DTO.
+     *
+     * @param id equipment identifier
+     * @return equipment data, or null when not found
+     * @throws Exception when authorization or query execution fails
+     */
     public EquipmentDto findEquipment(String id) throws Exception {
         EquipmentEntity entity = equipmentDao.search(id);
         if (entity == null) {
@@ -175,6 +205,12 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    /**
+     * Loads all equipment records and filters them by the current branch scope.
+     *
+     * @return equipment list for the UI layer
+     * @throws Exception when query execution fails
+     */
     public List<EquipmentDto> findAllEquipments() throws Exception {
         ArrayList<EquipmentEntity> entities = equipmentDao.getAll();
         List<EquipmentDto> dtos = new ArrayList<>();
@@ -198,6 +234,9 @@ public class EquipmentServiceImpl implements EquipmentService {
         return dtos;
     }
 
+    /*
+     * Checks whether a SQL exception is caused by a duplicate entry constraint violation.
+     */
     private boolean isDuplicateEntry(SQLException exception) {
         String message = exception.getMessage();
         return exception.getErrorCode() == 1062

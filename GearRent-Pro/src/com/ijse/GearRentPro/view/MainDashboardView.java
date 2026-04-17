@@ -1,9 +1,7 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.util.Session;
 import javax.swing.JOptionPane;
-
 
 public class MainDashboardView extends javax.swing.JFrame {
 
@@ -14,6 +12,8 @@ public class MainDashboardView extends javax.swing.JFrame {
      */
     public MainDashboardView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         applyRoleAccess();
     }
 

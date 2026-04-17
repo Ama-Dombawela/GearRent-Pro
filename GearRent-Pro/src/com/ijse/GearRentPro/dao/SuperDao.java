@@ -5,11 +5,10 @@
 package com.ijse.GearRentPro.dao;
 
 /**
+ * Generic interface defining standard CRUD operations.
  *
  * @author User
  */
 public interface SuperDao {
-    
-    
-    
+
 }

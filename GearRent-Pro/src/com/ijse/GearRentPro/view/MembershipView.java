@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.MembershipController;
@@ -7,9 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class MembershipView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MembershipView.class.getName());
     private MembershipController membershipController = new MembershipController();
 
@@ -18,6 +16,8 @@ public class MembershipView extends javax.swing.JFrame {
      */
     public MembershipView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 
@@ -248,7 +248,7 @@ public class MembershipView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),
@@ -285,7 +285,7 @@ public class MembershipView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),

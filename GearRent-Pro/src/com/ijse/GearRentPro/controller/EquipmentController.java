@@ -17,6 +17,7 @@ public class EquipmentController {
 
     private final EquipmentService equipmentService = (EquipmentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.EQUIPMENT);
 
+    // Handles equipment management actions from the UI.
     public boolean saveEquipment(EquipmentDto dto) throws Exception {
         return equipmentService.saveEquipment(dto);
     }

@@ -17,6 +17,7 @@ public class MembershipController {
 
     private final MembershipService membershipService = (MembershipService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.MEMBERSHIP);
 
+    // Handles membership management actions from the UI.
     public boolean saveMembership(MembershipDto dto) throws Exception {
         return membershipService.saveMembership(dto);
     }

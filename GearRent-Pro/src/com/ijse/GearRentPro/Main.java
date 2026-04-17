@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package com.ijse.GearRentPro;
+
 import com.ijse.GearRentPro.db.DBConnection;
 import com.ijse.GearRentPro.view.LoginView;
 import java.sql.Connection;
@@ -11,14 +12,19 @@ import java.sql.Connection;
  *
  * @author User
  */
+/*
+ * Main entry point for the GearRent-Pro application.
+ * Initializes the database connection and launches the login interface.
+ */
 public class Main {
 
     /**
-     * @param args the command line arguments
+     * Starts the application, checks the database connection, and opens the
+     * login window.
+     *
+     * @param args command-line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             System.out.println("Database Connected Successfully!");
@@ -27,5 +33,5 @@ public class Main {
         }
         new LoginView().setVisible(true);
     }
-    
+
 }

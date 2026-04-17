@@ -11,6 +11,7 @@ import com.ijse.GearRentPro.entity.CategoryEntity;
  *
  * @author User
  */
+// DAO interface for category data persistence operations.
 public interface CategoryDao extends CrudDao<CategoryEntity, String> {
-    
+
 }

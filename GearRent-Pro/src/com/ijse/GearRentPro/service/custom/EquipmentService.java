@@ -14,14 +14,19 @@ import java.util.List;
  */
 public interface EquipmentService extends SuperService {
 
+    // Save a new equipment
     boolean saveEquipment(EquipmentDto dto) throws Exception;
 
+    // Update existing equipment
     boolean updateEquipment(EquipmentDto dto) throws Exception;
 
+    // Delete equipment by ID
     boolean deleteEquipment(String id) throws Exception;
 
+    // Find equipment by ID
     EquipmentDto findEquipment(String id) throws Exception;
 
+    // Get all equipment
     List<EquipmentDto> findAllEquipments() throws Exception;
 
 }

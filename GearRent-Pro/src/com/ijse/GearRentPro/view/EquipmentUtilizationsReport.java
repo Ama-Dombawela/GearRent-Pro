@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -14,9 +13,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class EquipmentUtilizationsReport extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EquipmentUtilizationsReport.class.getName());
     private BranchController branchController = new BranchController();
     private RentalController rentalController = new RentalController();
@@ -27,6 +25,8 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
      */
     public EquipmentUtilizationsReport() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadBranches();
     }
 
@@ -232,7 +232,8 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             for (BranchDto branch : branches) {
                 cmbBranch.addItem(branch.getBranchId() + " - " + branch.getName());
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private void generateReport() {
@@ -256,9 +257,11 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             long totalDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
             DefaultTableModel model = new DefaultTableModel(
-                new Object[]{"Equipment ID", "Brand", "Model", "Category", "Total Days", "Days Rented", "Days Available", "Utilization %"}, 0
+                    new Object[]{"Equipment ID", "Brand", "Model", "Category", "Total Days", "Days Rented", "Days Available", "Utilization %"}, 0
             ) {
-                public boolean isCellEditable(int row, int column) { return false; }
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
             };
             tblequipmentzutilization.setModel(model);
 
@@ -272,14 +275,22 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             double maxUtil = -1, minUtil = 101;
 
             for (EquipmentDto eq : equipments) {
-                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(eq.getBranchId())) continue;
+                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(eq.getBranchId())) {
+                    continue;
+                }
                 long daysRented = 0;
                 for (RentalDto rental : rentals) {
-                    if (!rental.getEquipmentId().equals(eq.getEquipmentId())) continue;
-                    if (rental.getStartDate() == null || rental.getEndDate() == null) continue;
+                    if (!rental.getEquipmentId().equals(eq.getEquipmentId())) {
+                        continue;
+                    }
+                    if (rental.getStartDate() == null || rental.getEndDate() == null) {
+                        continue;
+                    }
                     LocalDate rs = rental.getStartDate().isBefore(startDate) ? startDate : rental.getStartDate();
                     LocalDate re = rental.getEndDate().isAfter(endDate) ? endDate : rental.getEndDate();
-                    if (!rs.isAfter(re)) daysRented += ChronoUnit.DAYS.between(rs, re) + 1;
+                    if (!rs.isAfter(re)) {
+                        daysRented += ChronoUnit.DAYS.between(rs, re) + 1;
+                    }
                 }
                 long daysAvailable = totalDays - daysRented;
                 double utilPct = totalDays > 0 ? Math.round((daysRented * 100.0) / totalDays) : 0;
@@ -289,8 +300,14 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
                 });
                 totalEquipment++;
                 totalUtilization += utilPct;
-                if (utilPct > maxUtil) { maxUtil = utilPct; mostUtilized = eq.getEquipmentId(); }
-                if (utilPct < minUtil) { minUtil = utilPct; leastUtilized = eq.getEquipmentId(); }
+                if (utilPct > maxUtil) {
+                    maxUtil = utilPct;
+                    mostUtilized = eq.getEquipmentId();
+                }
+                if (utilPct < minUtil) {
+                    minUtil = utilPct;
+                    leastUtilized = eq.getEquipmentId();
+                }
             }
 
             double avg = totalEquipment > 0 ? Math.round(totalUtilization / totalEquipment) : 0;

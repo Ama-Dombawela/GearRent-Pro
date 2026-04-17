@@ -22,6 +22,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     CategoryDao categoryDao = (CategoryDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.CATEGORY);
 
+    /**
+     * Creates a new category after validating pricing settings.
+     *
+     * @param dto category data from the UI
+     * @return true when the category is saved successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     @Override
     public boolean saveCategory(CategoryDto dto) throws Exception {
         AuthUtil.requireAdminOrManager();
@@ -59,6 +66,13 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    /**
+     * Updates an existing category after validating pricing settings.
+     *
+     * @param dto category data from the UI
+     * @return true when the category is updated successfully
+     * @throws Exception when validation, authorization, or persistence fails
+     */
     @Override
     public boolean updateCategory(CategoryDto dto) throws Exception {
         AuthUtil.requireAdminOrManager();
@@ -80,12 +94,26 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    /**
+     * Deletes a category by ID.
+     *
+     * @param id category identifier
+     * @return true when the category is deleted successfully
+     * @throws Exception when authorization or persistence fails
+     */
     @Override
     public boolean deleteCategory(String id) throws Exception {
         AuthUtil.requireAdminOrManager();
         return categoryDao.delete(id);
     }
 
+    /**
+     * Finds a category by ID and maps it to a DTO.
+     *
+     * @param id category identifier
+     * @return category data, or null when not found
+     * @throws Exception when authorization or query execution fails
+     */
     @Override
     public CategoryDto findCategory(String id) throws Exception {
         AuthUtil.requireUser();
@@ -104,6 +132,12 @@ public class CategoryServiceImpl implements CategoryService {
         );
     }
 
+    /**
+     * Loads all categories and converts them to DTOs.
+     *
+     * @return category list for the UI layer
+     * @throws Exception when authorization or query execution fails
+     */
     @Override
     public List<CategoryDto> findAllCategories() throws Exception {
         AuthUtil.requireUser();
@@ -123,6 +157,9 @@ public class CategoryServiceImpl implements CategoryService {
         return dtos;
     }
 
+    /*
+     * Checks whether a SQL exception is caused by a duplicate entry constraint violation.
+     */
     private boolean isDuplicateEntry(SQLException exception) {
         String message = exception.getMessage();
         return exception.getErrorCode() == 1062

@@ -38,6 +38,7 @@ public class Session {
 
     public static String getCurrentBranchId() {
 
+        // Managers and staff operate within their assigned branch.
         String role = loggedInUser.getRoleId();
         if ("R002".equals(role) || "R003".equals(role)) {
             return loggedInUser.getBranchId();
@@ -46,14 +47,17 @@ public class Session {
     }
 
     public static boolean isAdmin() {
+        // R001 is the admin role.
         return "R001".equals(loggedInUser.getRoleId());
     }
 
     public static boolean isBranchManager() {
+        // R002 is the branch manager role.
         return "R002".equals(loggedInUser.getRoleId());
     }
 
     public static boolean isStaff() {
+        // R003 is the staff role.
         return "R003".equals(loggedInUser.getRoleId());
     }
 }

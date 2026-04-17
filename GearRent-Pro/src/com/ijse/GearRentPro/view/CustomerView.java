@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.CustomerController;
@@ -14,7 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-
 public class CustomerView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CustomerView.class.getName());
@@ -27,6 +25,8 @@ public class CustomerView extends javax.swing.JFrame {
      */
     public CustomerView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadMemberships();
         loadTable();
     }

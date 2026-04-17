@@ -1,4 +1,3 @@
-
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -18,9 +17,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class BranchRevenueReportView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BranchRevenueReportView.class.getName());
     private BranchController branchController = new BranchController();
     private RentalController rentalController = new RentalController();
@@ -33,6 +31,8 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
      */
     public BranchRevenueReportView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadBranches();
     }
 
@@ -236,7 +236,8 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             for (BranchDto branch : branches) {
                 cmbBranch.addItem(branch.getBranchId() + " - " + branch.getName());
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private void generateReport() {
@@ -259,9 +260,11 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             }
 
             DefaultTableModel model = new DefaultTableModel(
-                new Object[]{"Rental ID", "Customer ID", "Equipment ID", "Start Date", "End Date", "Amount", "Late Fee", "Damage", "Total"}, 0
+                    new Object[]{"Rental ID", "Customer ID", "Equipment ID", "Start Date", "End Date", "Amount", "Late Fee", "Damage", "Total"}, 0
             ) {
-                public boolean isCellEditable(int row, int column) { return false; }
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
             };
             tblBranchRevenue.setModel(model);
 
@@ -271,9 +274,15 @@ public class BranchRevenueReportView extends javax.swing.JFrame {
             double totalRevenue = 0, totalLateFees = 0, totalDamage = 0;
 
             for (RentalDto rental : rentals) {
-                if (rental.getStartDate() == null) continue;
-                if (rental.getStartDate().isBefore(startDate) || rental.getStartDate().isAfter(endDate)) continue;
-                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(rental.getBranchId())) continue;
+                if (rental.getStartDate() == null) {
+                    continue;
+                }
+                if (rental.getStartDate().isBefore(startDate) || rental.getStartDate().isAfter(endDate)) {
+                    continue;
+                }
+                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(rental.getBranchId())) {
+                    continue;
+                }
 
                 double amount = rental.getRentalAmount();
                 double lateFee = 0;
