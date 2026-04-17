@@ -9,6 +9,8 @@ import com.ijse.GearRentPro.dao.DaoFactory;
 import com.ijse.GearRentPro.dto.CategoryDto;
 import com.ijse.GearRentPro.entity.CategoryEntity;
 import com.ijse.GearRentPro.service.custom.CategoryService;
+import com.ijse.GearRentPro.util.AuthUtil;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,44 +24,81 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public boolean saveCategory(CategoryDto dto) throws Exception {
-        return categoryDao.save(new CategoryEntity(
-                dto.getCategoryId(),
-                dto.getName(),
-                dto.getDescription(),
-                dto.getPriceFactor(),
-                dto.getWeekendMutiplier(),
-                dto.getLateFeePerDay(),
-                dto.isIsActive()
-        ));
+        AuthUtil.requireAdminOrManager();
+        if (dto.getCategoryId() == null || dto.getCategoryId().isBlank()) {
+            throw new Exception("Category ID is required.");
+        }
+        if (dto.getName() == null || dto.getName().isBlank()) {
+            throw new Exception("Category name is required.");
+        }
+        if (dto.getPriceFactor() <= 0) {
+            throw new Exception("Price factor must be greater than 0.");
+        }
+        if (dto.getWeekendMultiplier() < 1) {
+            throw new Exception("Weekend multiplier must be at least 1.0.");
+        }
+        if (dto.getLateFeePerDay() < 0) {
+            throw new Exception("Late fee cannot be negative.");
+        }
+
+        try {
+            return categoryDao.save(new CategoryEntity(
+                    dto.getCategoryId(),
+                    dto.getName(),
+                    dto.getDescription(),
+                    dto.getPriceFactor(),
+                    dto.getWeekendMultiplier(),
+                    dto.getLateFeePerDay(),
+                    dto.isIsActive()
+            ));
+        } catch (SQLException e) {
+            if (isDuplicateEntry(e)) {
+                throw new Exception("This category ID already exists. Please use a different category ID.");
+            }
+            throw e;
+        }
     }
 
     @Override
     public boolean updateCategory(CategoryDto dto) throws Exception {
-        return categoryDao.update(new CategoryEntity(
-                dto.getCategoryId(),
-                dto.getName(),
-                dto.getDescription(),
-                dto.getPriceFactor(),
-                dto.getWeekendMutiplier(),
-                dto.getLateFeePerDay(),
-                dto.isIsActive()
-        ));
+        AuthUtil.requireAdminOrManager();
+        try {
+            return categoryDao.update(new CategoryEntity(
+                    dto.getCategoryId(),
+                    dto.getName(),
+                    dto.getDescription(),
+                    dto.getPriceFactor(),
+                    dto.getWeekendMultiplier(),
+                    dto.getLateFeePerDay(),
+                    dto.isIsActive()
+            ));
+        } catch (SQLException e) {
+            if (isDuplicateEntry(e)) {
+                throw new Exception("This category ID already exists. Please use a different category ID.");
+            }
+            throw e;
+        }
     }
 
     @Override
     public boolean deleteCategory(String id) throws Exception {
+        AuthUtil.requireAdminOrManager();
         return categoryDao.delete(id);
     }
 
     @Override
     public CategoryDto findCategory(String id) throws Exception {
+        AuthUtil.requireUser();
         CategoryEntity entity = categoryDao.search(id);
+        if (entity == null) {
+            return null;
+        }
         return new CategoryDto(
                 entity.getCategoryId(),
                 entity.getName(),
                 entity.getDescription(),
                 entity.getPriceFactor(),
-                entity.getWeekendMutiplier(),
+                entity.getWeekendMultiplier(),
                 entity.getLateFeePerDay(),
                 entity.isIsActive()
         );
@@ -67,6 +106,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> findAllCategories() throws Exception {
+        AuthUtil.requireUser();
         ArrayList<CategoryEntity> entities = categoryDao.getAll();
         List<CategoryDto> dtos = new ArrayList<>();
         for (CategoryEntity entity : entities) {
@@ -75,11 +115,18 @@ public class CategoryServiceImpl implements CategoryService {
                     entity.getName(),
                     entity.getDescription(),
                     entity.getPriceFactor(),
-                    entity.getWeekendMutiplier(),
+                    entity.getWeekendMultiplier(),
                     entity.getLateFeePerDay(),
                     entity.isIsActive()
             ));
         }
         return dtos;
+    }
+
+    private boolean isDuplicateEntry(SQLException exception) {
+        String message = exception.getMessage();
+        return exception.getErrorCode() == 1062
+                || (exception.getSQLState() != null && exception.getSQLState().startsWith("23"))
+                || (message != null && message.toLowerCase().contains("duplicate entry"));
     }
 }

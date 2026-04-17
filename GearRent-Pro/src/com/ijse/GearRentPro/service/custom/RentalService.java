@@ -6,6 +6,7 @@ package com.ijse.GearRentPro.service.custom;
 
 import com.ijse.GearRentPro.dto.RentalDto;
 import com.ijse.GearRentPro.service.SuperService;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ public interface RentalService extends SuperService {
     boolean deleteRental(String id) throws Exception;
 
     RentalDto findRental(String id) throws Exception;
+
+    boolean processReturn(String rentalId, LocalDate actualReturnDate, String damageId, String damageDescription, double damageCharge) throws Exception;
 
     List<RentalDto> findAllRentals() throws Exception;
 
