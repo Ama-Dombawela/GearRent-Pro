@@ -12,10 +12,19 @@ import java.util.ArrayList;
  *
  * @author User
  */
-public interface EquipmentDao extends CrudDao<EquipmentEntity, String>{
-    
-    ArrayList<EquipmentEntity> getByBranch(String branchId)throws Exception;
-    ArrayList<EquipmentEntity> getByStatus(String status)throws Exception;
-    ArrayList<EquipmentEntity> getByCategory(String categoryId)throws Exception;
-    
+// DAO interface for equipment data persistence operations.
+public interface EquipmentDao extends CrudDao<EquipmentEntity, String> {
+
+    // Retrieve all equipment belonging to a specific branch
+    ArrayList<EquipmentEntity> getByBranch(String branchId) throws Exception;
+
+    // Retrieve equipment filtered by status
+    ArrayList<EquipmentEntity> getByStatus(String status) throws Exception;
+
+    // Retrieve equipment filtered by category
+    ArrayList<EquipmentEntity> getByCategory(String categoryId) throws Exception;
+
+    // Fetch record for update operations with row locking
+    EquipmentEntity searchForUpdate(String id) throws Exception;
+
 }

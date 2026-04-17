@@ -1,19 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.EquipmentController;
 import com.ijse.GearRentPro.dto.EquipmentDto;
+import com.ijse.GearRentPro.util.Session;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
 public class EquipmentView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EquipmentView.class.getName());
@@ -25,6 +18,8 @@ public class EquipmentView extends javax.swing.JFrame {
      */
     public EquipmentView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 
@@ -61,6 +56,7 @@ public class EquipmentView extends javax.swing.JFrame {
         iblSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblequipment = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,7 +67,7 @@ public class EquipmentView extends javax.swing.JFrame {
         iblEquiId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblEquiId.setText("Equipment ID");
 
-        iblEquiIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblEquiIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblEquiIdtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iblEquiIdtxtActionPerformed(evt);
@@ -81,12 +77,12 @@ public class EquipmentView extends javax.swing.JFrame {
         iblCateiId1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblCateiId1.setText("Category ID");
 
-        iblCateIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblCateIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblBranchId.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchId.setText("Branch ID");
 
-        iblBranchIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBranchIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchIdtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iblBranchIdtxtActionPerformed(evt);
@@ -96,12 +92,12 @@ public class EquipmentView extends javax.swing.JFrame {
         iblBrand.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBrand.setText("Brand");
 
-        iblBrandtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBrandtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblModel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblModel.setText("Model");
 
-        iblModeltxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblModeltxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblModeltxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iblModeltxtActionPerformed(evt);
@@ -111,7 +107,7 @@ public class EquipmentView extends javax.swing.JFrame {
         iblPurchaseYear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblPurchaseYear.setText("Purchase Year");
 
-        iblDepositAmountTxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblDepositAmountTxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblDepositAmountTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iblDepositAmountTxtActionPerformed(evt);
@@ -121,14 +117,19 @@ public class EquipmentView extends javax.swing.JFrame {
         iblDepositAmount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblDepositAmount.setText("Deposit Amount");
 
-        iblPurchaseYeartxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblPurchaseYeartxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        iblBaseDailyPricetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBaseDailyPricetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblBaseDailyPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBaseDailyPrice.setText("Base Daily Price");
 
-        iblStatustxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblStatustxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        iblStatustxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iblStatustxtActionPerformed(evt);
+            }
+        });
 
         iblStatus.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblStatus.setText("Status");
@@ -175,17 +176,28 @@ public class EquipmentView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblequipment);
 
+        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addContainerGap(12, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -205,26 +217,31 @@ public class EquipmentView extends javax.swing.JFrame {
                                     .addComponent(iblCateIdtxt)
                                     .addComponent(iblBranchIdtxt)
                                     .addComponent(iblPurchaseYeartxt))
+                                .addGap(95, 95, 95)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(73, 73, 73)
+                                        .addGap(13, 13, 13)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(iblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(iblDepositAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(iblBaseDailyPrice))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(iblBaseDailyPricetxt)
-                                            .addComponent(iblDepositAmountTxt)
-                                            .addComponent(iblStatustxt))))))))
-                .addGap(12, 12, 12))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(iblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(iblStatustxt, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(iblBaseDailyPrice)
+                                                    .addComponent(iblDepositAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(iblDepositAmountTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                                    .addComponent(iblBaseDailyPricetxt))))))))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,11 +276,11 @@ public class EquipmentView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(iblStatus)
                             .addComponent(iblStatustxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(iblSave)
                             .addComponent(iblUpdate)
-                            .addComponent(iblDelete)
-                            .addComponent(iblSave)))
+                            .addComponent(iblDelete)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(iblModel)
@@ -272,9 +289,11 @@ public class EquipmentView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(iblPurchaseYear)
                             .addComponent(iblPurchaseYeartxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -304,6 +323,10 @@ public class EquipmentView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_iblDepositAmountTxtActionPerformed
 
+    private void filterInputsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterInputsActionPerformed
+        loadTable();
+    }//GEN-LAST:event_filterInputsActionPerformed
+
     private void tblequipmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblequipmentMouseClicked
         searchEquipment();
     }//GEN-LAST:event_tblequipmentMouseClicked
@@ -312,11 +335,25 @@ public class EquipmentView extends javax.swing.JFrame {
         deleteEquipment();
     }//GEN-LAST:event_iblDeleteActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        try {
+            dispose();
+            new MainDashboardView().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error opening Equipment View : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void iblStatustxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iblStatustxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_iblStatustxtActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel iblBaseDailyPrice;
     private javax.swing.JTextField iblBaseDailyPricetxt;
     private javax.swing.JLabel iblBranchId;
@@ -355,7 +392,14 @@ public class EquipmentView extends javax.swing.JFrame {
 
         try {
             List<EquipmentDto> equipmentDtos = equipmentController.findAllEquipments();
+            String branchFilter = Session.getCurrentBranchId();
             for (EquipmentDto equipmentDto : equipmentDtos) {
+                if (branchFilter != null && !branchFilter.equals(equipmentDto.getBranchId())) {
+                    continue;
+                }
+                if (!matchesFilters(equipmentDto)) {
+                    continue;
+                }
                 Object[] rowData = {equipmentDto.getEquipmentId(), equipmentDto.getCategoryId(), equipmentDto.getBranchId(), equipmentDto.getBrand(), equipmentDto.getModel(), equipmentDto.getPurchaseYear(), equipmentDto.getBaseDailyPrice(), equipmentDto.getSecurityDeposit(), equipmentDto.getStatus()};
 
                 dtm.addRow(rowData);
@@ -367,12 +411,21 @@ public class EquipmentView extends javax.swing.JFrame {
     }
 
     public void saveEquipment() {
-
-        EquipmentDto equipmentDto = new EquipmentDto(iblEquiIdtxt.getText(), iblCateIdtxt.getText(), iblBranchIdtxt.getText(), iblBrandtxt.getText(),
-                iblModeltxt.getText(), Integer.parseInt(iblPurchaseYeartxt.getText()),
-                Double.parseDouble(iblBaseDailyPricetxt.getText()), Double.parseDouble(iblDepositAmountTxt.getText()),
-                iblStatustxt.getText());
         try {
+            if (iblEquiIdtxt.getText().isBlank() || iblCateIdtxt.getText().isBlank() || iblBranchIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Equipment ID, category ID, and branch ID are required.");
+                return;
+            }
+            if (iblBrandtxt.getText().isBlank() || iblModeltxt.getText().isBlank() || iblStatustxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Brand, model, and status are required.");
+                return;
+            }
+
+            EquipmentDto equipmentDto = new EquipmentDto(iblEquiIdtxt.getText(), iblCateIdtxt.getText(), iblBranchIdtxt.getText(), iblBrandtxt.getText(),
+                    iblModeltxt.getText(), Integer.parseInt(iblPurchaseYeartxt.getText()),
+                    Double.parseDouble(iblBaseDailyPricetxt.getText()), Double.parseDouble(iblDepositAmountTxt.getText()),
+                    iblStatustxt.getText());
+
             boolean resp = equipmentController.saveEquipment(equipmentDto);
 
             if (resp) {
@@ -381,9 +434,11 @@ public class EquipmentView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to save equipment!");
             }
 
-            loadTable();
             clearForm();
+            loadTable();
 
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Purchase year, base daily price, and deposit amount must be valid numbers.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -428,25 +483,37 @@ public class EquipmentView extends javax.swing.JFrame {
     }
 
     public void updateEquipment() {
-        EquipmentDto equipmentDto = new EquipmentDto(
-                iblEquiIdtxt.getText(),
-                iblCateIdtxt.getText(),
-                iblBranchIdtxt.getText(),
-                iblBrandtxt.getText(),
-                iblModeltxt.getText(),
-                Integer.parseInt(iblPurchaseYeartxt.getText()),
-                Double.parseDouble(iblBaseDailyPricetxt.getText()),
-                Double.parseDouble(iblDepositAmountTxt.getText()),
-                iblStatustxt.getText());
         try {
+            if (iblEquiIdtxt.getText().isBlank() || iblCateIdtxt.getText().isBlank() || iblBranchIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Equipment ID, category ID, and branch ID are required.");
+                return;
+            }
+            if (iblBrandtxt.getText().isBlank() || iblModeltxt.getText().isBlank() || iblStatustxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Brand, model, and status are required.");
+                return;
+            }
+
+            EquipmentDto equipmentDto = new EquipmentDto(
+                    iblEquiIdtxt.getText(),
+                    iblCateIdtxt.getText(),
+                    iblBranchIdtxt.getText(),
+                    iblBrandtxt.getText(),
+                    iblModeltxt.getText(),
+                    Integer.parseInt(iblPurchaseYeartxt.getText()),
+                    Double.parseDouble(iblBaseDailyPricetxt.getText()),
+                    Double.parseDouble(iblDepositAmountTxt.getText()),
+                    iblStatustxt.getText());
+
             boolean resp = equipmentController.updateEquipment(equipmentDto);
             if (resp) {
                 JOptionPane.showMessageDialog(this, "Equipment updated successfully!");
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to update equipment!");
             }
-            loadTable();
             clearForm();
+            loadTable();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Purchase year, base daily price, and deposit amount must be valid numbers.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -461,10 +528,39 @@ public class EquipmentView extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to delete equipment!");
             }
-            loadTable();
             clearForm();
+            loadTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
+    }
+
+    private boolean matchesFilters(EquipmentDto equipmentDto) {
+        String equipmentIdFilter = iblEquiIdtxt.getText().trim().toLowerCase();
+        String categoryFilter = iblCateIdtxt.getText().trim().toLowerCase();
+        String branchFilter = iblBranchIdtxt.getText().trim().toLowerCase();
+        String brandFilter = iblBrandtxt.getText().trim().toLowerCase();
+        String modelFilter = iblModeltxt.getText().trim().toLowerCase();
+        String statusFilter = iblStatustxt.getText().trim().toLowerCase();
+
+        if (!equipmentIdFilter.isBlank() && !equipmentDto.getEquipmentId().toLowerCase().contains(equipmentIdFilter)) {
+            return false;
+        }
+        if (!categoryFilter.isBlank() && !equipmentDto.getCategoryId().toLowerCase().contains(categoryFilter)) {
+            return false;
+        }
+        if (!branchFilter.isBlank() && !equipmentDto.getBranchId().toLowerCase().contains(branchFilter)) {
+            return false;
+        }
+        if (!brandFilter.isBlank() && !equipmentDto.getBrand().toLowerCase().contains(brandFilter)) {
+            return false;
+        }
+        if (!modelFilter.isBlank() && !equipmentDto.getModel().toLowerCase().contains(modelFilter)) {
+            return false;
+        }
+        if (!statusFilter.isBlank() && !equipmentDto.getStatus().toLowerCase().contains(statusFilter)) {
+            return false;
+        }
+        return true;
     }
 }

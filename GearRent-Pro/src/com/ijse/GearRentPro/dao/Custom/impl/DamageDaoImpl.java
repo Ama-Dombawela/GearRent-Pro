@@ -17,6 +17,13 @@ import java.sql.ResultSet;
 public class DamageDaoImpl implements DamageDao {
 
     @Override
+    /**
+     * Loads all damage records for a specific rental.
+     *
+     * @param rentalId rental identifier
+     * @return list of matching damage entities
+     * @throws Exception when the query fails
+     */
     public ArrayList<DamageEntity> getByRentalId(String rentalId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT * FROM damages WHERE TRIM(rental_id)=?", rentalId);
@@ -29,6 +36,13 @@ public class DamageDaoImpl implements DamageDao {
     }
 
     @Override
+    /**
+     * Inserts a new damage row into the database.
+     *
+     * @param t damage entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean save(DamageEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "INSERT INTO damages VALUES(?,?,?,?)",
@@ -40,6 +54,13 @@ public class DamageDaoImpl implements DamageDao {
     }
 
     @Override
+    /**
+     * Updates an existing damage row in the database.
+     *
+     * @param t damage entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean update(DamageEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE damages SET rental_id=?, description=?, damage_charge=? WHERE TRIM(damage_id)=?",
@@ -51,12 +72,26 @@ public class DamageDaoImpl implements DamageDao {
     }
 
     @Override
+    /**
+     * Deletes a damage row by ID.
+     *
+     * @param id damage identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
                 "DELETE FROM damages WHERE TRIM(damage_id)=?", id);
     }
 
     @Override
+    /**
+     * Loads one damage row by ID.
+     *
+     * @param id damage identifier
+     * @return matching damage entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     public DamageEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT * FROM damages WHERE TRIM(damage_id)=?", id);
@@ -67,6 +102,12 @@ public class DamageDaoImpl implements DamageDao {
     }
 
     @Override
+    /**
+     * Loads all damage rows.
+     *
+     * @return list of damage entities
+     * @throws Exception when the SQL execution fails
+     */
     public ArrayList<DamageEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM damages");
         ArrayList<DamageEntity> list = new ArrayList<>();

@@ -14,14 +14,19 @@ import java.util.List;
  */
 public interface BranchService extends SuperService {
 
+    // Save a new branch
     boolean saveBranch(BranchDto dto) throws Exception;
 
+    // Update existing branch
     boolean updateBranch(BranchDto dto) throws Exception;
 
+    // Delete branch by ID
     boolean deleteBranch(String id) throws Exception;
 
+    // Find branch by ID
     BranchDto findBranch(String id) throws Exception;
 
+    // Get all branches
     List<BranchDto> findAllBranches() throws Exception;
 
 }

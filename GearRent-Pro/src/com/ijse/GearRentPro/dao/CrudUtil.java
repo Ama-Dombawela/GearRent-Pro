@@ -13,9 +13,10 @@ import java.sql.ResultSet;
  *
  * @author User
  */
+//Utility class for executing SQL queries and updates
 public class CrudUtil {
-    
-    private static PreparedStatement getStatement(String sql, Object[]args)throws Exception{
+
+    private static PreparedStatement getStatement(String sql, Object[] args) throws Exception {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         if (args != null) {
@@ -25,13 +26,13 @@ public class CrudUtil {
         }
         return statement;
     }
-    
-    public static boolean executeUpdate(String sql, Object... args)throws Exception{
+
+    public static boolean executeUpdate(String sql, Object... args) throws Exception {
         return getStatement(sql, args).executeUpdate() > 0;
     }
-    
-    public static ResultSet executeQuery(String sql,Object... args)throws Exception{
+
+    public static ResultSet executeQuery(String sql, Object... args) throws Exception {
         return getStatement(sql, args).executeQuery();
     }
-    
+
 }

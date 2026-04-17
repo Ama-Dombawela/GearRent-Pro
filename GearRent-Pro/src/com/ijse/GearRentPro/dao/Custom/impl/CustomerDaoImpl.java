@@ -17,6 +17,13 @@ import java.util.ArrayList;
 public class CustomerDaoImpl implements CustomerDao {
 
     @Override
+    /**
+     * Inserts a new customer row into the database.
+     *
+     * @param t customer entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean save(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "INSERT INTO customers VALUES(?,?,?,?,?,?,?)",
@@ -26,6 +33,13 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+    /**
+     * Updates an existing customer row in the database.
+     *
+     * @param t customer entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean update(CustomerEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE customers SET name=?, nic_passport=?, contact_no=?, email=?, address=?, membership_id=? WHERE TRIM(customer_id)=?",
@@ -35,12 +49,26 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+    /**
+     * Deletes a customer row by ID.
+     *
+     * @param id customer identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
                 "DELETE FROM customers WHERE customer_id=?", id);
     }
 
     @Override
+    /**
+     * Loads one customer row by ID.
+     *
+     * @param id customer identifier
+     * @return matching customer entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     public CustomerEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT * FROM customers WHERE customer_id=?", id);
@@ -51,6 +79,12 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+    /**
+     * Loads all customer rows.
+     *
+     * @return list of customer entities
+     * @throws Exception when the SQL execution fails
+     */
     public ArrayList<CustomerEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM customers");
         ArrayList<CustomerEntity> list = new ArrayList<>();

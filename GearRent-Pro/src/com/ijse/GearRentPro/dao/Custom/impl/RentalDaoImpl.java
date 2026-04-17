@@ -18,8 +18,15 @@ public class RentalDaoImpl implements RentalDao {
 
     private static final String SELECT_QUERY = "SELECT * FROM rentals";
 
+    /**
+     * Loads rentals for a specific customer.
+     *
+     * @param customerId customer identifier
+     * @return matching rental entities
+     * @throws Exception when the query fails
+     */
     @Override
-    public ArrayList<RentalEntity> getByCutomer(String customerId) throws Exception {
+    public ArrayList<RentalEntity> getByCustomer(String customerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 SELECT_QUERY + " WHERE TRIM(customer_id)=?", customerId);
         ArrayList<RentalEntity> list = new ArrayList<>();
@@ -29,6 +36,13 @@ public class RentalDaoImpl implements RentalDao {
         return list;
     }
 
+    /**
+     * Loads rentals for a specific branch.
+     *
+     * @param branchId branch identifier
+     * @return matching rental entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<RentalEntity> getByBranch(String branchId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -40,6 +54,13 @@ public class RentalDaoImpl implements RentalDao {
         return list;
     }
 
+    /**
+     * Loads rentals with a specific rental status.
+     *
+     * @param status rental status value
+     * @return matching rental entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<RentalEntity> getByStatus(String status) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -51,6 +72,12 @@ public class RentalDaoImpl implements RentalDao {
         return list;
     }
 
+    /**
+     * Loads all overdue rentals.
+     *
+     * @return overdue rental entities
+     * @throws Exception when the query fails
+     */
     @Override
     public ArrayList<RentalEntity> getOverdueRentals() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -62,17 +89,70 @@ public class RentalDaoImpl implements RentalDao {
         return list;
     }
 
+    /**
+     * Calculates the active deposit total for a customer.
+     *
+     * @param CustomerId customer identifier
+     * @return active deposit total
+     * @throws Exception when the query fails
+     */
     @Override
-    public double getTotalActiveDepositByCutomer(String cutomerId) throws Exception {
+    public double getTotalActiveDepositByCustomer(String CustomerId) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT SUM(deposit_amount) AS total FROM rentals WHERE TRIM(customer_id)=? AND rental_status='Active'",
-                cutomerId);
+                CustomerId);
         if (resultSet.next()) {
             return resultSet.getDouble("total");
         }
         return 0.0;
     }
 
+    /**
+     * Calculates the active deposit total for a customer while locking matching
+     * rows.
+     *
+     * @param CustomerId customer identifier
+     * @return active deposit total
+     * @throws Exception when the query fails
+     */
+    @Override
+    public double getTotalActiveDepositByCustomerForUpdate(String CustomerId) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                "SELECT SUM(deposit_amount) AS total FROM rentals WHERE TRIM(customer_id)=? AND rental_status='Active' FOR UPDATE",
+                CustomerId);
+        if (resultSet.next()) {
+            return resultSet.getDouble("total");
+        }
+        return 0.0;
+    }
+
+    /**
+     * Checks whether an equipment item already has an active rental overlap.
+     *
+     * @param equipmentId equipment identifier
+     * @param startDate proposed rental start date
+     * @param endDate proposed rental end date
+     * @return true when an overlapping rental exists
+     * @throws Exception when the query fails
+     */
+    @Override
+    public boolean hasActiveOverlapForUpdate(String equipmentId, String startDate, String endDate) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                "SELECT rental_id FROM rentals WHERE TRIM(equipment_id)=? AND rental_status IN ('Active','Overdue') AND start_date <= ? AND end_date >= ? FOR UPDATE",
+                equipmentId,
+                endDate,
+                startDate
+        );
+        return resultSet.next();
+    }
+
+    /**
+     * Saves a rental row using the entity values.
+     *
+     * @param t rental entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean save(RentalEntity t) throws Exception {
         return CrudUtil.executeUpdate(
@@ -94,6 +174,13 @@ public class RentalDaoImpl implements RentalDao {
 
     }
 
+    /**
+     * Updates a rental row using the entity values.
+     *
+     * @param t rental entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean update(RentalEntity t) throws Exception {
         return CrudUtil.executeUpdate(
@@ -116,12 +203,26 @@ public class RentalDaoImpl implements RentalDao {
 
     }
 
+    /**
+     * Deletes a rental row by ID.
+     *
+     * @param id rental identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
                 "DELETE FROM rentals WHERE TRIM(rental_id)=?", id);
     }
 
+    /**
+     * Loads one rental row by ID.
+     *
+     * @param id rental identifier
+     * @return matching rental entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public RentalEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
@@ -132,6 +233,29 @@ public class RentalDaoImpl implements RentalDao {
         return null;
     }
 
+    /**
+     * Loads one rental row by ID while locking it for update.
+     *
+     * @param rentalId rental identifier
+     * @return matching rental entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
+    @Override
+    public RentalEntity searchForUpdate(String rentalId) throws Exception {
+        ResultSet resultSet = CrudUtil.executeQuery(
+                SELECT_QUERY + " WHERE TRIM(rental_id)=? FOR UPDATE", rentalId);
+        if (resultSet.next()) {
+            return mapRow(resultSet);
+        }
+        return null;
+    }
+
+    /**
+     * Loads all rental rows.
+     *
+     * @return list of rental entities
+     * @throws Exception when the SQL execution fails
+     */
     @Override
     public ArrayList<RentalEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(SELECT_QUERY);

@@ -17,6 +17,7 @@ public class UserController {
 
     private final UserService userService = (UserService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.USER);
 
+    // Handles user account management actions from the UI.
     public boolean saveUser(UserDto dto) throws Exception {
         return userService.saveUser(dto);
     }

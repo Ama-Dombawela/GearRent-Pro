@@ -5,7 +5,6 @@
 package com.ijse.GearRentPro.dao.Custom;
 
 import com.ijse.GearRentPro.dao.CrudDao;
-import com.ijse.GearRentPro.entity.EquipmentEntity;
 import com.ijse.GearRentPro.entity.RentalEntity;
 import java.util.ArrayList;
 
@@ -13,12 +12,31 @@ import java.util.ArrayList;
  *
  * @author User
  */
-public interface RentalDao extends CrudDao<RentalEntity, String>{
-    
-    ArrayList<RentalEntity> getByCutomer(String customerId)throws Exception;
-    ArrayList<RentalEntity> getByBranch(String branchId)throws Exception;
-    ArrayList<RentalEntity> getByStatus(String status)throws Exception;
-    ArrayList<RentalEntity> getOverdueRentals()throws Exception;
-    double getTotalActiveDepositByCutomer(String cutomerId)throws Exception;
-    
+// DAO interface for rental transaction data persistence operations.
+public interface RentalDao extends CrudDao<RentalEntity, String> {
+
+    // Retrieve all rentals for a specific customer
+    ArrayList<RentalEntity> getByCustomer(String customerId) throws Exception;
+
+    // Retrieve all rentals for a specific branch
+    ArrayList<RentalEntity> getByBranch(String branchId) throws Exception;
+
+    // Retrieve rentals filtered by status
+    ArrayList<RentalEntity> getByStatus(String status) throws Exception;
+
+    // Retrieve all overdue rental records
+    ArrayList<RentalEntity> getOverdueRentals() throws Exception;
+
+    // Calculate total active deposit amount for a customer
+    double getTotalActiveDepositByCustomer(String CustomerId) throws Exception;
+
+    // Calculate total active deposit amount for a customer with row locking
+    double getTotalActiveDepositByCustomerForUpdate(String CustomerId) throws Exception;
+
+    // Check for active rental overlap with row locking
+    boolean hasActiveOverlapForUpdate(String equipmentId, String startDate, String endDate) throws Exception;
+
+    // Fetch record for update operations with row locking
+    RentalEntity searchForUpdate(String rentalId) throws Exception;
+
 }

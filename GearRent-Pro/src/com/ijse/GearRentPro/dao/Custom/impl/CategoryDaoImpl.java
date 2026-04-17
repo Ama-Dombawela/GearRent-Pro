@@ -17,28 +17,56 @@ import java.util.ArrayList;
 public class CategoryDaoImpl implements CategoryDao {
 
     @Override
+    /**
+     * Inserts a new category row into the database.
+     *
+     * @param t category entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean save(CategoryEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "INSERT INTO categories VALUES(?,?,?,?,?,?,?)",
                 t.getCategoryId(), t.getName(), t.getDescription(),
-                t.getPriceFactor(), t.getWeekendMutiplier(), t.getLateFeePerDay(), t.isIsActive());
+                t.getPriceFactor(), t.getWeekendMultiplier(), t.getLateFeePerDay(), t.isIsActive());
     }
 
     @Override
+    /**
+     * Updates an existing category row in the database.
+     *
+     * @param t category entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean update(CategoryEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE categories SET name=?, description=?, price_factor=?, weekend_multiplier=?, late_fee_per_day=?, is_active=? WHERE TRIM(category_id)=?",
                 t.getName(), t.getDescription(), t.getPriceFactor(),
-                t.getWeekendMutiplier(), t.getLateFeePerDay(),
+                t.getWeekendMultiplier(), t.getLateFeePerDay(),
                 t.isIsActive(), t.getCategoryId());
     }
 
     @Override
+    /**
+     * Deletes a category row by ID.
+     *
+     * @param id category identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate("DELETE FROM categories WHERE TRIM(category_id)=?", id);
     }
 
     @Override
+    /**
+     * Loads one category row by ID.
+     *
+     * @param id category identifier
+     * @return matching category entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     public CategoryEntity search(String id) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM categories WHERE TRIM(category_id)=?", id);
         if (resultSet.next()) {
@@ -49,6 +77,12 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
+    /**
+     * Loads all category rows.
+     *
+     * @return list of category entities
+     * @throws Exception when the SQL execution fails
+     */
     public ArrayList<CategoryEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM categories");
         ArrayList<CategoryEntity> list = new ArrayList<>();

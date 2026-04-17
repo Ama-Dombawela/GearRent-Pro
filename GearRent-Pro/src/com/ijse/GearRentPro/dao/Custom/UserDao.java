@@ -11,8 +11,10 @@ import com.ijse.GearRentPro.entity.UserEntity;
  *
  * @author User
  */
-public interface UserDao extends CrudDao<UserEntity, String>{
-    
-        UserEntity getByUsernameAndPassword(String username, String password)throws Exception;
-    
+// DAO interface for user account data persistence operations.
+public interface UserDao extends CrudDao<UserEntity, String> {
+
+    // Retrieve user by username and password for authentication
+    UserEntity getByUsernameAndPassword(String username, String password) throws Exception;
+
 }

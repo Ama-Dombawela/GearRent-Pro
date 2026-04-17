@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.MembershipController;
@@ -10,12 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
 public class MembershipView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MembershipView.class.getName());
     private MembershipController membershipController = new MembershipController();
 
@@ -24,6 +16,8 @@ public class MembershipView extends javax.swing.JFrame {
      */
     public MembershipView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 
@@ -48,6 +42,7 @@ public class MembershipView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBranch = new javax.swing.JTable();
         iblSave = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,10 +56,10 @@ public class MembershipView extends javax.swing.JFrame {
         iblMembDiscount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembDiscount.setText("Discount %");
 
-        iblMembDiscounttxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembDiscounttxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembDiscounttxt.addActionListener(this::iblMembDiscounttxtActionPerformed);
 
-        iblMembershipIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembershipIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblUpdate.setText("Update");
@@ -73,7 +68,7 @@ public class MembershipView extends javax.swing.JFrame {
         iblMembLevel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembLevel.setText("Level");
 
-        iblMembLeveltxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblMembLeveltxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblMembLeveltxt.addActionListener(this::iblMembLeveltxtActionPerformed);
 
         iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -102,6 +97,10 @@ public class MembershipView extends javax.swing.JFrame {
         iblSave.setText("Save");
         iblSave.addActionListener(this::iblSaveActionPerformed);
 
+        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,9 +108,19 @@ public class MembershipView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -127,25 +136,19 @@ public class MembershipView extends javax.swing.JFrame {
                                             .addComponent(iblMembDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(iblMembDiscounttxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 584, Short.MAX_VALUE)
-                        .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 479, Short.MAX_VALUE)))))
                 .addGap(20, 20, 20))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(150, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(iblHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblMembershipId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblMembershipIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,19 +160,16 @@ public class MembershipView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblMembDiscount)
                     .addComponent(iblMembDiscounttxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblSave)
                     .addComponent(iblDelete)
                     .addComponent(iblUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(iblHeader)
-                    .addContainerGap(487, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -199,6 +199,15 @@ public class MembershipView extends javax.swing.JFrame {
         saveMembership();
     }//GEN-LAST:event_iblSaveActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        try {
+            dispose();
+            new MainDashboardView().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error opening Membership View : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBackActionPerformed
+
     private void loadTable() {
         try {
             DefaultTableModel model = new DefaultTableModel(
@@ -227,6 +236,19 @@ public class MembershipView extends javax.swing.JFrame {
 
     private void saveMembership() {
         try {
+            if (iblMembershipIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembLeveltxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership level is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembDiscounttxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),
@@ -242,6 +264,8 @@ public class MembershipView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Discount must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving membership: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -249,6 +273,19 @@ public class MembershipView extends javax.swing.JFrame {
 
     private void updateMembership() {
         try {
+            if (iblMembershipIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembLeveltxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Membership level is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (iblMembDiscounttxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Discount percentage is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             MembershipDto dto = new MembershipDto(
                     iblMembershipIdtxt.getText(),
                     iblMembLeveltxt.getText(),
@@ -264,6 +301,8 @@ public class MembershipView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Discount must be a valid number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error updating membership: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -340,6 +379,7 @@ public class MembershipView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton iblDelete;
     private javax.swing.JLabel iblHeader;
     private javax.swing.JLabel iblMembDiscount;

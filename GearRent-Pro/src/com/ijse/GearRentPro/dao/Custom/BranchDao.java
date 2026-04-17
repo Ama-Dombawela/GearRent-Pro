@@ -11,6 +11,7 @@ import com.ijse.GearRentPro.entity.BranchEntity;
  *
  * @author User
  */
+// DAO interface for branch data persistence operations.
 public interface BranchDao extends CrudDao<BranchEntity, String> {
-    
+
 }

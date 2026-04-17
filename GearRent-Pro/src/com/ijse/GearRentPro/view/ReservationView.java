@@ -1,23 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
 import com.ijse.GearRentPro.controller.CustomerController;
+import com.ijse.GearRentPro.controller.CategoryController;
 import com.ijse.GearRentPro.controller.EquipmentController;
+import com.ijse.GearRentPro.controller.MembershipController;
 import com.ijse.GearRentPro.controller.ReservationController;
+import com.ijse.GearRentPro.dto.BranchDto;
+import com.ijse.GearRentPro.dto.CategoryDto;
+import com.ijse.GearRentPro.dto.CustomerDto;
+import com.ijse.GearRentPro.dto.EquipmentDto;
+import com.ijse.GearRentPro.dto.MembershipDto;
+import com.ijse.GearRentPro.dto.RentalDto;
 import com.ijse.GearRentPro.dto.ReservationDto;
+import com.ijse.GearRentPro.util.Session;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
 public class ReservationView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ReservationView.class.getName());
@@ -25,12 +29,16 @@ public class ReservationView extends javax.swing.JFrame {
     private EquipmentController equipmentController = new EquipmentController();
     private CustomerController customerController = new CustomerController();
     private BranchController branchController = new BranchController();
+    private CategoryController categoryController = new CategoryController();
+    private MembershipController membershipController = new MembershipController();
 
     /**
      * Creates new form ReservationView
      */
     public ReservationView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadDropdowns();
         loadTable();
     }
@@ -64,6 +72,8 @@ public class ReservationView extends javax.swing.JFrame {
         cmbEquipmentId = new javax.swing.JComboBox<>();
         cmbBranchId = new javax.swing.JComboBox<>();
         cmbCustomerId = new javax.swing.JComboBox<>();
+        btnBack = new javax.swing.JButton();
+        btnConvert = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,15 +121,15 @@ public class ReservationView extends javax.swing.JFrame {
         iblEndDate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblEndDate.setText("End Date");
 
-        iblStartDatetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblStartDatetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblStartDatetxt.addActionListener(this::iblStartDatetxtActionPerformed);
 
-        iblResStatustxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblResStatustxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblResStatustxt.addActionListener(this::iblResStatustxtActionPerformed);
 
-        iblReservationIdtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblReservationIdtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        iblEndDatetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblEndDatetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblEndDatetxt.addActionListener(this::iblEndDatetxtActionPerformed);
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -133,14 +143,25 @@ public class ReservationView extends javax.swing.JFrame {
         iblDelete.setText("Delete");
         iblDelete.addActionListener(this::iblDeleteActionPerformed);
 
+        cmbEquipmentId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbEquipmentId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbEquipmentId.addActionListener(this::cmbEquipmentIdActionPerformed);
 
+        cmbBranchId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbBranchId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbBranchId.addActionListener(this::cmbBranchIdActionPerformed);
 
+        cmbCustomerId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbCustomerId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbCustomerId.addActionListener(this::cmbCustomerIdActionPerformed);
+
+        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
+
+        btnConvert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConvert.setText("Convert to Rental");
+        btnConvert.addActionListener(this::btnConvertActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,53 +171,57 @@ public class ReservationView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(iblReservationId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(iblReservationIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(iblEndDate)
+                                            .addComponent(iblStartDate)
+                                            .addComponent(iblResStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(iblResBranchId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(iblResCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(iblResEquipId))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(iblStartDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(cmbCustomerId, javax.swing.GroupLayout.Alignment.TRAILING, 0, 205, Short.MAX_VALUE)
+                                                        .addComponent(cmbBranchId, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(cmbEquipmentId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                    .addComponent(iblEndDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(iblResStatustxt)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(btnConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(108, 108, 108)
                                 .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(91, 91, 91))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(iblReservationId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(iblReservationIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(iblEndDate)
-                                    .addComponent(iblStartDate)
-                                    .addComponent(iblResStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblResBranchId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblResCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblResEquipId))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(iblStartDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cmbCustomerId, javax.swing.GroupLayout.Alignment.TRAILING, 0, 205, Short.MAX_VALUE)
-                                                .addComponent(cmbBranchId, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cmbEquipmentId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(iblEndDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(iblResStatustxt))))
-                        .addGap(474, 474, 474))))
+                                .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(iblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(iblReservationId)
                     .addComponent(iblReservationIdtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,36 +230,36 @@ public class ReservationView extends javax.swing.JFrame {
                     .addComponent(iblResEquipId)
                     .addComponent(cmbEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblSave)
-                            .addComponent(iblUpdate)
-                            .addComponent(iblDelete))
-                        .addGap(34, 34, 34))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(iblResCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblResBranchId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbBranchId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblStartDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblEndDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iblResStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblResStatustxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(105, 105, 105)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iblResCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iblResBranchId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbBranchId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iblStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblStartDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iblEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblEndDatetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iblResStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblResStatustxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iblDelete)
+                    .addComponent(iblUpdate)
+                    .addComponent(iblSave)
+                    .addComponent(btnConvert))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -276,6 +301,19 @@ public class ReservationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCustomerIdActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        try {
+            dispose();
+            new MainDashboardView().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error opening Reservation View : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertActionPerformed
+        calculateRental();
+    }//GEN-LAST:event_btnConvertActionPerformed
+
     private void cmbEquipmentIdActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -286,18 +324,18 @@ public class ReservationView extends javax.swing.JFrame {
             cmbCustomerId.removeAllItems();
             cmbBranchId.removeAllItems();
 
-            List<com.ijse.GearRentPro.dto.EquipmentDto> equipments = equipmentController.findAllEquipments();
-            for (com.ijse.GearRentPro.dto.EquipmentDto equipment : equipments) {
+            List<EquipmentDto> equipments = equipmentController.findAllEquipments();
+            for (EquipmentDto equipment : equipments) {
                 cmbEquipmentId.addItem(equipment.getEquipmentId());
             }
 
-            List<com.ijse.GearRentPro.dto.CustomerDto> customers = customerController.findAllCustomers();
-            for (com.ijse.GearRentPro.dto.CustomerDto customer : customers) {
+            List<CustomerDto> customers = customerController.findAllCustomers();
+            for (CustomerDto customer : customers) {
                 cmbCustomerId.addItem(customer.getCustomerId());
             }
 
-            List<com.ijse.GearRentPro.dto.BranchDto> branches = branchController.findAllBranches();
-            for (com.ijse.GearRentPro.dto.BranchDto branch : branches) {
+            List<BranchDto> branches = branchController.findAllBranches();
+            for (BranchDto branch : branches) {
                 cmbBranchId.addItem(branch.getBranchId());
             }
         } catch (Exception e) {
@@ -320,7 +358,11 @@ public class ReservationView extends javax.swing.JFrame {
             tblReservation.setModel(model);
 
             List<ReservationDto> reservations = reservationController.findAllReservations();
+            String branchFilter = Session.getCurrentBranchId();
             for (ReservationDto reservation : reservations) {
+                if (branchFilter != null && !branchFilter.equals(reservation.getBranchId())) {
+                    continue;
+                }
                 model.addRow(new Object[]{
                     reservation.getReservationId(),
                     reservation.getEquipmentId(),
@@ -338,6 +380,15 @@ public class ReservationView extends javax.swing.JFrame {
 
     private void saveReservation() {
         try {
+            if (iblReservationIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Reservation ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cmbEquipmentId.getSelectedItem() == null || cmbCustomerId.getSelectedItem() == null || cmbBranchId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Equipment, customer, and branch must be selected.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             ReservationDto dto = new ReservationDto(
                     iblReservationIdtxt.getText(),
                     cmbEquipmentId.getSelectedItem().toString(),
@@ -357,6 +408,8 @@ public class ReservationView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Start date and end date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error saving reservation: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -364,6 +417,15 @@ public class ReservationView extends javax.swing.JFrame {
 
     private void updateReservation() {
         try {
+            if (iblReservationIdtxt.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Reservation ID is required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (cmbEquipmentId.getSelectedItem() == null || cmbCustomerId.getSelectedItem() == null || cmbBranchId.getSelectedItem() == null) {
+                JOptionPane.showMessageDialog(this, "Equipment, customer, and branch must be selected.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             ReservationDto dto = new ReservationDto(
                     iblReservationIdtxt.getText(),
                     cmbEquipmentId.getSelectedItem().toString(),
@@ -383,6 +445,8 @@ public class ReservationView extends javax.swing.JFrame {
 
             loadTable();
             clearForm();
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Start date and end date must be in YYYY-MM-DD format.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error updating reservation: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -391,11 +455,15 @@ public class ReservationView extends javax.swing.JFrame {
     private void deleteReservation() {
         try {
             String reservationId = iblReservationIdtxt.getText();
-            boolean isDeleted = reservationController.deleteReservation(reservationId);
-            if (isDeleted) {
-                JOptionPane.showMessageDialog(this, "Reservation deleted successfully.");
+            if (reservationId.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Please enter or select a reservation ID to cancel.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            boolean isCancelled = reservationController.cancelReservation(reservationId);
+            if (isCancelled) {
+                JOptionPane.showMessageDialog(this, "Reservation cancelled successfully.");
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete reservation.");
+                JOptionPane.showMessageDialog(this, "Failed to cancel reservation.");
             }
 
             loadTable();
@@ -428,6 +496,79 @@ public class ReservationView extends javax.swing.JFrame {
             iblResStatustxt.setText(reservation.getReservationStatus());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error searching reservation: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void calculateRental() {
+
+        try {
+            int selectedRow = tblReservation.getSelectedRow();
+            if (selectedRow < 0) {
+                JOptionPane.showMessageDialog(this, "Please select a reservation first.");
+                return;
+            }
+
+            String reservationId = tblReservation.getValueAt(selectedRow, 0).toString();
+            ReservationDto reservation = reservationController.findReservation(reservationId);
+
+            if (reservation == null) {
+                JOptionPane.showMessageDialog(this, "Reservation not found.");
+                return;
+            }
+
+            EquipmentDto equipment = equipmentController.findEquipment(reservation.getEquipmentId());
+            CustomerDto customer = customerController.findCustomer(reservation.getCustomerId());
+            CategoryDto category = categoryController.findCategory(equipment.getCategoryId());
+
+            long days = ChronoUnit.DAYS.between(reservation.getStartDate(), reservation.getEndDate());
+            long weekendDays = 0;
+            for (LocalDate d = reservation.getStartDate(); d.isBefore(reservation.getEndDate()); d = d.plusDays(1)) {
+                if (d.getDayOfWeek() == DayOfWeek.SATURDAY || d.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                    weekendDays++;
+                }
+            }
+            long weekDays = days - weekendDays;
+
+            double rentalAmount = (equipment.getBaseDailyPrice() * category.getPriceFactor() * weekDays)
+                    + (equipment.getBaseDailyPrice() * category.getPriceFactor() * category.getWeekendMultiplier() * weekendDays);
+            double depositAmount = equipment.getSecurityDeposit();
+
+            MembershipDto membership = null;
+            if (customer != null && customer.getMembershipId() != null && !customer.getMembershipId().isBlank()) {
+                membership = membershipController.findMembership(customer.getMembershipId());
+            }
+
+            double membershipDiscount = membership != null ? rentalAmount * (membership.getDiscountPer() / 100.0) : 0.0;
+            double longRentalDiscount = days >= 7 ? rentalAmount * 0.10 : 0.0;
+            double finalAmount = rentalAmount - membershipDiscount - longRentalDiscount;
+
+            boolean converted = reservationController.convertReservationToRental(reservation, new RentalDto(
+                    reservation.getReservationId(),
+                    reservation.getEquipmentId(),
+                    reservation.getCustomerId(),
+                    reservation.getBranchId(),
+                    reservation.getStartDate(),
+                    reservation.getEndDate(),
+                    null,
+                    rentalAmount,
+                    depositAmount,
+                    membershipDiscount,
+                    longRentalDiscount,
+                    finalAmount,
+                    "Unpaid",
+                    "Active"
+            ));
+
+            if (converted) {
+                JOptionPane.showMessageDialog(this, "Reservation converted to rental successfully.");
+                loadTable();
+                clearForm();
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to convert reservation.");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error converting reservation: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -473,6 +614,8 @@ public class ReservationView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnConvert;
     private javax.swing.JComboBox<String> cmbBranchId;
     private javax.swing.JComboBox<String> cmbCustomerId;
     private javax.swing.JComboBox<String> cmbEquipmentId;

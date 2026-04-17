@@ -25,45 +25,39 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="iblHeader" alignment="0" min="-2" pref="774" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="iblLeastUtilized" min="-2" pref="306" max="-2" attributes="0"/>
+                          <Component id="iblMostUtilization" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
+                          <Component id="iblAvgUtilization" alignment="0" min="-2" pref="306" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnGenerate" min="-2" pref="170" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="btnBack" min="-2" pref="171" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="iblTo" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="iblFrom" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="iblBranch" alignment="1" pref="142" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="iblBranch" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="iblTo" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="iblFrom" min="-2" pref="102" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cmbBranch" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblFromtxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
-                                  <Component id="iblTotxt" alignment="0" min="-2" pref="205" max="-2" attributes="0"/>
+                                  <Component id="iblFromtxt" min="-2" pref="205" max="-2" attributes="0"/>
+                                  <Component id="iblTotxt" min="-2" pref="205" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="732" max="-2" attributes="0"/>
+                          <Component id="btnGenerate" alignment="0" min="-2" pref="313" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="iblTotalEquipments" min="-2" pref="321" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnBack" min="-2" pref="171" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" min="-2" pref="703" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="iblTotalEquipments" alignment="0" pref="166" max="32767" attributes="0"/>
-                          <Component id="iblMostUtilization" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="iblLeastUtilized" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                          <Component id="iblAvgUtilization" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="iblHeader" alignment="0" min="-2" pref="774" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,24 +80,25 @@
                   <Component id="iblTo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="iblTotxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnGenerate" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="136" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnGenerate" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBack" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                      <Component id="iblTotalEquipments" min="-2" pref="23" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="230" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="iblAvgUtilization" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                  <Component id="iblTotalEquipments" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="iblMostUtilization" alignment="3" min="-2" pref="73" max="-2" attributes="0"/>
-                  <Component id="iblLeastUtilized" alignment="3" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="iblMostUtilization" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="iblAvgUtilization" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="iblLeastUtilized" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,6 +139,9 @@
     </Container>
     <Component class="javax.swing.JComboBox" name="cmbBranch">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="Item 1"/>
@@ -176,7 +174,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Most Utilized : "/>
+        <Property name="text" type="java.lang.String" value="Most Utilized      : "/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
@@ -194,7 +192,7 @@
     <Component class="javax.swing.JTextField" name="iblTotxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>
@@ -214,7 +212,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Least Utilized: "/>
+        <Property name="text" type="java.lang.String" value="Least Utilized      : "/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
@@ -223,7 +221,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Avg Utilization :  "/>
+        <Property name="text" type="java.lang.String" value="Avg Utilization   :  "/>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
@@ -232,7 +230,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="From"/>
+        <Property name="text" type="java.lang.String" value="From    "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="iblTo">
@@ -240,7 +238,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="To"/>
+        <Property name="text" type="java.lang.String" value="To         "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="iblTotalEquipments">
@@ -255,7 +253,7 @@
     <Component class="javax.swing.JTextField" name="iblFromtxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="0"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
       </Properties>
       <Events>

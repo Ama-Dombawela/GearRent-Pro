@@ -14,14 +14,19 @@ import java.util.List;
  */
 public interface CustomerService extends SuperService {
 
+    // Save a new customer
     boolean saveCustomer(CustomerDto dto) throws Exception;
 
+    // Update existing customer
     boolean updateCustomer(CustomerDto dto) throws Exception;
 
+    // Delete customer by ID
     boolean deleteCustomer(String id) throws Exception;
 
+    // Find customer by ID
     CustomerDto findCustomer(String id) throws Exception;
 
+    // Get all customers
     List<CustomerDto> findAllCustomers() throws Exception;
 
 }

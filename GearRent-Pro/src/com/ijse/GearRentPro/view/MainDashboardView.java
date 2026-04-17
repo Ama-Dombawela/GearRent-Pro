@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
-import com.ijse.GearRentPro.Session;
+import com.ijse.GearRentPro.util.Session;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author User
- */
 public class MainDashboardView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainDashboardView.class.getName());
@@ -20,6 +12,9 @@ public class MainDashboardView extends javax.swing.JFrame {
      */
     public MainDashboardView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        applyRoleAccess();
     }
 
     /**
@@ -52,7 +47,7 @@ public class MainDashboardView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iblHeader.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        iblHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         iblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iblHeader.setText("GearRentPro Dashboard");
 
@@ -129,7 +124,6 @@ public class MainDashboardView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iblOperations1)
                             .addComponent(iblOperations)
                             .addComponent(iblInventoryAndCustomers)
@@ -156,12 +150,14 @@ public class MainDashboardView extends javax.swing.JFrame {
                                         .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnMembership))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnOverdueRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17)
-                                .addComponent(btnRevenueReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(btnOverdueRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(17, 17, 17)
+                                    .addComponent(btnRevenueReport, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -202,7 +198,7 @@ public class MainDashboardView extends javax.swing.JFrame {
                     .addComponent(btnUtilizationReport, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -352,4 +348,28 @@ public class MainDashboardView extends javax.swing.JFrame {
     private javax.swing.JLabel iblOperations;
     private javax.swing.JLabel iblOperations1;
     // End of variables declaration//GEN-END:variables
+
+    private void applyRoleAccess() {
+        String roleId = Session.getLoggedInUser().getRoleId();
+
+        if ("R001".equals(roleId)) {
+            // ADMIN - no restrictions
+
+        } else if ("R002".equals(roleId)) {
+            // BRANCH_MANAGER
+            btnBranch.setEnabled(false);
+            btnUser.setEnabled(false);
+            btnMembership.setEnabled(false);
+
+        } else if ("R003".equals(roleId)) {
+            // STAFF
+            btnBranch.setEnabled(false);
+            btnCategory.setEnabled(false);
+            btnUser.setEnabled(false);
+            btnMembership.setEnabled(false);
+            btnRevenueReport.setEnabled(false);
+            btnUtilizationReport.setEnabled(false);
+        }
+    }
+
 }

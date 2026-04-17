@@ -12,8 +12,10 @@ import java.util.ArrayList;
  *
  * @author User
  */
+// DAO interface for damage record data persistence operations.
 public interface DamageDao extends CrudDao<DamageEntity, String> {
 
+    // Retrieve all damage records for a specific rental
     ArrayList<DamageEntity> getByRentalId(String rentalId) throws Exception;
 
 }

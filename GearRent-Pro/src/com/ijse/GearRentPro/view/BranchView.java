@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -10,12 +6,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
 public class BranchView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BranchView.class.getName());
     private BranchController branchController = new BranchController();
 
@@ -24,6 +16,8 @@ public class BranchView extends javax.swing.JFrame {
      */
     public BranchView() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadTable();
     }
 
@@ -52,16 +46,17 @@ public class BranchView extends javax.swing.JFrame {
         iblBranchCode = new javax.swing.JLabel();
         iblBranchCodetxt = new javax.swing.JTextField();
         iblDelete = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        iblLocationtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblLocationtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblLocationtxt.addActionListener(this::iblLocationtxtActionPerformed);
 
         iblContactNo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblContactNo.setText("Contact Number");
 
-        iblContactNotxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblContactNotxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblContactNotxt.addActionListener(this::iblContactNotxtActionPerformed);
 
         iblUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -100,69 +95,76 @@ public class BranchView extends javax.swing.JFrame {
         iblBranchName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchName.setText("Branch Name");
 
-        iblBranchNametxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBranchNametxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchNametxt.addActionListener(this::iblBranchNametxtActionPerformed);
 
         iblBranchLoca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchLoca.setText("Location");
 
-        iblBranchIdtxt1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBranchIdtxt1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         iblBranchCode.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchCode.setText("Branch Code");
 
-        iblBranchCodetxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblBranchCodetxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranchCodetxt.addActionListener(this::iblBranchCodetxtActionPerformed);
 
         iblDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblDelete.setText("Delete");
         iblDelete.addActionListener(this::iblDeleteActionPerformed);
 
+        btnBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(this::btnBackActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 21, Short.MAX_VALUE)
                 .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(iblDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(iblUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(iblSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(iblContactNo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(iblContactNotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(iblBranchLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iblBranchName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(iblBranchCode)
-                                .addComponent(iblBranchId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(iblBranchCodetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(iblBranchNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(iblLocationtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(iblBranchIdtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(iblContactNo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(iblContactNotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(iblBranchLoca, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(iblBranchName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(iblBranchCode)
+                                    .addComponent(iblBranchId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(iblBranchCodetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblBranchNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblLocationtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblBranchIdtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(394, 394, 394))
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(iblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iblBranchIdtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iblBranchIdtxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(iblBranchId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -192,8 +194,10 @@ public class BranchView extends javax.swing.JFrame {
                             .addComponent(iblContactNotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(iblContactNo))
                         .addGap(66, 66, 66)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -229,6 +233,15 @@ public class BranchView extends javax.swing.JFrame {
         deleteBranch();
     }//GEN-LAST:event_iblDeleteActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        try {
+            dispose();
+            new MainDashboardView().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error opening Branch View : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +268,7 @@ public class BranchView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel iblBranchCode;
     private javax.swing.JTextField iblBranchCodetxt;
     private javax.swing.JLabel iblBranchId;
@@ -284,8 +298,8 @@ public class BranchView extends javax.swing.JFrame {
         tblBranch.setModel(dtm);
 
         try {
-            List<com.ijse.GearRentPro.dto.BranchDto> branchDtos = branchController.findAllBranches();
-            for (com.ijse.GearRentPro.dto.BranchDto branchDto : branchDtos) {
+            List<BranchDto> branchDtos = branchController.findAllBranches();
+            for (BranchDto branchDto : branchDtos) {
                 Object[] rowData = {
                     branchDto.getBranchId(),
                     branchDto.getBranchCode(),
@@ -301,6 +315,10 @@ public class BranchView extends javax.swing.JFrame {
     }
 
     public void saveBranch() {
+        if (iblBranchIdtxt1.getText().isBlank() || iblBranchCodetxt.getText().isBlank() || iblBranchNametxt.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Branch ID, code, and name are required.");
+            return;
+        }
         BranchDto branchDTO = new BranchDto(
                 iblBranchIdtxt1.getText(),
                 iblBranchCodetxt.getText(),
@@ -322,6 +340,10 @@ public class BranchView extends javax.swing.JFrame {
     }
 
     public void updateBranch() {
+        if (iblBranchIdtxt1.getText().isBlank() || iblBranchCodetxt.getText().isBlank() || iblBranchNametxt.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Branch ID, code, and name are required.");
+            return;
+        }
         BranchDto branchDTO = new BranchDto(
                 iblBranchIdtxt1.getText(),
                 iblBranchCodetxt.getText(),
@@ -344,6 +366,10 @@ public class BranchView extends javax.swing.JFrame {
 
     public void deleteBranch() {
         String branchId = iblBranchIdtxt1.getText();
+        if (branchId.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter or select a branch ID to delete.");
+            return;
+        }
         try {
             boolean resp = branchController.deleteBranch(branchId);
             if (resp) {
@@ -365,7 +391,7 @@ public class BranchView extends javax.swing.JFrame {
         String branchId = (String) tblBranch.getValueAt(tblBranch.getSelectedRow(), 0);
 
         try {
-            com.ijse.GearRentPro.dto.BranchDto branchDto = branchController.findBranch(branchId);
+            BranchDto branchDto = branchController.findBranch(branchId);
             if (branchDto != null) {
                 iblBranchIdtxt1.setText(branchDto.getBranchId());
                 iblBranchCodetxt.setText(branchDto.getBranchCode());

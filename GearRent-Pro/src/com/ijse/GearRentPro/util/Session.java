@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ijse.GearRentPro;
+package com.ijse.GearRentPro.util;
 
 import com.ijse.GearRentPro.dto.UserDto;
 
@@ -36,4 +36,28 @@ public class Session {
         userRole = null;
     }
 
+    public static String getCurrentBranchId() {
+
+        // Managers and staff operate within their assigned branch.
+        String role = loggedInUser.getRoleId();
+        if ("R002".equals(role) || "R003".equals(role)) {
+            return loggedInUser.getBranchId();
+        }
+        return null;
+    }
+
+    public static boolean isAdmin() {
+        // R001 is the admin role.
+        return "R001".equals(loggedInUser.getRoleId());
+    }
+
+    public static boolean isBranchManager() {
+        // R002 is the branch manager role.
+        return "R002".equals(loggedInUser.getRoleId());
+    }
+
+    public static boolean isStaff() {
+        // R003 is the staff role.
+        return "R003".equals(loggedInUser.getRoleId());
+    }
 }

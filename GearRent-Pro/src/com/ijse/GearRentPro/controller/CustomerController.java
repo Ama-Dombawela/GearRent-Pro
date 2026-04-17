@@ -17,6 +17,7 @@ public class CustomerController {
 
     private final CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CUSTOMER);
 
+    // Handles customer management actions from the UI.
     public boolean saveCustomer(CustomerDto dto) throws Exception {
         return customerService.saveCustomer(dto);
     }

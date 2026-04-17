@@ -17,6 +17,7 @@ public class DamageController {
 
     private final DamageService damageService = (DamageService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.DAMAGE);
 
+    // Handles damage record actions from the UI.
     public boolean saveDamage(DamageDto dto) throws Exception {
         return damageService.saveDamage(dto);
     }

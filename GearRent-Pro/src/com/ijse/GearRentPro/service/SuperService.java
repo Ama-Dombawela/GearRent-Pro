@@ -5,9 +5,8 @@
 package com.ijse.GearRentPro.service;
 
 /**
- *
- * @author User
+ * Marker interface for all service-layer contracts.
  */
 public interface SuperService {
-    
+
 }

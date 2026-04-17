@@ -11,8 +11,10 @@ import com.ijse.GearRentPro.entity.MembershipEntity;
  *
  * @author User
  */
+// DAO interface for membership level data persistence operations.
 public interface MembershipDao extends CrudDao<MembershipEntity, String> {
 
+    // Retrieve membership level by its name
     MembershipEntity getByLevel(String level) throws Exception;
 
 }

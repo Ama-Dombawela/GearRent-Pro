@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ijse.GearRentPro.view;
 
 import com.ijse.GearRentPro.controller.BranchController;
@@ -12,16 +8,13 @@ import com.ijse.GearRentPro.dto.EquipmentDto;
 import com.ijse.GearRentPro.dto.RentalDto;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
 public class EquipmentUtilizationsReport extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EquipmentUtilizationsReport.class.getName());
     private BranchController branchController = new BranchController();
     private RentalController rentalController = new RentalController();
@@ -32,6 +25,8 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
      */
     public EquipmentUtilizationsReport() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
         loadBranches();
     }
 
@@ -84,6 +79,7 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblequipmentzutilization);
 
+        cmbBranch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cmbBranch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbBranch.addActionListener(this::cmbBranchActionPerformed);
 
@@ -92,38 +88,38 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
         btnBack.addActionListener(this::btnBackActionPerformed);
 
         iblMostUtilization.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblMostUtilization.setText("Most Utilized : ");
+        iblMostUtilization.setText("Most Utilized      : ");
         iblMostUtilization.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         btnGenerate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGenerate.setText("Generate");
         btnGenerate.addActionListener(this::btnGenerateActionPerformed);
 
-        iblTotxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblTotxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblTotxt.addActionListener(this::iblTotxtActionPerformed);
 
         iblBranch.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblBranch.setText("Branch ");
 
         iblLeastUtilized.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblLeastUtilized.setText("Least Utilized: ");
+        iblLeastUtilized.setText("Least Utilized      : ");
         iblLeastUtilized.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         iblAvgUtilization.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblAvgUtilization.setText("Avg Utilization :  ");
+        iblAvgUtilization.setText("Avg Utilization   :  ");
         iblAvgUtilization.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         iblFrom.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblFrom.setText("From");
+        iblFrom.setText("From    ");
 
         iblTo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iblTo.setText("To");
+        iblTo.setText("To         ");
 
         iblTotalEquipments.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblTotalEquipments.setText("Total Equipment :");
         iblTotalEquipments.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        iblFromtxt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        iblFromtxt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         iblFromtxt.addActionListener(this::iblFromtxtActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,35 +128,31 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iblLeastUtilized, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblMostUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iblAvgUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(iblTo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(iblFrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(iblBranch, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(iblBranch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblTo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iblFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(iblFromtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(iblTotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(iblTotalEquipments, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(iblMostUtilization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(iblLeastUtilized, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iblAvgUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(iblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(iblTotalEquipments, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,21 +170,23 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iblTo)
                     .addComponent(iblTotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGenerate)
                 .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGenerate)
-                    .addComponent(btnBack))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(iblAvgUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iblTotalEquipments, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(iblMostUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iblLeastUtilized, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(81, 81, 81))
+                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(iblTotalEquipments, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(iblMostUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(iblAvgUtilization, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(iblLeastUtilized)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,8 +201,12 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbBranchActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        dispose();
-        new MainDashboardView().setVisible(true);
+        try {
+            dispose();
+            new MainDashboardView().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error opening Equipment Utilization Report : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
@@ -234,20 +232,36 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             for (BranchDto branch : branches) {
                 cmbBranch.addItem(branch.getBranchId() + " - " + branch.getName());
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private void generateReport() {
         try {
             String selectedBranch = (String) cmbBranch.getSelectedItem();
-            LocalDate startDate = LocalDate.parse(iblFromtxt.getText().trim());
-            LocalDate endDate = LocalDate.parse(iblTotxt.getText().trim());
+            String startDateStr = iblFromtxt.getText().trim();
+            String endDateStr = iblTotxt.getText().trim();
+
+            if (startDateStr.isBlank() || endDateStr.isBlank()) {
+                JOptionPane.showMessageDialog(this, "From and To dates are required.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            LocalDate startDate = LocalDate.parse(startDateStr);
+            LocalDate endDate = LocalDate.parse(endDateStr);
+
+            if (startDate.isAfter(endDate)) {
+                JOptionPane.showMessageDialog(this, "From date cannot be after To date.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             long totalDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
             DefaultTableModel model = new DefaultTableModel(
-                new Object[]{"Equipment ID", "Brand", "Model", "Category", "Total Days", "Days Rented", "Days Available", "Utilization %"}, 0
+                    new Object[]{"Equipment ID", "Brand", "Model", "Category", "Total Days", "Days Rented", "Days Available", "Utilization %"}, 0
             ) {
-                public boolean isCellEditable(int row, int column) { return false; }
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
             };
             tblequipmentzutilization.setModel(model);
 
@@ -261,14 +275,22 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             double maxUtil = -1, minUtil = 101;
 
             for (EquipmentDto eq : equipments) {
-                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(eq.getBranchId())) continue;
+                if (!"All Branches".equals(selectedBranch) && !selectedBranch.startsWith(eq.getBranchId())) {
+                    continue;
+                }
                 long daysRented = 0;
                 for (RentalDto rental : rentals) {
-                    if (!rental.getEquipmentId().equals(eq.getEquipmentId())) continue;
-                    if (rental.getStartDate() == null || rental.getEndDate() == null) continue;
+                    if (!rental.getEquipmentId().equals(eq.getEquipmentId())) {
+                        continue;
+                    }
+                    if (rental.getStartDate() == null || rental.getEndDate() == null) {
+                        continue;
+                    }
                     LocalDate rs = rental.getStartDate().isBefore(startDate) ? startDate : rental.getStartDate();
                     LocalDate re = rental.getEndDate().isAfter(endDate) ? endDate : rental.getEndDate();
-                    if (!rs.isAfter(re)) daysRented += ChronoUnit.DAYS.between(rs, re) + 1;
+                    if (!rs.isAfter(re)) {
+                        daysRented += ChronoUnit.DAYS.between(rs, re) + 1;
+                    }
                 }
                 long daysAvailable = totalDays - daysRented;
                 double utilPct = totalDays > 0 ? Math.round((daysRented * 100.0) / totalDays) : 0;
@@ -278,8 +300,14 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
                 });
                 totalEquipment++;
                 totalUtilization += utilPct;
-                if (utilPct > maxUtil) { maxUtil = utilPct; mostUtilized = eq.getEquipmentId(); }
-                if (utilPct < minUtil) { minUtil = utilPct; leastUtilized = eq.getEquipmentId(); }
+                if (utilPct > maxUtil) {
+                    maxUtil = utilPct;
+                    mostUtilized = eq.getEquipmentId();
+                }
+                if (utilPct < minUtil) {
+                    minUtil = utilPct;
+                    leastUtilized = eq.getEquipmentId();
+                }
             }
 
             double avg = totalEquipment > 0 ? Math.round(totalUtilization / totalEquipment) : 0;
@@ -288,6 +316,8 @@ public class EquipmentUtilizationsReport extends javax.swing.JFrame {
             iblMostUtilization.setText("Most Utilized : " + mostUtilized);
             iblLeastUtilized.setText("Least Utilized : " + leastUtilized);
 
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use YYYY-MM-DD for From and To dates.", "Validation Error", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

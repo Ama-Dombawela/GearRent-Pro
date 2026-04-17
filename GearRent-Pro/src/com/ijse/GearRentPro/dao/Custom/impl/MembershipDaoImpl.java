@@ -17,6 +17,13 @@ import java.util.ArrayList;
 public class MembershipDaoImpl implements MembershipDao {
 
     @Override
+    /**
+     * Loads a membership by its level name.
+     *
+     * @param level membership level name
+     * @return matching membership entity, or null when not found
+     * @throws Exception when the query fails
+     */
     public MembershipEntity getByLevel(String level) throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery(
                 "SELECT * FROM membership_levels WHERE level_name=?", level
@@ -32,6 +39,13 @@ public class MembershipDaoImpl implements MembershipDao {
     }
 
     @Override
+    /**
+     * Inserts a new membership row into the database.
+     *
+     * @param t membership entity to persist
+     * @return true when the insert succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean save(MembershipEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "INSERT INTO membership_levels (membership_id, level_name, discount_percentage) VALUES (?, ?, ?)",
@@ -42,6 +56,13 @@ public class MembershipDaoImpl implements MembershipDao {
     }
 
     @Override
+    /**
+     * Updates an existing membership row in the database.
+     *
+     * @param t membership entity with updated values
+     * @return true when the update succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean update(MembershipEntity t) throws Exception {
         return CrudUtil.executeUpdate(
                 "UPDATE membership_levels SET level_name=?, discount_percentage=? WHERE TRIM(membership_id)=?",
@@ -52,6 +73,13 @@ public class MembershipDaoImpl implements MembershipDao {
     }
 
     @Override
+    /**
+     * Deletes a membership row by ID.
+     *
+     * @param id membership identifier
+     * @return true when the delete succeeds
+     * @throws Exception when the SQL execution fails
+     */
     public boolean delete(String id) throws Exception {
         return CrudUtil.executeUpdate(
                 "DELETE FROM membership_levels WHERE TRIM(membership_id)=?", id
@@ -59,6 +87,13 @@ public class MembershipDaoImpl implements MembershipDao {
     }
 
     @Override
+    /**
+     * Loads one membership row by ID.
+     *
+     * @param id membership identifier
+     * @return matching membership entity, or null when not found
+     * @throws Exception when the SQL execution fails
+     */
     public MembershipEntity search(String id) throws Exception {
         ResultSet rs = CrudUtil.executeQuery(
                 "SELECT * FROM membership_levels WHERE TRIM(membership_id)=?", id
@@ -74,6 +109,12 @@ public class MembershipDaoImpl implements MembershipDao {
     }
 
     @Override
+    /**
+     * Loads all membership rows.
+     *
+     * @return list of membership entities
+     * @throws Exception when the SQL execution fails
+     */
     public ArrayList<MembershipEntity> getAll() throws Exception {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM membership_levels");
         ArrayList<MembershipEntity> list = new ArrayList<>();
