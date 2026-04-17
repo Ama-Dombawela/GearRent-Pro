@@ -4,6 +4,7 @@
  */
 package com.ijse.GearRentPro;
 import com.ijse.GearRentPro.db.DBConnection;
+import com.ijse.GearRentPro.view.LoginView;
 import java.sql.Connection;
 
 /**
@@ -24,6 +25,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        new LoginView().setVisible(true);
     }
     
 }

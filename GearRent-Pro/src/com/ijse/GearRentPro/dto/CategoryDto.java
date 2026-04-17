@@ -14,19 +14,19 @@ public class CategoryDto {
     private String name;
     private String description;
     private double priceFactor;
-    private double weekendMutiplier;
+    private double weekendMultiplier;
     private double lateFeePerDay;
     private boolean isActive;
 
     public CategoryDto() {
     }
 
-    public CategoryDto(String categoryId, String name, String description, double priceFactor, double weekendMutiplier, double lateFeePerDay, boolean isActive) {
+    public CategoryDto(String categoryId, String name, String description, double priceFactor, double weekendMultiplier, double lateFeePerDay, boolean isActive) {
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.priceFactor = priceFactor;
-        this.weekendMutiplier = weekendMutiplier;
+        this.weekendMultiplier = weekendMultiplier;
         this.lateFeePerDay = lateFeePerDay;
         this.isActive = isActive;
     }
@@ -88,17 +88,17 @@ public class CategoryDto {
     }
 
     /**
-     * @return the weekendMutiplier
+     * @return the weekendMultiplier
      */
-    public double getWeekendMutiplier() {
-        return weekendMutiplier;
+    public double getWeekendMultiplier() {
+        return weekendMultiplier;
     }
 
     /**
-     * @param weekendMutiplier the weekendMutiplier to set
+     * @param weekendMultiplier the weekendMultiplier to set
      */
-    public void setWeekendMutiplier(double weekendMutiplier) {
-        this.weekendMutiplier = weekendMutiplier;
+    public void setWeekendMultiplier(double weekendMultiplier) {
+        this.weekendMultiplier = weekendMultiplier;
     }
 
     /**
@@ -131,7 +131,7 @@ public class CategoryDto {
 
     @Override
     public String toString() {
-        return "CategoryDto{" + "categoryId=" + categoryId + ", name=" + name + ", description=" + description + ", priceFactor=" + priceFactor + ", weekendMutiplier=" + weekendMutiplier + ", lateFeePerDay=" + lateFeePerDay + ", isActive=" + isActive + '}';
+        return "CategoryDto{" + "categoryId=" + categoryId + ", name=" + name + ", description=" + description + ", priceFactor=" + priceFactor + ", weekendMultiplier=" + weekendMultiplier + ", lateFeePerDay=" + lateFeePerDay + ", isActive=" + isActive + '}';
     }
 
 }
