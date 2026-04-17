@@ -31,6 +31,12 @@ Follow these steps to configure the database.
 
 ## ▶️ How to Run the Application
 
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Ama-Dombawela/GearRent-Pro.git
+
+```
 ### NetBeans (Recommended)
 1. Open NetBeans.
 2. Open project folder: `GearRent-Pro`.
