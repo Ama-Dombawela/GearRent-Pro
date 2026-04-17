@@ -1,0 +1,48 @@
+package com.ijse.GearRentPro.util;
+
+import com.ijse.GearRentPro.dto.UserDto;
+
+public final class AuthUtil {
+
+    private AuthUtil() {
+    }
+
+    public static UserDto requireUser() throws Exception {
+        UserDto user = Session.getLoggedInUser();
+        if (user == null) {
+            throw new Exception("Access denied: user is not logged in.");
+        }
+        return user;
+    }
+
+    public static void requireAdmin() throws Exception {
+        UserDto user = requireUser();
+        if (!"R001".equals(user.getRoleId())) {
+            throw new Exception("Access denied: admin privileges are required.");
+        }
+    }
+
+    public static void requireBranchScopedAccess(String branchId) throws Exception {
+        UserDto user = requireUser();
+        String roleId = user.getRoleId();
+
+        if ("R001".equals(roleId)) {
+            return;
+        }
+
+        if (branchId == null || branchId.isBlank()) {
+            throw new Exception("Access denied: branch is required for this operation.");
+        }
+
+        if (!branchId.equals(user.getBranchId())) {
+            throw new Exception("Access denied: cross-branch operation is not allowed.");
+        }
+    }
+
+    public static void requireAdminOrManager() throws Exception {
+        UserDto user = requireUser();
+        if (!"R001".equals(user.getRoleId()) && !"R002".equals(user.getRoleId())) {
+            throw new Exception("Access denied: only admin or branch manager can perform this action.");
+        }
+    }
+}
