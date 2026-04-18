@@ -10,8 +10,8 @@ target/
 # =========================
 # NETBEANS
 # =========================
-nbproject/private/
-nbproject/build-impl.xml
+GearRent-Pro/nbproject/private/
+GearRent-Pro/nbproject/build-impl.xml
 
 # =========================
 # JAVA
